@@ -130,6 +130,20 @@ class AdminController extends Controller
     public function AllInstructor(){
         $allinstructors = User::where('role','instructor')->latest()->get();
         return view('admin.backend.instructor.all_instructor',compact('allinstructors'));
-        
+
     }//end mathod
+
+    public function UpdateUserStatus(Request $request){
+        $userId = $request->input('user_id');
+        $isChecked = $request->input('is_checked',0);
+
+        $user = User::find($userId);
+
+        if($user) {
+            $user->status = $isChecked;
+            $user->save();
+        }
+        return response()->json(['message' => 'User Status Updated Successfully']);
+
+    }//end method
 }

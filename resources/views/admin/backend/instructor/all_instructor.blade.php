@@ -1,5 +1,13 @@
 @extends('admin.admin_dashboard')
 @section('admin')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+    .large-checkbox{
+        transform: scale(1.5);
+    }
+</style>
+
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -37,15 +45,25 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($category as $key=> $item)
+                        @foreach ($allinstructors as $key=> $item)
                         <tr>
 
                             <td>{{ $key+1}}</td>
-                            <td>{{ $item->category_name }}</td>
-                           <td><img src="{{ asset($item->image)}}" alt="Category Image" style="width: 70px; hight: 40px;"></td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->phone }}</td>
+
+                            <td>@if ($item->status == 1)
+                                 <span class ="btn btn-success">Active</span>
+                                 @else   <span class ="btn btn-danger">InActive</span>
+                              @endif
+                           </td>
                            <td>
-                            <a href="{{ route('edit.category', $item->id) }}" class="btn btn-info px-5">Edit</a>
-                            <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
+                            <div class="form-check-success form-check form-switch">
+                                <input class="form-check-input status-toggle large-checkbox" type="checkbox" id="flexSwitchCheckCheckedDanger" data-user-id="{{ $item->id }}" {{ $item->status ? 'checked' : '' }}  >
+                                <label class="form-check-label" for="flexSwitchCheckCheckedDanger"></label>
+                            </div>
                            </td>
                         </tr>
                         @endforeach
@@ -58,5 +76,29 @@
     </div>
 
 </div>
+<script>
+    $(document).ready(function(){
+        $('.status-toggle').on('change', function(){
+            var userId = $(this).data('user-id');
+            var isChecked = $(this).is(':checked');
 
+            // sent an ajax request to update the status
+           $.ajax({
+             url: "{{ route('update.user.status') }}",
+             method: "POST",
+             data: {
+                user_id: userId,
+                is_checked: isChecked ? 1 : 0,
+                _token: "{{ csrf_token() }}",
+             },
+             success: function(respons){
+                toastr.success(respons.message);
+             },
+             error: function(respons){
+                toastr.success(respons.message);
+             }
+           });
+        });
+    });
+</script>
 @endsection
