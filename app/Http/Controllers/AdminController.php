@@ -132,7 +132,6 @@ class AdminController extends Controller
         return view('admin.backend.instructor.all_instructor',compact('allinstructors'));
 
     }//end mathod
-
     public function UpdateUserStatus(Request $request){
         $userId = $request->input('user_id');
         $isChecked = $request->input('is_checked',0);
