@@ -102,6 +102,7 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
     Route::controller(CourseController::class)->group(function () {
         Route::get('/all/course','AllCourse')->name('all.course');
+        Route::get('/add/course','AddCourse')->name('add.course');
 
 
      });
