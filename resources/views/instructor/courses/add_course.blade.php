@@ -118,7 +118,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="input1" class="form-label">Course Description</label>
-                    <textarea class="form-control" id="input11"  name="description" placeholder="Prerequisites ..." rows="3"></textarea>
+                    <textarea class="form-control" id="myeditorinstance"  name="description" placeholder="Description....." rows="3"></textarea>
                 </div>
 
 
