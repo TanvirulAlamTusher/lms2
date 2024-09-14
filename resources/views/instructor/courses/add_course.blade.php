@@ -19,7 +19,8 @@
     <div class="card">
         <div class="card-body p-4">
 
-            <form action="{{ route('store.category')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
+            <form action="{{ route('store.course')}}" method="post" id="myForm"
+             class="row g-3" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-group col-md-6">
                     <label for="input1" class="form-label">Course Name</label>
@@ -72,7 +73,7 @@
                 <div class="form-group col-md-6">
                     <label for="input1" class="form-label">Course Sub Category</label>
                     <select name="subcategory_id" class="form-select mb-3" aria-label="Default select example">
-                        <option selected="" disabled>Selece sub Category</option>
+                        <option></option>
 
 
 
@@ -82,7 +83,7 @@
                 <div class="form-group col-md-6">
                     <label for="input1" class="form-label">Certificate Available</label>
                     <select name="certificate" class="form-select mb-3" aria-label="Default select example">
-                        <option selected=""disabled>Yes/No</option>
+                        <option selected=""disabled>Open this select menu</option>
                          <option value="Yes">Yes</option>
                          <option value="No">No</option>
 
@@ -91,22 +92,32 @@
                 </div>
 
                 <div class="form-group col-md-6">
+                    <label for="input1" class="form-label">Coures Level</label>
+                    <select name="label" class="form-select mb-3" aria-label="Default select example">
+                        <option selected=""disabled>Open this select menu</option>
+                         <option value="Yes">Begginer</option>
+                         <option value="Yes">Middle</option>
+                         <option value="Yes">Advance</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-3">
                     <label for="input1" class="form-label">Course Price</label>
                     <input type="text" name="selling_price" class="form-control"  placeholder="Course Price">
                 </div>
 
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="input1" class="form-label">Discount Price</label>
                     <input type="text" name="discount_price" class="form-control"  placeholder="Discount Price">
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="input1" class="form-label">Duration</label>
                     <input type="text" name="duration" class="form-control"  placeholder="Duration">
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="input1" class="form-label">Resources</label>
                     <input type="text" name="resources" class="form-control"  placeholder="Resources">
                 </div>
@@ -119,6 +130,54 @@
                 <div class="form-group col-md-12">
                     <label for="input1" class="form-label">Course Description</label>
                     <textarea class="form-control" id="myeditorinstance"  name="description" placeholder="Description....." rows="3"></textarea>
+                </div>
+
+                <p>Course Goals</p>
+
+
+<!--   //////////// Goal Option /////////////// -->
+
+        <div class="row add_item">
+
+            <div class="col-md-6">
+                  <div class="mb-3">
+                        <label for="goals" class="form-label"> Goals </label>
+                        <input type="text" name="course_goals[]" id="goals" class="form-control" placeholder="Goals ">
+                  </div>
+            </div>
+            <div class="form-group col-md-6" style="padding-top: 30px;">
+                  <a class="btn btn-success addeventmore"><i class="fa fa-plus-circle"></i> Add More..</a>
+            </div>
+     </div> <!---end row-->
+
+
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="bestseller" value="1" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Bestseller</label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="featured" value="1" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Featured</label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="highestrated" value="1" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Highest Rated</label>
+                        </div>
+
+                    </div>
                 </div>
 
 
@@ -136,24 +195,163 @@
 
 
 </div>
+
+ <!--========== Start of add multiple class with ajax ==============-->
+ <div style="visibility: hidden">
+    <div class="whole_extra_item_add" id="whole_extra_item_add">
+       <div class="whole_extra_item_delete" id="whole_extra_item_delete">
+          <div class="container mt-2">
+             <div class="row">
+
+
+                <div class="form-group col-md-6">
+                   <label for="goals">Goals</label>
+                   <input type="text" name="course_goals[]" id="goals" class="form-control" placeholder="Goals  ">
+                </div>
+                <div class="form-group col-md-6" style="padding-top: 20px">
+                   <span class="btn btn-success btn-sm addeventmore"><i class="fa fa-plus-circle">Add</i></span>
+                   <span class="btn btn-danger btn-sm removeeventmore"><i class="fa fa-minus-circle">Remove</i></span>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+
+
+ <!----For Section-------->
+ <script type="text/javascript">
+    $(document).ready(function(){
+       var counter = 0;
+       $(document).on("click",".addeventmore",function(){
+             var whole_extra_item_add = $("#whole_extra_item_add").html();
+             $(this).closest(".add_item").append(whole_extra_item_add);
+             counter++;
+       });
+       $(document).on("click",".removeeventmore",function(event){
+             $(this).closest("#whole_extra_item_delete").remove();
+             counter -= 1
+       });
+    });
+ </script>
+ <!--========== End of add multiple class with ajax ==============-->
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('select[name="category_id"]').on('change', function(){
+            var category_id = $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ url('/subcategory/ajax') }}/"+category_id,
+                    type: "GET",
+                    dataType:"json",
+                    success:function(data){
+                        $('select[name="subcategory_id"]').html('');
+                        var d =$('select[name="subcategory_id"]').empty();
+                        $.each(data, function(key, value){
+                            $('select[name="subcategory_id"]').append('<option value="'+ value.id + '">' + value.subcategory_name + '</option>');
+                        });
+                    },
+
+                });
+            } else {
+                alert('danger');
+            }
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+       var counter = 0;
+       $(document).on("click",".addeventmore",function(){
+             var whole_extra_item_add = $("#whole_extra_item_add").html();
+             $(this).closest(".add_item").append(whole_extra_item_add);
+             counter++;
+       });
+       $(document).on("click",".removeeventmore",function(event){
+             $(this).closest("#whole_extra_item_delete").remove();
+             counter -= 1
+       });
+    });
+ </script>
+
+
 <script type="text/javascript">
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                category_name: {
+                course_name: {
                     required : true,
                 },
-                image: {
+                course_title: {
+                    required : true,
+                },
+                course_image: {
+                    required : true,
+                },
+                course_title: {
+                    required : true,
+                },
+                category_id: {
+                    required : true,
+                },
+                subcategory_id: {
+                    required : true,
+                },
+                label: {
+                    required : true,
+                },
+                selling_price: {
+                    required : true,
+                },
+                label: {
+                    required : true,
+                },
+                discount_price: {
+                    required : true,
+                },
+                duration: {
+                    required : true,
+                },
+                description: {
                     required : true,
                 },
 
             },
             messages :{
-                category_name: {
-                    required : 'Please Enter category Name',
+                course_name: {
+                    required : 'Please Enter Course Name',
                 },
-                image: {
-                    required : 'Please Insert Image',
+                course_title: {
+                    required : 'Please Enter Course title',
+                },
+                course_image: {
+                    required : 'Insert Course Image',
+                },
+                category_id: {
+                    required : 'Select Category',
+                },
+                subcategory_id: {
+                    required : 'Select Category',
+                },
+                label: {
+                    required : 'Please Select Course label',
+                },
+                selling_price: {
+                    required : 'Please Enter Selling price',
+                },
+                discount_price: {
+                    required : 'Please Enter Discount price',
+                },
+                duration: {
+                    required : 'Please Enter duration',
+                },
+                description: {
+                    required : 'Please Enter Description',
                 },
 
 
