@@ -104,6 +104,8 @@ Route::middleware(['auth','roles:admin'])->group(function () {
         Route::get('/all/course','AllCourse')->name('all.course');
         Route::get('/add/course','AddCourse')->name('add.course');
         Route::post('/store/course','StoreCourse')->name('store.course');
+        Route::get('/edit/course/{id}','EditCourse')->name('edit.course');
+        Route::post('/update/course','UpdateCourse')->name('update.course');
 
         Route::get('/subcategory/ajax/{category_id}','GetSubcategory');
 

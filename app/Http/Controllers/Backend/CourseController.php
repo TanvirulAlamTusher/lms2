@@ -75,6 +75,7 @@ class CourseController extends Controller
         'resources' => $request->resources,
         'certificate' => $request->certificate,
         'selling_price' => $request->selling_price,
+        'discount_price' => $request->discount_price,
         'prerequisites' => $request->prerequisites,
 
         'bestseller' => $request->bestseller,
@@ -102,5 +103,50 @@ class CourseController extends Controller
   return redirect()->route('all.course')->with($notifaction);
 
   }//End method
+
+  public function EditCourse($id){
+
+    $course = Course::find($id);
+    $categories = Category::latest()->get();
+    $subcategories = SubCategory::latest()->get();
+
+    return view('instructor.courses.edit_course',compact('course',
+    'categories','subcategories'));
+
+  }//End method
+
+  public function UpdateCourse(Request $request){
+
+     $course_id =  $request->course_id;
+
+
+      Course::find($course_id)->update([
+       'category_id' => $request->category_id,
+       'subcategory_id' => $request->subcategory_id,
+
+       'course_title' => $request->course_title,
+       'course_name' => $request->course_name,
+       'course_name_slug' => strtolower(str_replace(' ', '-', $request->course_name)),
+       'description' => $request->description,
+       'label' => $request->label,
+       'duration' => $request->duration,
+       'resources' => $request->resources,
+       'certificate' => $request->certificate,
+       'selling_price' => $request->selling_price,
+       'discount_price' => $request->discount_price,
+       'prerequisites' => $request->prerequisites,
+
+       'bestseller' => $request->bestseller,
+       'featured' => $request->featured,
+       'highestrated' => $request->highestrated,
+       'updated_at' => Carbon::now(),
+     ]);
+
+     $notifaction = array('message' => 'Course Updated successfully',
+     'alert_type' => 'success');
+
+ return redirect()->route('all.course')->with($notifaction);
+
+ }//End method
 
 }
