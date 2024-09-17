@@ -189,6 +189,44 @@
     </div>
  </div>
 
+ {{-- Course Image Update --}}
+<div class="page-content">
+    <div class="card">
+        <div class="card-body">
+           <form action="{{ route('update.course.image') }}" method="post" enctype="multipart/form-data">
+            @csrf
+        <input type="hidden" name="id" value="{{ $course->id }}">
+        <input type="hidden" name="old_img" value="{{ $course->course_image }}">
+
+          <div class="row">
+            <div class="form-group col-md-6 text-secondary">
+                <label for="formFile" class="form-label">Course Image</label>
+                {{-- <input id="image" type="file" name="photo" class="form-control"/> --}}
+                <input oninput="showImage.src=window.URL.createObjectURL(this.files[0])"
+                name="course_image" type="file" class="form-control" id="image">
+            </div>
+
+            <div class="col-md-6">
+                <img id="showImage"
+                    src="{{ asset($course->course_image) }}"
+                    alt="Course img" class="p-1 bg-primary" width="100">
+            </div>
+
+
+          </div>
+
+          <div class="col-md-12">
+            <div class="d-md-flex d-grid align-items-center gap-3">
+                <button type="submit" class="btn btn-primary mt-3 px-4">Save Changes</button>
+
+            </div>
+        </div>
+
+           </form>
+        </div>
+    </div>
+</div>
+{{-- Ended image update section --}}
 
  <!----For Section-------->
  <script type="text/javascript">

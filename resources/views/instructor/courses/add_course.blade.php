@@ -95,9 +95,9 @@
                     <label for="input1" class="form-label">Coures Level</label>
                     <select name="label" class="form-select mb-3" aria-label="Default select example">
                         <option selected=""disabled>Open this select menu</option>
-                         <option value="Yes">Begginer</option>
-                         <option value="Yes">Middle</option>
-                         <option value="Yes">Advance</option>
+                         <option value="Begginer">Begginer</option>
+                         <option value="Middle">Middle</option>
+                         <option value="Advance">Advance</option>
                     </select>
                 </div>
 
