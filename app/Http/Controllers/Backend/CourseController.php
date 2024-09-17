@@ -238,8 +238,22 @@ class CourseController extends Controller
 
   return redirect()->route('all.course')->with($notifaction);
 
-  }
+  }//end function
 
+  public function DeleteCourse($id){
 
+    $course = Course::find($id);
+
+    unlink($course->course_image);
+    unlink($course->video);
+
+     Course::find($id)->delete();
+
+    $notifaction = array('message' => 'Course Delected successfully',
+    'alert_type' => 'success');
+
+  return redirect()->back()->with($notifaction);
+
+  }//end function
 
 }

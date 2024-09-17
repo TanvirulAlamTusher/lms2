@@ -110,6 +110,8 @@ Route::middleware(['auth','roles:admin'])->group(function () {
         Route::post('/update/course/video','UpdateCourseVedio')->name('update.course.video');
         Route::post('/update/course/goal','UpdateCourseGoal')->name('update.course.goal');
 
+        Route::get('/delete/course/{id}','DeleteCourse')->name('delete.course');
+
         Route::get('/subcategory/ajax/{category_id}','GetSubcategory');
 
 
