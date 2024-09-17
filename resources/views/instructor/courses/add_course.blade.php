@@ -56,6 +56,7 @@
                     <input type="file" name="video" class="form-control" placeholder="Course Name"
                     accept="video/mp4, video/webm">
                 </div>
+                
                 <div class="form-group col-md-6"></div>
                 <div class="form-group col-md-6">
                     <label for="input1" class="form-label">Course Category</label>

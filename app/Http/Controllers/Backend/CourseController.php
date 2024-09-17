@@ -109,9 +109,10 @@ class CourseController extends Controller
     $course = Course::find($id);
     $categories = Category::latest()->get();
     $subcategories = SubCategory::latest()->get();
+    $goals = Course_goal::where('course_id',$id)->get();
 
     return view('instructor.courses.edit_course',compact('course',
-    'categories','subcategories'));
+    'categories','subcategories','goals'));
 
   }//End method
 
@@ -175,6 +176,35 @@ class CourseController extends Controller
 
    return redirect()->route('all.course')->with($notifaction);
 
-  }
+  }//end function
+
+  public function UpdateCourseVedio(Request $request){
+
+    $course_id = $request->vid;
+    $oldVideo = $request->old_video;
+
+      //upload video
+      $video = $request->file('video');
+      $videoName = time().'.'. $video->getClientOriginalExtension();
+      $video->move(public_path('upload/course/video/'),$videoName);
+      $save_video ='upload/course/video/'.$videoName;
+
+      if(file_exists( $oldVideo)){
+        unlink( $oldVideo);
+
+     }
+
+
+     Course::find($course_id)->update([
+          'video' =>  $save_video,
+          'updated_at' => Carbon::now(),
+     ]);
+
+     $notifaction = array('message' => 'Course video Update successfully',
+     'alert_type' => 'success');
+
+   return redirect()->route('all.course')->with($notifaction);
+
+  }//end function
 
 }
