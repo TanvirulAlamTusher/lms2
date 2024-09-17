@@ -207,4 +207,39 @@ class CourseController extends Controller
 
   }//end function
 
+
+  public function UpdateCourseGoal(Request $request){
+    $course_id = $request->id;
+
+    if($request->course_goals == NULL){
+        return redirect()->back();
+    } else{
+
+        Course_goal::where('course_id',$course_id)->delete();
+
+         // Course Goal Add Form
+      $goles = Count($request->course_goals);
+
+
+         for ($i = 0; $i < $goles ; $i++){
+            $goleCount = new Course_goal();
+            $goleCount->course_id =  $course_id;
+            $goleCount->goal_name = $request->course_goals[$i];
+            $goleCount->save();
+
+         }//end for loop
+
+      //End course goal
+
+
+    }//end else
+    $notifaction = array('message' => 'Course Goals Updated successfully',
+    'alert_type' => 'success');
+
+  return redirect()->route('all.course')->with($notifaction);
+
+  }
+
+
+
 }
