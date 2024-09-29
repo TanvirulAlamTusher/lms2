@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CourseSection extends Model
 {
     use HasFactory;
+   //tesrasasd
 
-    
     protected $guarded = [];
 
 }
