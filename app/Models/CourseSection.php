@@ -9,7 +9,7 @@ class CourseSection extends Model
 {
     use HasFactory;
 
-    //sdasdasdas
+    
     protected $guarded = [];
 
 }
