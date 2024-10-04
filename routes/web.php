@@ -120,10 +120,13 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
      //Course lecture and Course section All routes
      Route::controller(CourseController::class)->group(function () {
-        Route::get('/all/course/lecture/{id}','AllCourseLecture')->name('add.course.lecture');
+        Route::get('/add/course/lecture/{id}','AllCourseLecture')->name('add.course.lecture');
         Route::post('/add/course/section/','AdCourseSection')->name('add.course.section');
         Route::post('/save-lecture','SaveLecture')->name('save-lecture');
 
+
+        Route::get('/edit/lecture/{id}','EditLecture')->name('edit.lecture');
+        Route::post('/update/course/lecture','UpdateCourseLecture')->name('update.course.lecture');
 
 
      });
