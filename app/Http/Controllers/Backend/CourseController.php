@@ -319,5 +319,18 @@ class CourseController extends Controller
 
     }//end method
 
+    public function DeleteLecture($id){
+       CourseLecture::find($id)->delete();
+
+      $notifaction = array('message' => 'Lecture Delete successfully',
+      'alert_type' => 'success');
+      return redirect()->back()->with($notifaction);
+    }//end method
+
+    public function DeleteSection($id){
+
+        CourseSection::find($id)->delete();
+
+    }
 
 }

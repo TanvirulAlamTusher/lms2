@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <img src="{{ asset($course->course_image) }}" class="p-1 border" width="105" height="70"
-                                alt="...">
+                                alt="course_image">
                             <div class="flex-grow-1 ms-3">
                                 <h5 class="mt-0">{{ $course->course_name }}</h5>
                                 <p class="mb-0">{{ $course->course_title }}</p>
@@ -45,8 +45,16 @@
                                             <h6>{{ $item->section_title }}</h6>
 
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <button type="submit" class="btn btn-danger px-2 ms-auto">Delete
-                                                    Section</button> &nbsp;
+
+                                                {{-- <form action="{{ route('delete.section', ['id' => $item->id]) }}" method="POST">
+                                                    @csrf
+
+                                                    <button type="submit" class="btn btn-danger px-2 ms-auto" id="delete">Delete
+                                                        Section</button> &nbsp;
+
+                                                </form> --}}
+                                                <button type="button" onclick="deleteSection({{ $item->id }})" class="btn btn-danger px-2 ms-auto">Delete Section</button>
+                                                &nbsp;
                                                 <a onclick="addLectureDiv({{ $course->id }},{{ $item->id }}, 'lectureContainer{{ $key }}')"
                                                     id="addLectureBtn($key)" class="btn btn-warning">Add Lecture</a>
                                             </div>
@@ -54,23 +62,25 @@
 
                                         <div class="courseHide" id="lectureContainer{{ $key }}">
                                             <div class="container">
-                                                @foreach ($item->lectures as $lectures )
+                                                @foreach ($item->lectures as $lectures)
+                                                    <div
+                                                        class="lectureDiv mb-3 d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <strong>{{ $loop->iteration }}.
+                                                                {{ $lectures->lecture_title }}</strong>
+                                                        </div>
+                                                        <div class="btn-group">
+                                                            <a href="{{ route('edit.lecture', ['id' => $lectures->id]) }}"
+                                                                class="btn btn-sm btn-primary"><i
+                                                                    class="lni lni-eraser"></i>Edit</a> &nbsp;
+                                                            <a href="{{ route('delete.lecture', ['id' => $lectures->id]) }}"
+                                                                class="btn btn-sm btn-danger " id="delete"><i
+                                                                    class="lni lni-trash"></i>Delete</a>
+                                                        </div>
 
 
-                                                <div
-                                                    class="lectureDiv mb-3 d-flex align-items-center justify-content-between">
-                                                    <div>
-                                                        <strong>{{ $loop->iteration }}. {{ $lectures->lecture_title }}</strong>
                                                     </div>
-                                                    <div class="btn-group">
-                                                        <a href="{{ route('edit.lecture',['id' => $lectures->id]) }}" class="btn btn-sm btn-primary"><i class="lni lni-eraser"></i></a> &nbsp;
-                                                        <a href="" class="btn btn-sm btn-danger "><i class="lni lni-trash"></i></a>
-                                                    </div>
-
-
-                                                </div>
-                                              <hr>
-
+                                                    <hr>
                                                 @endforeach
 
                                             </div>
@@ -126,16 +136,16 @@
 
 
     <script>
-     function addLectureDiv(courseId, sectionId, containerId) {
-    const lectureContainer = document.getElementById(containerId);
+        function addLectureDiv(courseId, sectionId, containerId) {
+            const lectureContainer = document.getElementById(containerId);
 
-    // Clear existing content before adding a new lecture div
-    lectureContainer.innerHTML = '';
+            // Clear existing content before adding a new lecture div
+            lectureContainer.innerHTML = '';
 
-    const newLectureDiv = document.createElement('div');
-    newLectureDiv.classList.add('lectureDiv', 'mb-3');
+            const newLectureDiv = document.createElement('div');
+            newLectureDiv.classList.add('lectureDiv', 'mb-3');
 
-    newLectureDiv.innerHTML = `
+            newLectureDiv.innerHTML = `
         <div class="container">
             <h6>Lecture Title</h6>
             <input type="text" class="form-control" placeholder="Enter Lecture Title" >
@@ -148,82 +158,87 @@
         </div>
     `;
 
-    lectureContainer.appendChild(newLectureDiv);
-    lectureContainer.style.display = 'block';  // Ensure it's visible when adding
-}
+            lectureContainer.appendChild(newLectureDiv);
+            lectureContainer.style.display = 'block'; // Ensure it's visible when adding
+        }
 
 
 
-function hideLectureContainer(containerId) {
-    const lectureContainer = document.getElementById(containerId);
-    lectureContainer.style.display = 'none';
-    location.reload();
+        function hideLectureContainer(containerId) {
+            const lectureContainer = document.getElementById(containerId);
+            lectureContainer.style.display = 'none';
+            location.reload();
 
-}
-
+        }
     </script>
 
     <script>
-        function saveLecture(courseId, sectionId, containerId){
-             const lectureContainer = document.getElementById(containerId);
-             const lectureTitle = lectureContainer.querySelector('input[type=text]').value;
-             const lectureContent = lectureContainer.querySelector('textarea').value;
-             const lectureUrl = lectureContainer.querySelector('input[name=url]').value
+        function saveLecture(courseId, sectionId, containerId) {
+            const lectureContainer = document.getElementById(containerId);
+            const lectureTitle = lectureContainer.querySelector('input[type=text]').value;
+            const lectureContent = lectureContainer.querySelector('textarea').value;
+            const lectureUrl = lectureContainer.querySelector('input[name=url]').value
 
-             fetch('/save-lecture', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({
-                    course_id: courseId,
-                    section_id: sectionId,
-                    lecture_title: lectureTitle,
-                    lecture_url: lectureUrl,
-                    lecture_content: lectureContent,
+            fetch('/save-lecture', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        course_id: courseId,
+                        section_id: sectionId,
+                        lecture_title: lectureTitle,
+                        lecture_url: lectureUrl,
+                        lecture_content: lectureContent,
+                    })
                 })
-             })
 
-             .then(response => response.json())
-             .then(data => {
-               console.log(data);
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
 
-               hideLectureContainer(containerId);
+                    hideLectureContainer(containerId);
 
 
                     // Start Message
 
-            const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'success',
-                  showConfirmButton: false,
-                  timer: 6000
-            })
-            if ($.isEmptyObject(data.error)) {
-
-                    Toast.fire({
-                    type: 'success',
-                    title: data.success,
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 6000
                     })
+                    if ($.isEmptyObject(data.error)) {
 
-            }else{
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                        })
 
-           Toast.fire({
-                    type: 'error',
-                    title: data.error,
-                    })
-                }
+                    } else {
 
-              // End Message
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error,
+                        })
+                    }
 
-             })
-             .catch(error => {
-                console.error(error);
-             })
+                    // End Message
 
-       }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
 
+        }
+    </script>
+    <script>
+        async function deleteSection(id){
+            let res = await axios.post(`/delete/section/${id}`);
+         alert("Delete Successfully");
+         location.reload();
+        }
     </script>
 @endsection

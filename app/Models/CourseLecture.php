@@ -9,5 +9,7 @@ class CourseLecture extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
+    public function coursesection(){
+        return $this->belongsTo(CourseSection::class,);
+    }
 }

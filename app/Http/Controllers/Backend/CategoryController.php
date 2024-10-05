@@ -89,6 +89,7 @@ class CategoryController extends Controller
    public function DeleteCategory($id){
         $item = Category::find($id);
         $img = $item->image;
+        
         unlink($img);
 
         Category::find($id)->delete();
