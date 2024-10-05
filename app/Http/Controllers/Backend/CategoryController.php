@@ -82,14 +82,12 @@ class CategoryController extends Controller
         return redirect()->route('all.category')->with($notifaction);
 
         }//end else
-
-
-   }// End Method
+ }// End Method
 
    public function DeleteCategory($id){
         $item = Category::find($id);
         $img = $item->image;
-        
+
         unlink($img);
 
         Category::find($id)->delete();
