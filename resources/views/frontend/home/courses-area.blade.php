@@ -28,12 +28,12 @@
                     <div class="row">
 
 
-                        @foreach ($course as $item)
+                        @foreach ($course as $course_item)
                             <div class="col-lg-4 responsive-column-half">
                                 <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_1">
                                     <div class="card-image">
                                         <a href="course-details.html" class="d-block">
-                                            <img class="card-img-top lazy" src="images/img-loading.png"
+                                            <img class="card-img-top lazy" src="{{ $course_item->course_image }}"
                                                 data-src="images/img8.jpg" alt="Card image cap">
                                         </a>
                                         <div class="course-badge-labels">
@@ -42,9 +42,9 @@
                                         </div>
                                     </div><!-- end card-image -->
                                     <div class="card-body">
-                                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $item->label }}</h6>
+                                        <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->label }}</h6>
                                         <h5 class="card-title"><a
-                                                href="course-details.html">{{ $item->course_name }}</a></h5>
+                                                href="course-details.html">{{ $course_item->course_name }}</a></h5>
                                         <p class="card-text"><a href="teacher-detail.html">Jose Portilla</a></p>
                                         <div class="rating-wrap d-flex align-items-center py-2">
                                             <div class="review-stars">
