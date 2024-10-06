@@ -404,9 +404,7 @@
                 label: {
                     required : true,
                 },
-                discount_price: {
-                    required : true,
-                },
+
                 duration: {
                     required : true,
                 },
@@ -436,9 +434,6 @@
                 },
                 selling_price: {
                     required : 'Please Enter Selling price',
-                },
-                discount_price: {
-                    required : 'Please Enter Discount price',
                 },
                 duration: {
                     required : 'Please Enter duration',
