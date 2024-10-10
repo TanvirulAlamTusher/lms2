@@ -13,10 +13,13 @@
         <ul class="nav nav-tabs generic-tab justify-content-center pb-4" id="myTab" role="tablist">
 
             @foreach ($category as $item)
+
                 <li class="nav-item">
-                    <a class="nav-link" id="business-tab" data-toggle="tab" href="#business" role="tab"
+                    <a class="nav-link" id="business-tab" data-toggle="tab"
+                     href="#business{{ $item->id }}" role="tab"
                         aria-controls="business" aria-selected="true">{{ $item->category_name }}</a>
                 </li>
+
             @endforeach
 
         </ul>
@@ -110,7 +113,7 @@
 
                     </div><!-- end row -->
                 </div><!-- end tab-pane -->
-                <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
+                <div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="design-tab">
                     <div class="row">
                         <div class="col-lg-4 responsive-column-half">
                             <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_2">
