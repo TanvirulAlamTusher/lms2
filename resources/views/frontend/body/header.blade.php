@@ -288,9 +288,7 @@
                 <a href="#">Home</a>
                 <ul class="sub-menu">
                     <li><a href="index.html">Home One</a></li>
-                    <li><a href="home-2.html">Home Two</a></li>
-                    <li><a href="home-3.html">Home Three</a></li>
-                    <li><a href="home-4.html">Home four</a></li>
+                   
                 </ul>
             </li>
             <li>
