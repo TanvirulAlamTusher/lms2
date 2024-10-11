@@ -128,7 +128,7 @@
                                 <div class="col-lg-4 responsive-column-half">
                                     <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_2">
                                         <div class="card-image">
-                                            <a href="course-details.html" class="d-block">
+                                            <a href="{{ url('course/details/'.$course_item->id.'/'.$course_item->course_name_slug) }}" class="d-block">
                                                 <img class="card-img-top lazy"
                                                     src="{{ asset($course_item->course_image) }}"
                                                     data-src="images/img8.jpg" alt="Card image cap">
@@ -166,7 +166,7 @@
                                         <div class="card-body">
                                             <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->level }}</h6>
                                             <h5 class="card-title"><a
-                                                    href="course-details.html">{{ $course_item->course_title }}</a>
+                                                    href="{{ url('course/details/'.$course_item->id.'/'.$course_item->course_name_slug) }}">{{ $course_item->course_title }}</a>
                                             </h5>
                                             <p class="card-text"><a
                                                     href="teacher-detail.html">{{ $course_item['user']['name'] }}</a>
