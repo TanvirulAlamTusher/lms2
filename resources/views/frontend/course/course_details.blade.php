@@ -1,8 +1,8 @@
 @extends('frontend.master')
 @section('home')
     <!-- ================================
-                    START BREADCRUMB AREA
-                ================================= -->
+                            START BREADCRUMB AREA
+                        ================================= -->
     <section class="breadcrumb-area pt-50px pb-50px bg-white pattern-bg">
         <div class="container">
             <div class="col-lg-8 mr-auto">
@@ -83,12 +83,12 @@
         </div><!-- end container -->
     </section><!-- end breadcrumb-area -->
     <!-- ================================
-                    END BREADCRUMB AREA
-                ================================= -->
+                            END BREADCRUMB AREA
+                        ================================= -->
 
     <!--======================================
-                        START COURSE DETAILS AREA
-                ======================================-->
+                                START COURSE DETAILS AREA
+                        ======================================-->
     <section class="course-details-area pb-20px">
         <div class="container">
             <div class="row">
@@ -552,10 +552,10 @@
                                                 class="fs-35 font-weight-semi-bold text-black">${{ $course->selling_price }}</span>
                                     </p>
                                 @else
-                                    <span
-                                        class="fs-35 font-weight-semi-bold text-black">${{ $course->discount_price }} </span>
+                                    <span class="fs-35 font-weight-semi-bold text-black">${{ $course->discount_price }}
+                                    </span>
                                     <span class="before-price mx-1">${{ $course->selling_price }} </span>
-                                    <span class="price-discount">  {{ round($discount) }} % off</span>
+                                    <span class="price-discount"> {{ round($discount) }} % off</span>
                                     @endif
 
                                     <div class="icon-element icon-element-sm shadow-sm cursor-pointer"
@@ -576,19 +576,21 @@
                                     <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                                     <div class="preview-course-incentives">
                                         <h3 class="card-title fs-18 pb-2">This course includes</h3>
-        <ul class="generic-list-item pb-3">
-            <li><i class="la la-play-circle-o mr-2 text-color"></i>{{ $course->duration }} hours on-demand
-                video</li>
-            <li><i class="la la-file mr-2 text-color"></i>34 articles</li>
-            <li><i class="la la-file-text mr-2 text-color"></i>{{ $course->resources }} downloadable resources
-            </li>
-            <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
-            <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
-            <li><i class="la la-television mr-2 text-color"></i>Access on mobile and TV
-            </li>
-            <li><i class="la la-certificate mr-2 text-color"></i>Certificate of Completion
-            </li>
-        </ul>
+                                        <ul class="generic-list-item pb-3">
+                                            <li><i class="la la-play-circle-o mr-2 text-color"></i>{{ $course->duration }}
+                                                hours on-demand
+                                                video</li>
+                                            <li><i class="la la-file mr-2 text-color"></i>34 articles</li>
+                                            <li><i class="la la-file-text mr-2 text-color"></i>{{ $course->resources }}
+                                                downloadable resources
+                                            </li>
+                                            <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
+                                            <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
+                                            <li><i class="la la-television mr-2 text-color"></i>Access on mobile and TV
+                                            </li>
+                                            <li><i class="la la-certificate mr-2 text-color"></i>Certificate of Completion
+                                            </li>
+                                        </ul>
                                         <div class="section-block"></div>
                                         <div class="buy-for-team-container pt-4">
                                             <h3 class="fs-18 font-weight-semi-bold pb-2">Training 5 or more people?</h3>
@@ -608,11 +610,13 @@
                                 <div class="divider"><span></span></div>
                                 <ul class="generic-list-item generic-list-item-flash">
                                     <li class="d-flex align-items-center justify-content-between"><span><i
-                                                class="la la-clock mr-2 text-color"></i>Duration</span> {{ $course->duration }} hours</li>
+                                                class="la la-clock mr-2 text-color"></i>Duration</span>
+                                        {{ $course->duration }} hours</li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
                                                 class="la la-play-circle-o mr-2 text-color"></i>Lectures</span> 17</li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
-                                                class="la la-file-text-o mr-2 text-color"></i>Resources</span> {{ $course->resources }}</li>
+                                                class="la la-file-text-o mr-2 text-color"></i>Resources</span>
+                                        {{ $course->resources }}</li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
                                                 class="la la-bolt mr-2 text-color"></i>Quizzes</span> 26</li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
@@ -620,12 +624,14 @@
                                     <li class="d-flex align-items-center justify-content-between"><span><i
                                                 class="la la-language mr-2 text-color"></i>Language</span> English</li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
-                                                class="la la-lightbulb mr-2 text-color"></i>Skill level</span> {{ $course->label }}
+                                                class="la la-lightbulb mr-2 text-color"></i>Skill level</span>
+                                        {{ $course->label }}
                                     </li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
                                                 class="la la-users mr-2 text-color"></i>Students</span> 30,506</li>
                                     <li class="d-flex align-items-center justify-content-between"><span><i
-                                                class="la la-certificate mr-2 text-color"></i>Certificate</span> {{ $course->certificate }}</li>
+                                                class="la la-certificate mr-2 text-color"></i>Certificate</span>
+                                        {{ $course->certificate }}</li>
                                 </ul>
                             </div>
                         </div><!-- end card -->
@@ -634,14 +640,10 @@
                                 <h3 class="card-title fs-18 pb-2">Course Categories</h3>
                                 <div class="divider"><span></span></div>
                                 <ul class="generic-list-item">
-                                    <li><a href="#">Development</a></li>
-                                    <li><a href="#">Web Design</a></li>
-                                    <li><a href="#">Technology</a></li>
-                                    <li><a href="#">IT & Software</a></li>
-                                    <li><a href="#">Backend</a></li>
-                                    <li><a href="#">Marketing</a></li>
-                                    <li><a href="#">Photography</a></li>
-                                    <li><a href="#">Frontend</a></li>
+                                    @foreach ($categoris as $category)
+                                        <li><a href="#">{{ $category->category_name }}</a></li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div><!-- end card -->
@@ -649,43 +651,41 @@
                             <div class="card-body">
                                 <h3 class="card-title fs-18 pb-2">Related Courses</h3>
                                 <div class="divider"><span></span></div>
-                                <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                    <a href="course-details.html" class="media-img">
-                                        <img class="mr-3 lazy" src="images/img-loading.png"
-                                            data-src="images/small-img-2.jpg" alt="Related course image">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="fs-15"><a href="course-details.html">The Complete JavaScript Course
-                                                2021</a></h5>
-                                        <span class="d-block lh-18 py-1 fs-14">Kamran Ahmed</span>
-                                        <p class="text-black font-weight-semi-bold lh-18 fs-15">$12.99 <span
-                                                class="before-price fs-14">$129.99</span></p>
-                                    </div>
-                                </div><!-- end media -->
-                                <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                    <a href="course-details.html" class="media-img">
-                                        <img class="mr-3 lazy" src="images/img-loading.png"
-                                            data-src="images/small-img-3.jpg" alt="Related course image">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="fs-15"><a href="course-details.html">Learning jQuery Mobile for
-                                                Beginners</a></h5>
-                                        <span class="d-block lh-18 py-1 fs-14">Kamran Ahmed</span>
-                                        <p class="text-black font-weight-semi-bold lh-18 fs-15">$129.99</p>
-                                    </div>
-                                </div><!-- end media -->
-                                <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                    <a href="course-details.html" class="media-img">
-                                        <img class="mr-3 lazy" src="images/img-loading.png"
-                                            data-src="images/small-img-4.jpg" alt="Related course image">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="fs-15"><a href="course-details.html">Introduction LearnPress – LMS
-                                                plugin</a></h5>
-                                        <span class="d-block lh-18 py-1 fs-14">Kamran Ahmed</span>
-                                        <p class="text-black font-weight-semi-bold lh-18 fs-15">Free</p>
-                                    </div>
-                                </div><!-- end media -->
+                                @if($relatedCourses->isEmpty())
+                                <p>No related courses available.</p>
+                            @else
+                                @foreach ($relatedCourses as $relatedCourse)
+                                    <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
+                                        <a href="course-details.html" class="media-img">
+                                            <img class="mr-3 lazy" src="{{ asset($relatedCourse->course_image) }}"
+                                                 data-src="images/small-img-2.jpg" alt="Related course image">
+                                        </a>
+                                        <div class="media-body">
+                                            <h5 class="fs-15">
+                                                <a href="course-details.html">{{ $relatedCourse->course_name }}</a>
+                                            </h5>
+                                            <span class="d-block lh-18 py-1 fs-14">{{ $relatedCourse->user->name }}</span>
+                                            @php
+                                                $amount = $relatedCourse->selling_price - $relatedCourse->discount_price;
+                                                $discount = ($amount / $relatedCourse->selling_price) * 100;
+                                            @endphp
+                                            @if ($relatedCourse->discount_price == null)
+                                                <p class="card-price text-black font-weight-bold">
+                                                    ${{ $relatedCourse->selling_price }}
+                                                </p>
+                                            @else
+                                                <p class="text-black font-weight-semi-bold lh-18 fs-15">
+                                                    ${{ $relatedCourse->discount_price }}
+                                                    <span class="before-price fs-14">
+                                                        ${{ $relatedCourse->selling_price }}
+                                                    </span>
+                                                </p>
+                                            @endif
+                                        </div>
+                                    </div><!-- end media -->
+                                @endforeach
+                            @endif
+
                                 <div class="view-all-course-btn-box">
                                     <a href="course-grid.html" class="btn theme-btn w-100">View All Courses <i
                                             class="la la-arrow-right icon ml-1"></i></a>
@@ -715,12 +715,12 @@
         </div><!-- end container -->
     </section><!-- end course-details-area -->
     <!--======================================
-                        END COURSE DETAILS AREA
-                ======================================-->
+                                END COURSE DETAILS AREA
+                        ======================================-->
 
     <!--======================================
-                        START RELATED COURSE AREA
-                ======================================-->
+                                START RELATED COURSE AREA
+                        ======================================-->
     <section class="related-course-area bg-gray pt-60px pb-60px">
         <div class="container">
             <div class="related-course-wrap">
@@ -805,12 +805,12 @@
         </div><!-- end container -->
     </section><!-- end related-course-area -->
     <!--======================================
-                        END RELATED COURSE AREA
-                ======================================-->
+                                END RELATED COURSE AREA
+                        ======================================-->
 
     <!--======================================
-                        START CTA AREA
-                ======================================-->
+                                START CTA AREA
+                        ======================================-->
     <section class="cta-area pt-60px pb-60px position-relative overflow-hidden">
         <span class="stroke-shape stroke-shape-1"></span>
         <span class="stroke-shape stroke-shape-2"></span>
@@ -855,8 +855,8 @@
         </div><!-- end container -->
     </section><!-- end cta-area -->
     <!--======================================
-                        END CTA AREA
-                ======================================-->
+                                END CTA AREA
+                        ======================================-->
     <!-- Modal -->
     <div class="modal fade modal-container" id="shareModal" tabindex="-1" role="dialog"
         aria-labelledby="shareModalTitle" aria-hidden="true">
