@@ -641,7 +641,7 @@
                                 <div class="divider"><span></span></div>
                                 <ul class="generic-list-item">
                                     @foreach ($categoris as $category)
-                                        <li><a href="#">{{ $category->category_name }}</a></li>
+                                        <li><a href="{{ url('category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }}</a></li>
                                     @endforeach
 
                                 </ul>
@@ -656,13 +656,13 @@
                             @else
                                 @foreach ($relatedCourses as $relatedCourse)
                                     <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                        <a href="course-details.html" class="media-img">
+                                        <a href="{{ url('course/details/'.$relatedCourse->id.'/'.$relatedCourse->course_name_slug) }}" class="media-img">
                                             <img class="mr-3 lazy" src="{{ asset($relatedCourse->course_image) }}"
                                                  data-src="images/small-img-2.jpg" alt="Related course image">
                                         </a>
                                         <div class="media-body">
                                             <h5 class="fs-15">
-                                                <a href="course-details.html">{{ $relatedCourse->course_name }}</a>
+                                                <a href="{{ url('course/details/'.$relatedCourse->id.'/'.$relatedCourse->course_name_slug) }}">{{ $relatedCourse->course_name }}</a>
                                             </h5>
                                             <span class="d-block lh-18 py-1 fs-14">{{ $relatedCourse->user->name }}</span>
                                             @php
@@ -692,7 +692,7 @@
                                 </div>
                             </div>
                         </div><!-- end card -->
-                       
+
                     </div><!-- end sidebar -->
                 </div><!-- end col-lg-4 -->
             </div><!-- end row -->
