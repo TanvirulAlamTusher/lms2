@@ -145,6 +145,7 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
  Route::get('/course/details/{id}/{slug}',[IndexController::class, 'CourseDetails']);
  Route::get('/category/{id}/{slug}',[IndexController::class, 'CategoryCourse']);
+ Route::get('/subcategory/{id}/{slug}',[IndexController::class, 'SubCategoryCourse']);
 
 
 

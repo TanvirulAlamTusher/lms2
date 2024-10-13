@@ -111,7 +111,7 @@
                                                         @foreach ( $subcategory as $sub_cat)
 
 
-                                                        <li><a href="#">{{ $sub_cat->subcategory_name }}</a></li>
+                                                        <li><a href="{{ url('subcategory/'.$sub_cat->id.'/'.$sub_cat->subcategory_slug) }}">{{ $sub_cat->subcategory_name }}</a></li>
 
                                                         @endforeach
 

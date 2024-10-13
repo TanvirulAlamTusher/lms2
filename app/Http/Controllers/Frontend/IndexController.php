@@ -6,30 +6,41 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Course_goal;
-use Illuminate\Http\Request;
+use App\Models\SubCategory;
 
 class IndexController extends Controller
 {
-    public function CourseDetails($id,$slug){
-       $course = Course::find($id);
-       $goals = Course_goal::where('course_id',$id)->orderBy('id','DESC')->get();
-       $categoris = Category::latest()->get();
+    public function CourseDetails($id, $slug)
+    {
+        $course = Course::find($id);
+        $goals = Course_goal::where('course_id', $id)->orderBy('id', 'DESC')->get();
+        $categoris = Category::latest()->get();
 
-       $ins_id = $course->instructor_id;
-       $instructorCourses = Course::where('instructor_id',$ins_id)->where('status',1)->orderBy('id','DESC')->get();
+        $ins_id = $course->instructor_id;
+        $instructorCourses = Course::where('instructor_id', $ins_id)->where('status', 1)->orderBy('id', 'DESC')->get();
 
-       $category_id = $course->category_id;
-       $relatedCourses = Course::where('category_id',$category_id)->where('id', '!=', $id)
-    ->where('status',1)->orderBy('id','DESC')->limit(3)->get();
-       return view('frontend.course.course_details',compact('course','goals','instructorCourses','categoris','relatedCourses'));
+        $category_id = $course->category_id;
+        $relatedCourses = Course::where('category_id', $category_id)->where('id', '!=', $id)
+            ->where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        return view('frontend.course.course_details', compact('course', 'goals', 'instructorCourses', 'categoris', 'relatedCourses'));
 
     }
 
-    public function CategoryCourse($id, $slug){
+    public function CategoryCourse($id, $slug)
+    {
         $courses = Course::where('category_id', $id)
-        ->where('status', 1)->get();
-    $category = Category::where('id', $id)->first();
-    $categoris = Category::latest()->get();
-        return view('frontend.category.category_all', compact('courses','category','categoris'));
+            ->where('status', 1)->get();
+        $category = Category::where('id', $id)->first();
+        $categoris = Category::latest()->get();
+        return view('frontend.category.category_all', compact('courses', 'category', 'categoris'));
+    }
+
+    public function SubCategoryCourse($id, $slug)
+    {
+        $courses = Course::where('subcategory_id', $id)
+            ->where('status', 1)->get();
+        $subcategory = SubCategory::where('id', $id)->first();
+        $categoris = Category::latest()->get();
+        return view('frontend.category.sub_category_all', compact('courses', 'subcategory', 'categoris'));
     }
 }
