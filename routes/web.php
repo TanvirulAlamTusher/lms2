@@ -144,6 +144,7 @@ Route::middleware(['auth','roles:admin'])->group(function () {
  //// Route Accessable for All
 
  Route::get('/course/details/{id}/{slug}',[IndexController::class, 'CourseDetails']);
+ Route::get('/category/{id}/{slug}',[IndexController::class, 'CategoryCourse']);
 
 
 
