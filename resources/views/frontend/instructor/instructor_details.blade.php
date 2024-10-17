@@ -376,7 +376,7 @@
                         </div>
                     </div><!-- end card-body -->
                 </div><!-- end card -->
-            </div><!-- end col-lg-4 -->
+            </div>
 
 
             @endforeach
