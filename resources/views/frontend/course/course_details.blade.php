@@ -238,7 +238,7 @@
                                         </ul>
                                     </div><!-- end instructor-img -->
                                     <div class="media-body">
-                                        <h5><a href="teacher-detail.html">{{ $course->user->name }}</a></h5>
+                                        <h5><a href="{{ route('instructor.details', $course->instructor_id )}}">{{ $course->user->name }}</a></h5>
                                         <span class="d-block lh-18 pt-2 pb-3">Joined
                                             {{ Carbon\Carbon::parse($course->user->created_at)->diffForHumans() }}</span>
                                         <p class="text-black lh-18 pb-3">Email : {{ $course->user->email }}</p>

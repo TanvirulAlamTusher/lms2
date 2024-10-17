@@ -107,7 +107,7 @@ class AdminController extends Controller
             'password' => ['required','string','max:255'],
         ]);
 
-        User::insert([
+        User::create([
              'name' => $request->name,
              'username' => $request->username,
              'email' => $request->email,
@@ -116,6 +116,7 @@ class AdminController extends Controller
              'address' => $request->address,
              'role' => 'instructor',
              'status' => '0',
+
 
         ]);
 
