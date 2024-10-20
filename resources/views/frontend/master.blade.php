@@ -107,5 +107,6 @@
  }
  @endif
 </script>
+@include('frontend.body.script')
 </body>
 </html>
