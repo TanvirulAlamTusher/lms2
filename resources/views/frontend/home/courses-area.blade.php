@@ -33,7 +33,8 @@
                                 <div class="card card-item card-preview"
                                     data-tooltip-content="#tooltip_content_1{{ $course_item->id }}">
                                     <div class="card-image">
-                                        <a href="{{ url('course/details/'.$course_item->id.'/'.$course_item->course_name_slug) }}" class="d-block">
+                                        <a href="{{ url('course/details/' . $course_item->id . '/' . $course_item->course_name_slug) }}"
+                                            class="d-block">
                                             <img class="card-img-top lazy" src="{{ asset($course_item->course_image) }}"
                                                 data-src="images/img8.jpg" alt="Card image cap">
                                         </a>
@@ -73,9 +74,10 @@
                                     <div class="card-body">
                                         <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->label }}</h6>
                                         <h5 class="card-title"><a
-                                                href="{{ url('course/details/'.$course_item->id.'/'.$course_item->course_name_slug) }}">{{ $course_item->course_name }}</a></h5>
+                                                href="{{ url('course/details/' . $course_item->id . '/' . $course_item->course_name_slug) }}">{{ $course_item->course_name }}</a>
+                                        </h5>
                                         <p class="card-text"><a
-                                                href="{{ route('instructor.details', $course_item->instructor_id )}}">{{ $course_item['user']['name'] }}</a>
+                                                href="{{ route('instructor.details', $course_item->instructor_id) }}">{{ $course_item['user']['name'] }}</a>
                                         </p>
                                         <div class="rating-wrap d-flex align-items-center py-2">
                                             <div class="review-stars">
@@ -100,8 +102,9 @@
                                                     </span></p>
                                             @endif
 
-    <div class="icon-element icon-element-sm shadow-sm cursor-pointer"
-        title="Add to Wishlist" id="{{ $course_item->id }}" onclick="addToWishlist(this.id)"><i class="la la-heart-o"></i></div>
+                                            <div class="icon-element icon-element-sm shadow-sm cursor-pointer"
+                                                title="Add to Wishlist" id="{{ $course_item->id }}"
+                                                onclick="addToWishlist(this.id)"><i class="la la-heart-o"></i></div>
                                         </div>
                                     </div><!-- end card-body -->
                                 </div><!-- end card -->
@@ -128,7 +131,8 @@
                                 <div class="col-lg-4 responsive-column-half">
                                     <div class="card card-item card-preview" data-tooltip-content="#tooltip_content_2">
                                         <div class="card-image">
-                                            <a href="{{ url('course/details/'.$course_item->id.'/'.$course_item->course_name_slug) }}" class="d-block">
+                                            <a href="{{ url('course/details/' . $course_item->id . '/' . $course_item->course_name_slug) }}"
+                                                class="d-block">
                                                 <img class="card-img-top lazy"
                                                     src="{{ asset($course_item->course_image) }}"
                                                     data-src="images/img8.jpg" alt="Card image cap">
@@ -166,7 +170,7 @@
                                         <div class="card-body">
                                             <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->level }}</h6>
                                             <h5 class="card-title"><a
-                                                    href="{{ url('course/details/'.$course_item->id.'/'.$course_item->course_name_slug) }}">{{ $course_item->course_title }}</a>
+                                                    href="{{ url('course/details/' . $course_item->id . '/' . $course_item->course_name_slug) }}">{{ $course_item->course_title }}</a>
                                             </h5>
                                             <p class="card-text"><a
                                                     href="teacher-detail.html">{{ $course_item['user']['name'] }}</a>
@@ -888,14 +892,16 @@
                     </ul>
                     <p class="card-text pt-1 fs-14 lh-22">{{ $item->prerequisites }}</p>
 
-                   @php
-                     $goals = App\Models\Course_goal::where('course_id', $item->id)->orderBy('id','DESC')->get();
-                   @endphp
+                    @php
+                        $goals = App\Models\Course_goal::where('course_id', $item->id)
+                            ->orderBy('id', 'DESC')
+                            ->get();
+                    @endphp
 
                     <ul class="generic-list-item fs-14 py-3">
-                          @foreach ($goals as $goal_item)
-                         <li><i class="la la-check mr-1 text-black"></i> {{ $goal_item->goal_name }}</li>
-                         @endforeach
+                        @foreach ($goals as $goal_item)
+                            <li><i class="la la-check mr-1 text-black"></i> {{ $goal_item->goal_name }}</li>
+                        @endforeach
 
 
                     </ul>
