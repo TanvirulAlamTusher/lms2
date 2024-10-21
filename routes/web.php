@@ -37,7 +37,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
     Route::post('/user/password/update', [UserController::class, 'UserPasswordUpdate'])->name('user.password.update');
 
+
+    //user wishlist
+      Route::controller(WishListController::class)->group(function () {
+        Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
+
+     }); // end user wishlist
+
+
 });
+// END AUTH MEDDLEWARE
 
 require __DIR__.'/auth.php';
 // Admin group middleware
