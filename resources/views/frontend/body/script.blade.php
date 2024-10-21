@@ -49,3 +49,50 @@ function  addToWishlist(course_id){
 }
 
  </script>
+
+ {{-- start load Wishlist data --}}
+
+ <script type="text/javascript">
+
+         function wishlist(){
+            $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: "/get/wishlist/course/",
+
+        success: function(response){
+
+                // Start Message
+
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 6000
+            })
+            if ($.isEmptyObject(response.error)) {
+
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success',
+                    title: response.success,
+                    })
+
+            }else{
+
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error',
+                    title: response.error,
+                    })
+                }
+
+              // End Message
+        }
+    })
+         }
+
+
+     </script>
+      {{-- end load Wishlist data --}}
