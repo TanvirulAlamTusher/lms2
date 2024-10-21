@@ -43,7 +43,7 @@
                             <span class="student-total pl-2">540,815 students</span>
                         </div>
                     </div><!-- end d-flex -->
-                    <p class="pt-2 pb-1">Created by <a href="teacher-detail.html"
+                    <p class="pt-2 pb-1">Created by <a href="{{ route('instructor.details', $course->instructor_id )}}"
                             class="text-color hover-underline">{{ $course['user']['name'] }}</a></p>
                     <div class="d-flex flex-wrap align-items-center">
                         <p class="pr-3 d-flex align-items-center">
