@@ -79,7 +79,7 @@
                         ${value.course.discount_price == null
                         ? ` <p class="card-price text-black font-weight-bold">$ ${value.course.selling_price}</p>`
                     :`
-                     <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
+                      <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
                     }
 
                         <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id ="${value.id}" onclick = "wishlistRemove(this.id)"  ><i class="la la-heart"></i></div>
@@ -143,36 +143,61 @@
      }
 
      // end remove wishlist //
-
-
  </script>
 
-  {{-- start Add to cart --}}
-  <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    })
+ {{-- start Add to cart --}}
+ <script type="text/javascript">
+     $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+     })
 
-    function addToCart(course_id, course_name, instructor_id, slug) {
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            data: {
-                _token: '{{ csrf_token() }}',
-                course_name: course_name,
-                course_name_slug: slug,
-                instructor: instructor_id
+     function addToCart(course_id, course_name, instructor_id, slug) {
+         $.ajax({
+             type: "POST",
+             dataType: 'json',
+             data: {
+                 _token: '{{ csrf_token() }}',
+                 course_name: course_name,
+                 course_name_slug: slug,
+                 instructor: instructor_id
 
-            },
-            url: "/cart/data/store/" + course_id,
+             },
+             url: "/cart/data/store/" + course_id,
 
-            success: function(data) {
+             success: function(data) {
+                 // Start Message
 
-            }
-        })
+                 const Toast = Swal.mixin({
+                     toast: true,
+                     position: 'top-end',
+                     icon: 'success',
+                     showConfirmButton: false,
+                     timer: 6000
+                 })
+                 if ($.isEmptyObject(data.error)) {
 
-    }
-</script>
-  {{-- end Add to cart --}}
+                     Toast.fire({
+                         type: 'success',
+                         icon: 'success',
+                         title: data.success,
+                     })
+
+                 } else {
+
+                     Toast.fire({
+                         type: 'error',
+                         icon: 'error',
+                         title: data.error,
+                     })
+                 }
+
+                 // End Message
+
+             }
+         })
+
+     }
+ </script>
+ {{-- end Add to cart --}}
