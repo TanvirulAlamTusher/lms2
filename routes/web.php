@@ -162,6 +162,7 @@ Route::middleware(['auth','roles:admin'])->group(function () {
  Route::get('/instructor/details/{id}',[IndexController::class, 'InstructorDetails'])->name('instructor.details');
  Route::post('/add-to-wishlist/{course_id}',[WishListController::class, 'AddToWishlist']);
  Route::post('/cart/data/store/{id}',[CartController::class, 'AddToCart']);
+ Route::get('/cart/data/',[CartController::class, 'CartData']);
 
 
 
