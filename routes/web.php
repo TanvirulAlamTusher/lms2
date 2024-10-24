@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 
@@ -160,6 +161,7 @@ Route::middleware(['auth','roles:admin'])->group(function () {
  Route::get('/subcategory/{id}/{slug}',[IndexController::class, 'SubCategoryCourse']);
  Route::get('/instructor/details/{id}',[IndexController::class, 'InstructorDetails'])->name('instructor.details');
  Route::post('/add-to-wishlist/{course_id}',[WishListController::class, 'AddToWishlist']);
+ Route::post('/cart/data/store/{id}',[CartController::class, 'AddToCart']);
 
 
 

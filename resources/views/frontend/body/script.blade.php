@@ -159,7 +159,14 @@
         $.ajax({
             type: "POST",
             dataType: 'json',
-            url: "/add-to-wishlist/" + course_id,
+            data: {
+                _token: '{{ csrf_token() }}',
+                course_name: course_name,
+                course_name_slug: slug,
+                instructor: instructor_id
+
+            },
+            url: "/cart/data/store/" + course_id,
 
             success: function(data) {
 
