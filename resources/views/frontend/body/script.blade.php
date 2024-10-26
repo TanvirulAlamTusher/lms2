@@ -168,7 +168,7 @@
 
              success: function(data) {
                  // Start Message
-
+                
                  const Toast = Swal.mixin({
                      toast: true,
                      position: 'top-end',
@@ -201,3 +201,37 @@
      }
  </script>
  {{-- end Add to cart --}}
+{{-- START Mini cart --}}
+<script type="text/javascript">
+    function miniCart(){
+        $.ajax({
+            type: 'GET',
+            url: '/course/mini/cart/',
+            dataType: 'json',
+
+            success: function(response){
+                var miniCart = "";
+
+                $.each(response.cart, function(key, value){
+                    miniCart += `
+                        <li class="media media-card">
+                            <a href="shopping-cart.html" class="media-img">
+                                <img src="/${value.options.image}" alt="Cart image">
+                            </a>
+                            <div class="media-body">
+                                <h5><a href="course-details.html">${value.name}</a></h5>
+                                <span class="d-block fs-14">$${value.price}</span>
+                            </div>
+                        </li>
+                    `;
+                });
+
+                $('#minicart').html(miniCart);
+                $('.product-count').text(response.Qty);  // Update the cart quantity
+            }
+        });
+    }
+    miniCart();
+    </script>
+    {{-- END Mini cart --}}
+

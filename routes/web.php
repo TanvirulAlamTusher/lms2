@@ -164,5 +164,8 @@ Route::middleware(['auth','roles:admin'])->group(function () {
  Route::post('/cart/data/store/{id}',[CartController::class, 'AddToCart']);
  Route::get('/cart/data/',[CartController::class, 'CartData']);
 
+ //get data from mini cart
+ Route::get('/course/mini/cart/',[CartController::class, 'AddMiniCart']);
+
 
 
