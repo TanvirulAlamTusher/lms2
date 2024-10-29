@@ -117,7 +117,7 @@
                      position: 'top-end',
                      icon: 'success',
                      showConfirmButton: false,
-                     timer: 6000
+                     timer: 1000
                  })
                  if ($.isEmptyObject(data.error)) {
 
@@ -174,7 +174,7 @@
                      position: 'top-end',
                      icon: 'success',
                      showConfirmButton: false,
-                     timer: 2000
+                     timer: 1000
                  })
                  if ($.isEmptyObject(data.error)) {
 
@@ -248,7 +248,7 @@
                      position: 'top-end',
                      icon: 'success',
                      showConfirmButton: false,
-                     timer: 2000
+                     timer: 1000
                  })
                  if ($.isEmptyObject(data.error)) {
 
