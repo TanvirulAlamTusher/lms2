@@ -168,13 +168,13 @@
 
              success: function(data) {
                  // Start Message
-                
+                 miniCart();
                  const Toast = Swal.mixin({
                      toast: true,
                      position: 'top-end',
                      icon: 'success',
                      showConfirmButton: false,
-                     timer: 6000
+                     timer: 2000
                  })
                  if ($.isEmptyObject(data.error)) {
 
@@ -215,11 +215,11 @@
                 $.each(response.cart, function(key, value){
                     miniCart += `
                         <li class="media media-card">
-                            <a href="shopping-cart.html" class="media-img">
+                            <a href="/course/details/${value.id}/${value.options.slug}" class="media-img">
                                 <img src="/${value.options.image}" alt="Cart image">
                             </a>
                             <div class="media-body">
-                                <h5><a href="course-details.html">${value.name}</a></h5>
+                                <h5><a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a></h5>
                                 <span class="d-block fs-14">$${value.price}</span>
                             </div>
                         </li>
@@ -228,6 +228,7 @@
 
                 $('#minicart').html(miniCart);
                 $('.product-count').text(response.Qty);  // Update the cart quantity
+                $('#total_amount').text(response.total);
             }
         });
     }

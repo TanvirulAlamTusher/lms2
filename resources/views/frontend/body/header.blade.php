@@ -161,7 +161,7 @@
                                     <li>
                                         <p class="shop-cart-btn d-flex align-items-center">
                                             <i class="la la-shopping-cart"></i>
-                                            <span class="product-count">2</span>
+                                            <span class="product-count"></span>
                                         </p>
                                         <ul class="cart-dropdown-menu">
 
@@ -171,6 +171,11 @@
 
                                            </div>
 
+                                      <br>
+                                      <li>
+
+                                            <i>Total : <span id="total_amount"></span></i>
+                                    </li>
 
                                             <li>
                                                 <a href="shopping-cart.html" class="btn theme-btn w-100">Got to cart
