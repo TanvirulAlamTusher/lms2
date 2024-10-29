@@ -79,7 +79,7 @@
                         ${value.course.discount_price == null
                         ? ` <p class="card-price text-black font-weight-bold">$ ${value.course.selling_price}</p>`
                     :`
-                      <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
+                        <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
                     }
 
                         <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id ="${value.id}" onclick = "wishlistRemove(this.id)"  ><i class="la la-heart"></i></div>
@@ -201,19 +201,19 @@
      }
  </script>
  {{-- end Add to cart --}}
-{{-- START Mini cart --}}
-<script type="text/javascript">
-    function miniCart(){
-        $.ajax({
-            type: 'GET',
-            url: '/course/mini/cart/',
-            dataType: 'json',
+ {{-- START Mini cart --}}
+ <script type="text/javascript">
+     function miniCart() {
+         $.ajax({
+             type: 'GET',
+             url: '/course/mini/cart/',
+             dataType: 'json',
 
-            success: function(response){
-                var miniCart = "";
+             success: function(response) {
+                 var miniCart = "";
 
-                $.each(response.cart, function(key, value){
-                    miniCart += `
+                 $.each(response.cart, function(key, value) {
+                     miniCart += `
                         <li class="media media-card">
                             <a href="/course/details/${value.id}/${value.options.slug}" class="media-img">
                                 <img src="/${value.options.image}" alt="Cart image">
@@ -221,18 +221,64 @@
                             <div class="media-body">
                                 <h5><a href="/course/details/${value.id}/${value.options.slug}">${value.name}</a></h5>
                                 <span class="d-block fs-14">$${value.price}</span>
+                                <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="la la-times"></i></a>
                             </div>
                         </li>
                     `;
-                });
+                 });
 
-                $('#minicart').html(miniCart);
-                $('.product-count').text(response.Qty);  // Update the cart quantity
-                $('#total_amount').text(response.total);
-            }
-        });
-    }
-    miniCart();
-    </script>
-    {{-- END Mini cart --}}
+                 $('#minicart').html(miniCart);
+                 $('.product-count').text(response.Qty); // Update the cart quantity
+                 $('#total_amount').text(response.total);
+             }
+         });
+     }
+     miniCart();
+
+    function miniCartRemove(rowId) {
+         $.ajax({
+             type: 'GET',
+             url: '/minicart/remove/' + rowId,
+             dataType: 'json',
+             success: function(data) {
+                 // Start Message
+                 miniCart();
+                 const Toast = Swal.mixin({
+                     toast: true,
+                     position: 'top-end',
+                     icon: 'success',
+                     showConfirmButton: false,
+                     timer: 2000
+                 })
+                 if ($.isEmptyObject(data.error)) {
+
+                     Toast.fire({
+                         type: 'success',
+                         icon: 'success',
+                         title: data.success,
+                     })
+
+                 } else {
+
+                     Toast.fire({
+                         type: 'error',
+                         icon: 'error',
+                         title: data.error,
+                     })
+                 }
+
+                 // End Message
+
+
+             }
+
+         });
+     }
+     //End
+     //Remove course from minicart
+ </script>
+ {{-- END Mini cart --}}
+
+
+
 

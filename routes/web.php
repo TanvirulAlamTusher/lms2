@@ -166,6 +166,8 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
  //get data from mini cart
  Route::get('/course/mini/cart/',[CartController::class, 'AddMiniCart']);
+  //remove data from mini cart
+ Route::get('/minicart/remove/{rowId}',[CartController::class, 'RemoveMiniCart']);
 
 
 
