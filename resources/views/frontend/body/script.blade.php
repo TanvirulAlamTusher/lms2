@@ -290,7 +290,9 @@
         dataType: 'json',
         success: function(response){
 
+            $('span[id="cartSubTotal"]').text(response.total)
             var rows = ""
+
             $.each(response.cart, function(key, value){
                rows += `
                 <tr>

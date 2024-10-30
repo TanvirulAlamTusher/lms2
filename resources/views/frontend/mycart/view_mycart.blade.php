@@ -64,12 +64,12 @@
                     <div class="divider"><span></span></div>
                     <ul class="generic-list-item pb-4">
                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                            <span class="text-black">Subtotal:</span>
-                            <span>$44.99</span>
+                            <span class="text-black">Subtotal: $</span>
+                            <span id="cartSubTotal"></span>
                         </li>
                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                            <span class="text-black">Total:</span>
-                            <span>$44.99</span>
+                            <span class="text-black">Total: $</span>
+                            <span id="cartSubTotal"> </span>
                         </li>
                     </ul>
                     <a href="checkout.html" class="btn theme-btn w-100">Checkout <i
