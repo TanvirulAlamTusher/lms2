@@ -170,4 +170,8 @@ Route::middleware(['auth','roles:admin'])->group(function () {
  Route::get('/minicart/remove/{rowId}',[CartController::class, 'RemoveMiniCart']);
 
 
+//Cart all route
+ Route::controller(CartController::class)->group(function () {
+    Route::get('/mycart','MyCart')->name('mycart');
 
+ });

@@ -178,7 +178,7 @@
                                     </li>
 
                                             <li>
-                                                <a href="shopping-cart.html" class="btn theme-btn w-100">Got to cart
+                                                <a href="{{ route('mycart') }}" class="btn theme-btn w-100">Got to cart
                                                     <i class="la la-arrow-right icon ml-1"></i></a>
                                             </li>
                                         </ul>

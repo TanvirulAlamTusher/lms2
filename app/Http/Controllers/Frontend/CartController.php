@@ -80,7 +80,11 @@ class CartController extends Controller
       Cart::remove($id);
 
       return response()->json(['success' => 'Course remove from cart']);
-      
+
+    }//end Method
+
+    public function MyCart(){
+       return view('frontend.mycart.view_mycart');
     }//end Method
 
 }
