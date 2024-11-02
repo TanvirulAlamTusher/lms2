@@ -56,12 +56,12 @@
                             <td>{{ $item['category']['category_name'] }}</td>
 
                             <td>{{ $item->selling_price }}</td>
-                            <td>     <a href="#" class="btn btn-info px-5" id=""><i class="lni lni-eye" ></i></a></td>
+                            <td>     <a href="{{ route('admin.course.details',$item->id) }}" class="btn btn-info px-5" id=""><i class="lni lni-eye" ></i></a></td>
 
 
                            <td>
                             <div class="form-check-success form-check form-switch">
-                                <input class="form-check-input status-toggle large-checkbox" type="checkbox" id="flexSwitchCheckCheckedDanger" data-user-id="{{ $item->id }}" {{ $item->status ? 'checked' : '' }}  >
+                                <input class="form-check-input status-toggle large-checkbox" type="checkbox" id="flexSwitchCheckCheckedDanger" data-course-id="{{ $item->id }}" {{ $item->status ? 'checked' : '' }}  >
                                 <label class="form-check-label" for="flexSwitchCheckCheckedDanger"></label>
                             </div>
                            </td>
@@ -79,15 +79,15 @@
 <script>
     $(document).ready(function(){
         $('.status-toggle').on('change', function(){
-            var userId = $(this).data('user-id');
+            var courseId = $(this).data('course-id');
             var isChecked = $(this).is(':checked');
 
             // sent an ajax request to update the status
            $.ajax({
-             url: "{{ route('update.user.status') }}",
+             url: "{{ route('update.course.status') }}",
              method: "POST",
              data: {
-                user_id: userId,
+                course_id: courseId,
                 is_checked: isChecked ? 1 : 0,
                 _token: "{{ csrf_token() }}",
              },

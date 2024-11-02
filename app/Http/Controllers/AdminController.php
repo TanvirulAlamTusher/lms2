@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -97,59 +97,85 @@ class AdminController extends Controller
 
     } //end Method
 
-    public function BecomeInstructor(){
-       return view('frontend.instructor.reg_instructor');
-    }//end mathod
+    public function BecomeInstructor()
+    {
+        return view('frontend.instructor.reg_instructor');
+    } //end mathod
 
-    public function InstructorRegister(Request $request){
+    public function InstructorRegister(Request $request)
+    {
         $request->validate([
-            'name' => ['required','string','max:255'],
-            'email' => ['required','string','unique:users'],
-            'password' => ['required','string','max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'unique:users'],
+            'password' => ['required', 'string', 'max:255'],
         ]);
 
         User::create([
-             'name' => $request->name,
-             'username' => $request->username,
-             'email' => $request->email,
-             'password' => Hash::make($request->password),
-             'phone' => $request->phone,
-             'address' => $request->address,
-             'role' => 'instructor',
-             'status' => '0',
-
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'role' => 'instructor',
+            'status' => '0',
 
         ]);
 
         $notifaction = array(
-        'message' => 'Instructor Registed successfully',
-        'alert_type' => 'success');
+            'message' => 'Instructor Registed successfully',
+            'alert_type' => 'success');
 
-    return redirect()->route('instructor.login')->with($notifaction);
+        return redirect()->route('instructor.login')->with($notifaction);
 
-    }//end mathod
+    } //end mathod
 
-    public function AllInstructor(){
-        $allinstructors = User::where('role','instructor')->latest()->get();
-        return view('admin.backend.instructor.all_instructor',compact('allinstructors'));
+    public function AllInstructor()
+    {
+        $allinstructors = User::where('role', 'instructor')->latest()->get();
+        return view('admin.backend.instructor.all_instructor', compact('allinstructors'));
 
-    }//end mathod
-    public function UpdateUserStatus(Request $request){
+    } //end mathod
+    public function UpdateUserStatus(Request $request)
+    {
         $userId = $request->input('user_id');
-        $isChecked = $request->input('is_checked',0);
+        $isChecked = $request->input('is_checked', 0);
 
         $user = User::find($userId);
 
-        if($user) {
+        if ($user) {
             $user->status = $isChecked;
             $user->save();
         }
         return response()->json(['message' => 'User Status Updated Successfully']);
 
-    }//end method
+    } //end method
 
-    public function AdminAllCourse(){
-      $course = Course::latest()->get();
-      return view('admin.backend.courses.all_course', compact('course'));
+    public function AdminAllCourse()
+    {
+        $course = Course::latest()->get();
+        return view('admin.backend.courses.all_course', compact('course'));
+    } //end method
+
+    public function UpdateCourseStatus(Request $request)
+    {
+        $courseId = $request->input('course_id');
+        $ischecked = $request->input('is_checked', 0);
+
+        $course = Course::find($courseId);
+
+        if ($course) {
+            $course->status = $ischecked;
+            $course->save();
+        }
+        return response()->json(['message' => 'Course Status Updated Successfully']);
+
     }//end method
+    public function AdminCourseDetails($id){
+
+        $course = Course::find($id);
+        return view('admin.backend.courses.course_details', compact('course'));
+
+    }
+
 }
