@@ -51,4 +51,13 @@ class CouponController extends Controller
     return redirect()->route('admin.all.coupon')->with($notifaction);
       }//end mathod
 
+      public function AdminDeleteCoupon($id){
+        Coupon::find($id)->delete();
+
+        $notifaction = array('message' => 'Coupon Delete successfully',
+        'alert_type' => 'success');
+
+    return redirect()->route('admin.all.coupon')->with($notifaction);
+      }
+
 }

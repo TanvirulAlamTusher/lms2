@@ -105,6 +105,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::post('/admin/store/coupon', 'AdminStoreCoupon')->name('admin.store.coupon');
         Route::get('/admin/edit/coupon/{id}', 'AdminEditCoupon')->name('admin.edit.coupon');
         Route::post('/admin/update/coupon', 'AdminUpdateCoupon')->name('admin.update.coupon');
+        Route::get('/admin/delete/coupon/{id}', 'AdminDeleteCoupon')->name('admin.delete.coupon');
 
 
     });//End
