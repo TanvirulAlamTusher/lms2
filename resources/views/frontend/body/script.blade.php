@@ -334,3 +334,52 @@
  {{-- END MyCart --}}
 
 
+  {{-- Apply Coupon Start --}}
+
+ <script type="text/javascript">
+
+ function applyCoupon(){
+    var coupon_name = $('#coupon_code').val();
+
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        data: { coupon_name:coupon_name },
+        url: "/coupon-apply",
+
+        success: function(data){
+
+              // Start Message
+                 const Toast = Swal.mixin({
+                     toast: true,
+                     position: 'top-end',
+                     icon: 'success',
+                     showConfirmButton: false,
+                     timer: 1000
+                 })
+                 if ($.isEmptyObject(data.error)) {
+
+                     Toast.fire({
+                         type: 'success',
+                         icon: 'success',
+                         title: data.success,
+                     })
+
+                 } else {
+
+                     Toast.fire({
+                         type: 'error',
+                         icon: 'error',
+                         title: data.error,
+                     })
+                 }
+
+                 // End Message
+
+        }
+    })
+ }
+
+</script>
+{{-- Apply Coupon End --}}
+

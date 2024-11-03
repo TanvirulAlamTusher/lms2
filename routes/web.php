@@ -187,3 +187,8 @@ Route::controller(CartController::class)->group(function () {
     Route::get('/get-cart-courses', 'GetCartCourse');
 
 });
+
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+
+
+//// End Route Accessable for All
