@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-            <a href="{{ route('add.category') }}" class="btn btn-primary "> Add Coupon </a>
+            <a href="{{ route('admin.add.coupon') }}" class="btn btn-primary "> Add Coupon </a>
 
 
             </div>
@@ -35,7 +35,7 @@
                             <th>Coupon Discount</th>
                             <th>Coupon Validity</th>
                             <th>Coupon Validity</th>
-                            <th>Status</th>
+                           
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@
                                   @else
                                   <span class="badge bg-danger">Invalid</span>
                                 @endif
-                                {{ $item->status }}</td>
+                              </td>
                            <td>
                             <a href="{{ route('edit.category', $item->id) }}" class="btn btn-info px-5">Edit</a>
                             <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
