@@ -79,7 +79,7 @@
                         ${value.course.discount_price == null
                         ? ` <p class="card-price text-black font-weight-bold">$ ${value.course.selling_price}</p>`
                     :`
-                        <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
+                         <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
                     }
 
                         <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id ="${value.id}" onclick = "wishlistRemove(this.id)"  ><i class="la la-heart"></i></div>
@@ -235,7 +235,7 @@
      }
      miniCart();
 
-    function miniCartRemove(rowId) {
+     function miniCartRemove(rowId) {
          $.ajax({
              type: 'GET',
              url: '/minicart/remove/' + rowId,
@@ -283,18 +283,18 @@
 
  {{-- Start MyCart --}}
  <script type="text/javascript">
- function cart(){
-    $.ajax({
-        type: 'GET',
-        url: '/get-cart-courses',
-        dataType: 'json',
-        success: function(response){
+     function cart() {
+         $.ajax({
+             type: 'GET',
+             url: '/get-cart-courses',
+             dataType: 'json',
+             success: function(response) {
 
-            $('span[id="cartSubTotal"]').text(response.total)
-            var rows = ""
+                 $('span[id="cartSubTotal"]').text(response.total)
+                 var rows = ""
 
-            $.each(response.cart, function(key, value){
-               rows += `
+                 $.each(response.cart, function(key, value) {
+                     rows += `
                 <tr>
                     <th scope="row">
                         <div class="media media-card">
@@ -323,33 +323,37 @@
                     </td>
                 </tr>
                `
-            });
-            $('#cartPage').html(rows);
+                 });
+                 $('#cartPage').html(rows);
 
-        }
-    })
- }
- cart();
-</script>
+             }
+         })
+     }
+     cart();
+ </script>
  {{-- END MyCart --}}
 
 
-  {{-- Apply Coupon Start --}}
+ {{-- Apply Coupon Start --}}
 
  <script type="text/javascript">
+     function applyCoupon() {
+         var coupon_name = $('#coupon_code').val();
 
- function applyCoupon(){
-    var coupon_name = $('#coupon_code').val();
+         $.ajax({
+             type: "POST",
+             dataType: "JSON",
+             data: {
+                 coupon_name: coupon_name
+             },
+             url: "/coupon-apply",
 
-    $.ajax({
-        type: "POST",
-        dataType: "JSON",
-        data: { coupon_name:coupon_name },
-        url: "/coupon-apply",
+             success: function(data) {
+                 if (data.validity === true) {
+                     $('#couponField').hide();
+                 }
 
-        success: function(data){
-
-              // Start Message
+                 // Start Message
                  const Toast = Swal.mixin({
                      toast: true,
                      position: 'top-end',
@@ -376,10 +380,8 @@
 
                  // End Message
 
-        }
-    })
- }
-
-</script>
-{{-- Apply Coupon End --}}
-
+             }
+         })
+     }
+ </script>
+ {{-- Apply Coupon End --}}
