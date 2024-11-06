@@ -79,7 +79,7 @@
                         ${value.course.discount_price == null
                         ? ` <p class="card-price text-black font-weight-bold">$ ${value.course.selling_price}</p>`
                     :`
-                         <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
+                          <p class="card-price text-black font-weight-bold">$ ${value.course.discount_price}<span class="before-price font-weight-medium">$ ${value.course.selling_price}</span></p>`
                     }
 
                         <div class="icon-element icon-element-sm shadow-sm cursor-pointer" data-toggle="tooltip" data-placement="top" title="Remove from Wishlist" id ="${value.id}" onclick = "wishlistRemove(this.id)"  ><i class="la la-heart"></i></div>
@@ -387,18 +387,62 @@
 
 
      /// Start Coupon Calculation Method
-     function couponCalculation(){
-        $.ajax({
-            type: 'GET',
-            url: "/coupon-calculation",
-            dataType: 'json',
+     function couponCalculation() {
+         $.ajax({
+             type: 'GET',
+             url: "/coupon-calculation",
+             dataType: 'json',
 
-            success: function(data){
+             success: function(data) {
 
+                 if (data.total) {
+                     $('#couponCalField').html(
+                         `
+                  <h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
+                    <div class="divider"><span></span></div>
+                    <ul class="generic-list-item pb-4">
+                        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                            <span class="text-black">Subtotal: $</span>
+                            <span>${data.total}</span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                            <span class="text-black">Total: $</span>
+                             <span>${data.total}</span>
+                        </li>
+                    </ul>
+                        `
+                     )
+                 }else{
+                    $('#couponCalField').html(
+                         `
+                  <h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
+                    <div class="divider"><span></span></div>
+                    <ul class="generic-list-item pb-4">
+                        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                            <span class="text-black">Subtotal:</span>
+                            <span>$${data.subtotal}</span>
+                        </li>
+                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                            <span class="text-black">Coupon Name: </span>
+                            <span>${data.coupon_name}</span>
+                        </li>
+                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                            <span class="text-black">Coupon Discount:</span>
+                            <span>$${data.coupon_discount}</span>
+                         
+                        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                            <span class="text-black">Grand Total:</span>
+                             <span>$${data.total_amount}</span>
+                        </li>
+                    </ul>
+                        `
+                     )
 
-            }
-        })
+                 }
+
+             }
+         })
      } /// End Coupon Calculation Method
-
+     couponCalculation();
  </script>
  {{-- Apply Coupon End --}}

@@ -75,8 +75,15 @@
 
             </div>
             <div class="col-lg-4 ml-auto">
-                <div class="bg-gray p-4 rounded-rounded mt-40px">
-                    <h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
+                <div class="bg-gray p-4 rounded-rounded mt-40px" id="couponCalField">
+
+
+
+
+
+
+
+                    {{-- <h3 class="fs-18 font-weight-bold pb-3">Cart Totals</h3>
                     <div class="divider"><span></span></div>
                     <ul class="generic-list-item pb-4">
                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
@@ -87,7 +94,7 @@
                             <span class="text-black">Total: $</span>
                             <span id="cartSubTotal"> </span>
                         </li>
-                    </ul>
+                    </ul> --}}
                     <a href="checkout.html" class="btn theme-btn w-100">Checkout <i
                             class="la la-arrow-right icon ml-1"></i></a>
                 </div>
