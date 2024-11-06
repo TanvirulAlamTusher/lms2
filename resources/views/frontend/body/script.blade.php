@@ -244,6 +244,8 @@
                  // Start Message
                  miniCart();
                  cart();
+                 couponCalculation();
+
                  const Toast = Swal.mixin({
                      toast: true,
                      position: 'top-end',
@@ -352,7 +354,7 @@
                  if (data.validity === true) {
                      $('#couponField').hide();
                  }
-
+                 couponCalculation();
                  // Start Message
                  const Toast = Swal.mixin({
                      toast: true,
@@ -420,19 +422,21 @@
                     <ul class="generic-list-item pb-4">
                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
                             <span class="text-black">Subtotal:</span>
-                            <span>$${data.subtotal}</span>
+                            <span>${data.subtotal}$</span>
                         </li>
                          <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
                             <span class="text-black">Coupon Name: </span>
-                            <span>${data.coupon_name}</span>
+                            <span>${data.coupon_name} <button type="button"  onclick="couponRemove()" class="icon-element icon-element-xs shadow-sm border-0" data-toggle="tooltip" data-placement="top" >
+                            <i class="la la-times"></i>
+                        </button> </span>
                         </li>
                          <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-                            <span class="text-black">Coupon Discount:</span>
-                            <span>$${data.coupon_discount}</span>
-                         
+                            <span class="text-black">Discount Amount:</span>
+                            <span>${data.discount_amount}$</span>
+
                         <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
                             <span class="text-black">Grand Total:</span>
-                             <span>$${data.total_amount}</span>
+                             <span>${data.total_amount}$</span>
                         </li>
                     </ul>
                         `
@@ -446,3 +450,54 @@
      couponCalculation();
  </script>
  {{-- Apply Coupon End --}}
+
+
+
+  {{-- Remove Coupon Start --}}
+ <script type="text/javascript">
+   function couponRemove(){
+    $.ajax({
+        type: "GET",
+        dataType: 'json',
+        url: '/coupon-remove',
+
+        success: function(data){
+
+
+            $('#couponField').show();
+
+            couponCalculation();
+              // Start Message
+              const Toast = Swal.mixin({
+                     toast: true,
+                     position: 'top-end',
+                     icon: 'success',
+                     showConfirmButton: false,
+                     timer: 1000
+                 })
+                 if ($.isEmptyObject(data.error)) {
+
+                     Toast.fire({
+                         type: 'success',
+                         icon: 'success',
+                         title: data.success,
+                     })
+
+                 } else {
+
+                     Toast.fire({
+                         type: 'error',
+                         icon: 'error',
+                         title: data.error,
+                     })
+                 }
+
+                 // End Message
+
+        }
+    })
+
+   }
+
+ </script>
+  {{-- Remove Coupon End --}}

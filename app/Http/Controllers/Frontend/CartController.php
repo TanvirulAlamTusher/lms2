@@ -16,7 +16,9 @@ class CartController extends Controller
     {
 
         $course = Course::find($id);
-
+         if(Session::has('coupon')){
+            Session::forget('coupon');
+         }
         // Check if the course is already in the cart
         $cartItem = Cart::search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;
@@ -84,6 +86,19 @@ class CartController extends Controller
     public function RemoveMiniCart($id)
     {
         Cart::remove($id);
+        if(Session::has('coupon')){
+            $coupon_name = Session::get('coupon')['coupon_name'];
+            $coupon = Coupon::where('coupon_name',$coupon_name)->first();
+
+            Session::put('coupon', [
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round(Cart::total() * $coupon->coupon_discount / 100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
+            ]);
+
+
+        }
 
         return response()->json(['success' => 'Course remove from cart']);
 
@@ -143,6 +158,11 @@ class CartController extends Controller
             ));
         }
 
+    } //End Method
+
+    public function CouponRemove(){
+        Session::forget('coupon');
+        return response()->json(['success' => 'Coupon remove successfully']);
     } //End Method
 
 }
