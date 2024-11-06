@@ -383,5 +383,22 @@
              }
          })
      }
+
+
+
+     /// Start Coupon Calculation Method
+     function couponCalculation(){
+        $.ajax({
+            type: 'GET',
+            url: "/coupon-calculation",
+            dataType: 'json',
+
+            success: function(data){
+
+
+            }
+        })
+     } /// End Coupon Calculation Method
+
  </script>
  {{-- Apply Coupon End --}}

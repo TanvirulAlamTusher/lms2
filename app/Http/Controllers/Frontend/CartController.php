@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\Course;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -59,67 +59,90 @@ class CartController extends Controller
 
     } // End Method
 
-    public function CartData(){
+    public function CartData()
+    {
         $carts = Cart::content();
         $cartsTotal = Cart::total();
         $cartsQty = Cart::count();
 
         return response()->json(['cart' => $carts,
-        'total' => $cartsTotal,
-        'Qty' => $cartsQty]);
+            'total' => $cartsTotal,
+            'Qty' => $cartsQty]);
 
-    }//end Method
-    public function  AddMiniCart(){
+    } //end Method
+    public function AddMiniCart()
+    {
         $carts = Cart::content();
         $cartsTotal = Cart::total();
         $cartsQty = Cart::count();
 
         return response()->json(['cart' => $carts,
-        'total' => $cartsTotal,
-        'Qty' => $cartsQty]);
+            'total' => $cartsTotal,
+            'Qty' => $cartsQty]);
 
-    }//end Method
-    public function RemoveMiniCart($id){
-      Cart::remove($id);
+    } //end Method
+    public function RemoveMiniCart($id)
+    {
+        Cart::remove($id);
 
-      return response()->json(['success' => 'Course remove from cart']);
+        return response()->json(['success' => 'Course remove from cart']);
 
-    }//end Method
+    } //end Method
 
-    public function MyCart(){
-       return view('frontend.mycart.view_mycart');
-    }//end Method
+    public function MyCart()
+    {
+        return view('frontend.mycart.view_mycart');
+    } //end Method
 
-    public function  GetCartCourse(){
+    public function GetCartCourse()
+    {
         $carts = Cart::content();
         $cartsTotal = Cart::total();
         $cartsQty = Cart::count();
 
         return response()->json(['cart' => $carts,
-        'total' => $cartsTotal,
-        'Qty' => $cartsQty]);
+            'total' => $cartsTotal,
+            'Qty' => $cartsQty]);
 
-    }//end Method
+    } //end Method
 
-    public function CouponApply(Request $request){
+    public function CouponApply(Request $request)
+    {
         $coupon = Coupon::where('coupon_name', $request->coupon_name)
-        ->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
+            ->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
 
-        if($coupon){
-            Session::put('coupon',[
+        if ($coupon) {
+            Session::put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
                 'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount' => round(Cart::total() * $coupon->coupon_discount/100) ,
-                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100 )
+                'discount_amount' => round(Cart::total() * $coupon->coupon_discount / 100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
             ]);
             return response()->json(array(
                 'validity' => true,
-                'success' => 'Coupon Applied Successfully'
+                'success' => 'Coupon Applied Successfully',
             ));
-        }else{
+        } else {
             return response()->json(['error' => 'Invaild Coupon']);
         }
-    }
+    } //End Method
 
+    public function CouponCalculation()
+    {
+        if (Session::has('coupon')) {
+            return response()->json(array(
+                'subtotal' => Cart::total(),
+                'coupon_name' => session()->get('coupon')['coupon_name'],
+                'coupon_discount' => session()->get('coupon')['coupon_discount'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ));
+        } else {
+            return response()->json(array(
+                'total' => Cart::total(),
+            ));
+        }
+
+    } //End Method
 
 }

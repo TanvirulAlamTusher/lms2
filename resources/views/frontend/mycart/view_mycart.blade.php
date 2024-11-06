@@ -1,8 +1,8 @@
 @extends('frontend.master')
 @section('home')
     <!-- ================================
-        START BREADCRUMB AREA
-    ================================= -->
+            START BREADCRUMB AREA
+        ================================= -->
     <section class="breadcrumb-area section-padding img-bg-2">
         <div class="overlay"></div>
         <div class="container">
@@ -20,12 +20,12 @@
         </div><!-- end container -->
     </section><!-- end breadcrumb-area -->
     <!-- ================================
-        END BREADCRUMB AREA
-    ================================= -->
+            END BREADCRUMB AREA
+        ================================= -->
 
     <!-- ================================
-           START CONTACT AREA
-    ================================= -->
+               START CONTACT AREA
+        ================================= -->
     <section class="cart-area section-padding">
         <div class="container">
             <div class="table-responsive">
@@ -45,19 +45,34 @@
 
                     </tbody>
                 </table>
+
+
                 <div class="d-flex flex-wrap align-items-center justify-content-between pt-4">
+
+                    @if (Session::has('coupon'))
+
+                    @else
+                    <pre>
+                        {{-- {{ json_encode(Session::get('coupon'), JSON_PRETTY_PRINT) }} --}}
+                    </pre>
+
                     <form action="#">
                         <div class="input-group mb-2" id="couponField">
                             <input class="form-control form--control pl-3" type="text" id="coupon_code"
                                 placeholder="Coupon code">
                             <div class="input-group-append">
-                                {{-- <button class="btn theme-btn" type="submit" onclick="applyCoupon()" >Apply Code</button> --}}
+
                                 <a type="submit" onclick="applyCoupon()" class="btn theme-btn">Apply Code</a>
                             </div>
                         </div>
                     </form>
-                    <a href="#" class="btn theme-btn mb-2">Update Cart</a>
+
+                    @endif
+
+
                 </div>
+
+
             </div>
             <div class="col-lg-4 ml-auto">
                 <div class="bg-gray p-4 rounded-rounded mt-40px">
@@ -80,6 +95,6 @@
         </div><!-- end container -->
     </section>
     <!-- ================================
-           END CONTACT AREA
-    ================================= -->
+               END CONTACT AREA
+        ================================= -->
 @endsection
