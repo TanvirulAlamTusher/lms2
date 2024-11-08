@@ -8,6 +8,7 @@ use App\Models\Course;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -16,9 +17,9 @@ class CartController extends Controller
     {
 
         $course = Course::find($id);
-         if(Session::has('coupon')){
+        if (Session::has('coupon')) {
             Session::forget('coupon');
-         }
+        }
         // Check if the course is already in the cart
         $cartItem = Cart::search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;
@@ -86,9 +87,9 @@ class CartController extends Controller
     public function RemoveMiniCart($id)
     {
         Cart::remove($id);
-        if(Session::has('coupon')){
+        if (Session::has('coupon')) {
             $coupon_name = Session::get('coupon')['coupon_name'];
-            $coupon = Coupon::where('coupon_name',$coupon_name)->first();
+            $coupon = Coupon::where('coupon_name', $coupon_name)->first();
 
             Session::put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
@@ -96,7 +97,6 @@ class CartController extends Controller
                 'discount_amount' => round(Cart::total() * $coupon->coupon_discount / 100),
                 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
             ]);
-
 
         }
 
@@ -160,9 +160,37 @@ class CartController extends Controller
 
     } //End Method
 
-    public function CouponRemove(){
+    public function CouponRemove()
+    {
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon remove successfully']);
+    } //End Method
+
+    public function CheckoutCreate()
+    {
+        // check if the user has already login.
+        if (Auth::check()) {
+            //check if the user has any course in the cart.
+            if (Cart::total() > 0) {
+                $carts = Cart::content();
+                $cartsTotal = Cart::total();
+                $cartsQty = Cart::count();
+                return view('frontend.checkout.checkout_view', compact('carts', 'cartsTotal', 'cartsQty'));
+            } else {
+                $notifaction = array('message' => 'Add At list one course',
+                    'alert_type' => 'error');
+
+                return redirect()->to('/')->with($notifaction);
+            }//end inner if
+
+        } else {
+            $notifaction = array('message' => 'Login First',
+            'alert_type' => 'error');
+
+        return redirect()->route('login')->with($notifaction);
+
+        }
+        return view('');
     } //End Method
 
 }
