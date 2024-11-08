@@ -177,6 +177,7 @@ class CartController extends Controller
                 $cartsQty = Cart::count();
                 return view('frontend.checkout.checkout_view', compact('carts', 'cartsTotal', 'cartsQty'));
             } else {
+
                 $notifaction = array('message' => 'Add At list one course',
                     'alert_type' => 'error');
 
@@ -184,13 +185,14 @@ class CartController extends Controller
             }//end inner if
 
         } else {
+            
             $notifaction = array('message' => 'Login First',
             'alert_type' => 'error');
 
         return redirect()->route('login')->with($notifaction);
 
         }
-        return view('');
+
     } //End Method
 
 }
