@@ -19,7 +19,7 @@ return new class extends Migration
          $table->unsignedBigInteger('course_id')->nullable();
          $table->unsignedBigInteger('instructor_id')->nullable();
 
-         $table->string('image')->nullable();
+        
          $table->string('course_title')->nullable();
          $table->double('price')->nullable();
 

@@ -88,7 +88,7 @@
                                     </div>
                                     <div class="payment-tab-toggle">
                                         <input checked="" id="bankTransfer" name="cash_delivery" type="radio"
-                                            value="striped">
+                                            value="stripe">
                                         <label for="bankTransfer">Striped Payment </label>
                                     </div>
 
