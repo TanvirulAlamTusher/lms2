@@ -37,9 +37,9 @@
 
 
 
-                            <form method="post" action="" enctype="multipart/form-data" class="row">
+                            <form method="post" action="{{ route('payment') }}" enctype="multipart/form-data" class="row">
                                 @csrf
-                                
+
                                 <div class="input-box col-lg-6">
                                     <label class="label-text">Name</label>
                                     <div class="form-group">
@@ -82,12 +82,12 @@
                             <div class="payment-option-wrap">
                                 <div class="payment-tab is-active">
                                     <div class="payment-tab-toggle">
-                                        <input checked="" id="bankTransfer" name="cash_delivary" type="radio"
+                                        <input checked="" id="bankTransfer" name="cash_delivery" type="radio"
                                             value="handcash">
                                         <label for="bankTransfer">Direct Payment </label>
                                     </div>
                                     <div class="payment-tab-toggle">
-                                        <input checked="" id="bankTransfer" name="cash_delivary" type="radio"
+                                        <input checked="" id="bankTransfer" name="cash_delivery" type="radio"
                                             value="striped">
                                         <label for="bankTransfer">Striped Payment </label>
                                     </div>

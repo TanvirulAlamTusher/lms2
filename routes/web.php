@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -193,6 +194,7 @@ Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
 Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 //checkout page route
 Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+Route::post('/payment', [PaymentController::class, 'Payment'])->name('payment');
 
 
 //// End Route Accessable for All
