@@ -1,8 +1,8 @@
 @extends('frontend.master')
 @section('home')
     <!-- ================================
-        START BREADCRUMB AREA
-    ================================= -->
+            START BREADCRUMB AREA
+        ================================= -->
     <section class="breadcrumb-area section-padding img-bg-2">
         <div class="overlay"></div>
         <div class="container">
@@ -20,12 +20,12 @@
         </div><!-- end container -->
     </section><!-- end breadcrumb-area -->
     <!-- ================================
-        END BREADCRUMB AREA
-    ================================= -->
+            END BREADCRUMB AREA
+        ================================= -->
 
     <!-- ================================
-           START CONTACT AREA
-    ================================= -->
+               START CONTACT AREA
+        ================================= -->
     <section class="cart-area section--padding">
         <div class="container">
             <div class="row">
@@ -34,21 +34,26 @@
                         <div class="card-body">
                             <h3 class="card-title fs-22 pb-3">Billing Details</h3>
                             <div class="divider"><span></span></div>
-                            <form method="post" class="row">
+
+
+
+                            <form method="post" action="" enctype="multipart/form-data" class="row">
+                                @csrf
+                                
                                 <div class="input-box col-lg-6">
                                     <label class="label-text">Name</label>
                                     <div class="form-group">
                                         <input class="form-control form--control" type="text" name="name"
-                                           value="{{ Auth::user()->name }}">
+                                            value="{{ Auth::user()->name }}">
                                         <span class="la la-user input-icon"></span>
                                     </div>
                                 </div><!-- end input-box -->
 
                                 <div class="input-box col-lg-6">
-                                    <label class="label-text">Email Address</label>
+                                    <label class="label-text">Email</label>
                                     <div class="form-group">
                                         <input class="form-control form--control" type="email" name="email"
-                                        value="{{ Auth::user()->email }}">
+                                            value="{{ Auth::user()->email }}">
                                         <span class="la la-envelope input-icon"></span>
                                     </div>
                                 </div><!-- end input-box -->
@@ -56,7 +61,7 @@
                                     <label class="label-text">Address</label>
                                     <div class="form-group">
                                         <input id="address" class="form-control form--control" type="text"
-                                            name="address"  value="{{ Auth::user()->address }}">
+                                            name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div><!-- end input-box -->
                                 <div class="input-box col-lg-12">
@@ -67,7 +72,7 @@
                                     </div>
                                 </div><!-- end input-box -->
 
-                            </form>
+
                         </div><!-- end card-body -->
                     </div><!-- end card -->
                     <div class="card card-item">
@@ -146,19 +151,27 @@
                             <div class="divider"><span></span></div>
                             <div class="order-details-lists">
 
-                            @foreach ($carts as $cart)
+                                @foreach ($carts as $cart)
+                                {{-- set data fot order details --}}
+                                  <input type="hidden" name="slug[]" value="{{ $cart->options->slug }}">
+                                  <input type="hidden" name="course_id[]" value="{{ $cart->id }}">
+                                  <input type="hidden" name="course_title[]" value="{{ $cart->name }}">
+                                  <input type="hidden" name="price[]" value="{{ $cart->price }}">
+                                  <input type="hidden" name="instructor_id[]" value="{{ $cart->options->instructor }}">
+                                 {{-- END --}}
 
-
-                                <div class="media media-card border-bottom border-bottom-gray pb-3 mb-3">
-                                    <a href="{{ url('course/details/' .$cart->id. '/' .$cart->options->slug ) }}" class="media-img">
-                                        <img src="{{ asset($cart->options->image) }}" alt="Cart image">
-                                    </a>
-                                    <div class="media-body">
-                                        <h5 class="fs-15 pb-2"><a href="{{ url('course/details/' .$cart->id. '/' .$cart->options->slug ) }}">{{ $cart->name }}</a></h5>
-                                        <p class="text-black font-weight-semi-bold lh-18">${{ $cart->price }}</p>
-                                    </div>
-                                </div><!-- end media -->
-
+                                    <div class="media media-card border-bottom border-bottom-gray pb-3 mb-3">
+                                        <a href="{{ url('course/details/' . $cart->id . '/' . $cart->options->slug) }}"
+                                            class="media-img">
+                                            <img src="{{ asset($cart->options->image) }}" alt="Cart image">
+                                        </a>
+                                        <div class="media-body">
+                                            <h5 class="fs-15 pb-2"><a
+                                                    href="{{ url('course/details/' . $cart->id . '/' . $cart->options->slug) }}">{{ $cart->name }}</a>
+                                            </h5>
+                                            <p class="text-black font-weight-semi-bold lh-18">${{ $cart->price }}</p>
+                                        </div>
+                                    </div><!-- end media -->
                                 @endforeach
 
                             </div><!-- end order-details-lists -->
@@ -170,37 +183,38 @@
                             <h3 class="card-title fs-22 pb-3">Order Summary</h3>
                             <div class="divider"><span></span></div>
 
-       @if (Session::has('coupon'))
-       <ul class="generic-list-item generic-list-item-flash fs-15">
-        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-            <span class="text-black">SubTotal:</span>
-            <span>${{ $cartsTotal }}</span>
-        </li>
-        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-            <span class="text-black">Coupon:</span>
-            <span>{{ session()->get('coupon')['coupon_name'] }} ({{ session()->get('coupon')['coupon_discount'] }} %)</span>
-        </li>
+                            @if (Session::has('coupon'))
+                                <ul class="generic-list-item generic-list-item-flash fs-15">
+                                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                                        <span class="text-black">SubTotal:</span>
+                                        <span>${{ $cartsTotal }}</span>
+                                    </li>
+                                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                                        <span class="text-black">Coupon:</span>
+                                        <span>{{ session()->get('coupon')['coupon_name'] }}
+                                            ({{ session()->get('coupon')['coupon_discount'] }} %)</span>
+                                    </li>
 
-        <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
-            <span class="text-black">Discount Amount:</span>
-            <span>${{ session()->get('coupon')['discount_amount'] }}</span>
-        </li>
-        <li class="d-flex align-items-center justify-content-between font-weight-bold">
-            <span class="text-black">Total:</span>
-            <span>${{ session()->get('coupon')['total_amount'] }}</span>
-        </li>
-    </ul>
+                                    <li class="d-flex align-items-center justify-content-between font-weight-semi-bold">
+                                        <span class="text-black">Discount Amount:</span>
+                                        <span>${{ session()->get('coupon')['discount_amount'] }}</span>
+                                    </li>
+                                    <li class="d-flex align-items-center justify-content-between font-weight-bold">
+                                        <span class="text-black">Total:</span>
+                                        <span>${{ session()->get('coupon')['total_amount'] }}</span>
+                                    </li>
+                                </ul>
+                                <input type="hidden" name="total" value="{{ $cartsTotal }}">
+                            @else
+                                <ul class="generic-list-item generic-list-item-flash fs-15">
 
-       @else
-       <ul class="generic-list-item generic-list-item-flash fs-15">
-
-        <li class="d-flex align-items-center justify-content-between font-weight-bold">
-            <span class="text-black">Total:</span>
-            <span>${{ $cartsTotal }}</span>
-        </li>
-    </ul>
-
-       @endif
+                                    <li class="d-flex align-items-center justify-content-between font-weight-bold">
+                                        <span class="text-black">Total:</span>
+                                        <span>${{ $cartsTotal }}</span>
+                                    </li>
+                                    <input type="hidden" name="total" value="{{ $cartsTotal }}">
+                                </ul>
+                            @endif
 
 
 
@@ -209,16 +223,18 @@
                                     taxes for purchases made in certain tax jurisdictions.</p>
                                 <p class="fs-14 lh-22 mb-3">By completing your purchase you agree to these <a
                                         href="#" class="text-color hover-underline">Terms of Service.</a></p>
-                                <a href="checkout.html" class="btn theme-btn w-100">Proceed <i
-                                        class="la la-arrow-right icon ml-1"></i></a>
+                                        <button type="submit" class="btn theme-btn w-100" >Proceed <i
+                                            class="la la-arrow-right icon ml-1"></i></button>
+
                             </div>
                         </div><!-- end card-body -->
                     </div><!-- end card -->
                 </div><!-- end col-lg-5 -->
             </div><!-- end row -->
         </div><!-- end container -->
+     </form>
     </section>
     <!-- ================================
-           END CONTACT AREA
-    ================================= -->
+               END CONTACT AREA
+        ================================= -->
 @endsection
