@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Payment;
-use Carbon\Carbon;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Mail\Orderconfirm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class PaymentController extends Controller
 {
@@ -23,20 +25,20 @@ class PaymentController extends Controller
         }
 
         // Create a new payment record
-        $date = new Payment();
-        $date->name = $request->name;
-        $date->email = $request->email;
-        $date->phone = $request->phone;
-        $date->address = $request->address;
-        $date->cash_delivery = $request->cash_delivery;
-        $date->total_amount = $total_amount;
-        $date->payment_type = 'Direct Payment';
-        $date->invoice_no = 'EOS' . mt_rand(10000000, 99999999);
-        $date->order_date = Carbon::now()->format('d F Y');
-        $date->order_month = Carbon::now()->format('F');
-        $date->order_year = Carbon::now()->format('Y');
-        $date->status = 'pending';
-        $date->save();
+        $data = new Payment();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+        $data->cash_delivery = $request->cash_delivery;
+        $data->total_amount = $total_amount;
+        $data->payment_type = 'Direct Payment';
+        $data->invoice_no = 'EOS' . mt_rand(10000000, 99999999);
+        $data->order_date = Carbon::now()->format('d F Y');
+        $data->order_month = Carbon::now()->format('F');
+        $data->order_year = Carbon::now()->format('Y');
+        $data->status = 'pending';
+        $data->save();
 
         // check if same course purchase again
         // we have  to ristract it, same course can not purchace second time
@@ -53,7 +55,7 @@ class PaymentController extends Controller
 
             $order = new Order();
 
-            $order->payment_id = $date->id;
+            $order->payment_id = $data->id;
             $order->user_id = Auth::user()->id;
             $order->course_id = $request->course_id[$key];
             $order->instructor_id = $request->instructor_id[$key];
@@ -64,11 +66,26 @@ class PaymentController extends Controller
 
 
         }// end for each
+        /// remove cart data from Cart
         $request->session()->forget('cart');
-        ///start sent mail to student ///
-       $paymentId = $date->id;
 
-     ///END sent mail to student ///
+        $paymentId = $data->id;
+
+        /// Start Send email to student ///
+        $sendmail = Payment::find($paymentId);
+        $data = [
+             'invoice_no' => $sendmail->invoice_no,
+             'amount' => $total_amount,
+             'name' => $sendmail->name,
+             'email' => $sendmail->email,
+        ];
+
+        // Mail::to($request->email)->send(new Orderconfirm($data));
+        Mail::to($request->email)->send(new Orderconfirm($data));
+
+
+
+        /// End Send email to student ///
         if($request->cash_delivery == 'stripe'){
             echo "stripe";
             // return view('');
