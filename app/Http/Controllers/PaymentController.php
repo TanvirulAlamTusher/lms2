@@ -65,6 +65,10 @@ class PaymentController extends Controller
 
         }// end for each
         $request->session()->forget('cart');
+        ///start sent mail to student ///
+       $paymentId = $date->id;
+
+     ///END sent mail to student ///
         if($request->cash_delivery == 'stripe'){
             echo "stripe";
             // return view('');
