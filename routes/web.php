@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
@@ -111,6 +112,14 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
     });//End
 
+       //Admin Setting Routes
+       Route::controller(SettingController::class)->group(function () {
+        Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
+        Route::post('/update/smtp', 'UpdateSmtp')->name('update.smtp');
+
+
+
+    });//End
 
 });//End Admin group middleware
 
