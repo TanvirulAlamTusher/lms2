@@ -190,7 +190,7 @@
                                                         lectures</span>
                                                 </button>
                                             </div><!-- end card-header -->
-                                            <div id="collapse{{ $sectnons->id }}" class="collapse show"
+                                            <div id="collapse{{ $sectnons->id }}" class="collapse "
                                                 aria-labelledby="heading{{ $sectnons->id }}" data-parent="#accordion">
                                                 <div class="card-body">
                                                     <ul class="generic-list-item">
