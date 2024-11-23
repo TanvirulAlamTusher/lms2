@@ -49,10 +49,26 @@ Route::middleware('auth')->group(function () {
 
     }); // end user wishlist
 
+     //Use My Course all route
+     Route::controller(OrderController::class)->group(function () {
+        Route::get('/my/course', 'MyCourse')->name('my.course');
+
+
+    }); // Use My Course all route
+
+
 });
 // END AUTH MEDDLEWARE
 
+
+
 require __DIR__ . '/auth.php';
+
+
+
+
+
+
 // Admin group middleware
 Route::middleware(['auth', 'roles:admin'])->group(function () {
 
@@ -137,6 +153,13 @@ Route::get('/become/instructor', [AdminController::class, 'BecomeInstructor'])->
 Route::post('/instructor/register', [AdminController::class, 'InstructorRegister'])->name('instructor.register');
 //End
 
+
+
+
+
+
+
+
 //Instructor group middleware
 Route::middleware(['auth', 'roles:instructor'])->group(function () {
 
@@ -194,6 +217,14 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
 
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 //End
+
+
+
+
+
+
+
+
 
 //// Route Accessable for All
 
