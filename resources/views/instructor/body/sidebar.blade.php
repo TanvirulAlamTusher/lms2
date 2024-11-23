@@ -34,7 +34,7 @@
 
 
 
-        <li class="menu-label">Course Manage</li>
+        <li class="menu-label">Course </li>
 
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -43,20 +43,21 @@
                 <div class="menu-title">Course Manage</div>
             </a>
             <ul>
-                <li> <a href="{{ route('all.course') }}"><i class='bx bx-radio-circle'></i>All Course</a>
-                </li>
+                <li> <a href="{{ route('all.course') }}"><i class='bx bx-radio-circle'></i>All Course</a> </li>
+
 
             </ul>
         </li>
+        <li class="menu-label">Orders</li>
+
         <li>
-            <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart'></i>
                 </div>
-                <div class="menu-title">Components</div>
+                <div class="menu-title">Manage Orders</div>
             </a>
             <ul>
-                <li> <a href="component-alerts.html"><i class='bx bx-radio-circle'></i>Alerts</a>
-                </li>
+                <li> <a href="{{ route('instructor.all.order') }}"><i class='bx bx-radio-circle'></i>All Order</a> </li>
 
 
             </ul>

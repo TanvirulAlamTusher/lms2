@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -116,10 +117,16 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
        Route::controller(SettingController::class)->group(function () {
         Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
         Route::post('/update/smtp', 'UpdateSmtp')->name('update.smtp');
+      });//End
 
+       //Admin All Order Routes
+       Route::controller(OrderController::class)->group(function () {
+        Route::get('/admin/pending/order', 'PendingOrder')->name('admin.pending.order');
+        Route::get('/admin/confirm/order', 'ConfirmOrder')->name('admin.confirm.order');
+        Route::get('/admin/order/details/{id}', 'OrderDetails')->name('admin.order.details');
+        Route::get('/pending/confirm/{id}', 'PendingToConfirm')->name('pending-confirm');
 
-
-    });//End
+      });//End
 
 });//End Admin group middleware
 
@@ -171,7 +178,19 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
     });
     //End
 
+    // Instructor Order All route
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/instructor/all/order', 'InstructorAllOrder')->name('instructor.all.order');
+        Route::get('/instructor/order/details/{payment_id}', 'InstructorOrderDetails')->name('instructor.order.details');
+        Route::get('/instructor/order/invoice/{payment_id}', 'InstructorOrderInvoice')->name('instructor.order.invoice');
+
+
+    });
+    //End
+
+
 });
+//End Instructor group middleware
 
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 //End
