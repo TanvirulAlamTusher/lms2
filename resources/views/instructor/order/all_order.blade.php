@@ -49,7 +49,7 @@
 
                            <td>
                             <a href="{{ route('instructor.order.details',$item->payment->id) }}" class="btn btn-info"  title="edit"><i class="lni lni-eye"></i></a>
-                            <a href="{{ route('instructor.order.invoice', $item->payment->id) }}" class="btn btn-success " id="delete" title="delete"><i class="lni lni-download"></i></a>
+                            <a href="{{ route('instructor.order.invoice', $item->payment->id) }}" class="btn btn-success "  title="Invoice"><i class="lni lni-download"></i></a>
 
                            </td>
                         </tr>

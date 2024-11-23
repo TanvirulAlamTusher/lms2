@@ -48,13 +48,13 @@
     <tr>
         <td valign="top">
           <!-- {{-- <img src="" alt="" width="150"/> --}} -->
-          <h2 style="color: green; font-size: 26px;"><strong>EasyShop</strong></h2>
+          <h2 style="color: green; font-size: 26px;"><strong>Easy Learning</strong></h2>
         </td>
         <td align="right">
             <pre class="font" >
-               EasyShop Head Office
-               Email:support@easylearningbd.com <br>
-               Mob: 1245454545 <br>
+               EasyLearning Head Office
+               Email:tanvirulalam15@gmail.com<br>
+               Mob: 01628224514 <br>
                Dhaka 1207,Dhanmondi:#4 <br>
 
             </pre>
@@ -70,20 +70,20 @@
     <tr>
         <td>
           <p class="font" style="margin-left: 20px;">
-           <strong>Name:</strong> Name <br>
-           <strong>Email:</strong> Email <br>
-           <strong>Phone:</strong> Phone <br>
+           <strong>Name:</strong> {{ $payment->name }} <br>
+           <strong>Email:</strong> {{ $payment->email }} <br>
+           <strong>Phone:</strong> {{ $payment->phone }}<br>
 
-           <strong>Address:</strong> Address <br>
-           <strong>Post Code:</strong> Post Code
+           <strong>Address:</strong>  {{ $payment->address }} <br>
+
          </p>
         </td>
         <td>
           <p class="font">
-            <h3><span style="color: green;">Invoice:</span> #Invoice</h3>
-            Order Date: Order Date <br>
-             Delivery Date: Delivery Date <br>
-            Payment Type : Payment Type </span>
+            <h3><span style="color: green;">Invoice:</span> #{{ $payment->invoice_no }}</h3>
+            Order Date:  {{ $payment->order_date }} <br>
+             Delivery Date:  {{ $payment->order_date }} <br>
+            Payment Type :  {{ $payment->payment_type }} </span>
          </p>
         </td>
     </tr>
@@ -94,34 +94,30 @@
 
   <table width="100%">
     <thead style="background-color: green; color:#FFFFFF;">
+
+
       <tr class="font">
         <th>Image</th>
-        <th>Product Name</th>
-        <th>Size</th>
-        <th>Color</th>
-        <th>Code</th>
-        <th>Quantity</th>
+        <th>Course Name</th>
         <th>Unit Price </th>
         <th>Total </th>
       </tr>
+
+
     </thead>
     <tbody>
 
 
+        @foreach ($orderItem as $item)
       <tr class="font">
         <td align="center">
-            <img src=" " height="60px;" width="60px;" alt="">
+            <img src="{{ public_path($item->course->course_image) }}" height="60px;" width="60px;" alt="">
         </td>
-        <td align="center">product_name_en</td>
-        <td align="center">
-
-        </td>
-        <td align="center">color</td>
-        <td align="center">product_code</td>
-        <td align="center">qty</td>
-        <td align="center">price Tk</td>
-        <td align="center">price Tk</td>
+        <td align="center">{{ $item->course->course_name }}</td>
+         <td align="center">{{ $item->price }}</td>
       </tr>
+
+      @endforeach
 
     </tbody>
   </table>
@@ -129,8 +125,8 @@
   <table width="100%" style=" padding:0 10px 0 10px;">
     <tr>
         <td align="right" >
-            <h2><span style="color: green;">Subtotal:</span> Subtotal tk</h2>
-            <h2><span style="color: green;">Total:</span> Total tk</h2>
+            <h2><span style="color: green;">Subtotal:</span>  {{ $payment->total_amount }}</h2>
+            <h2><span style="color: green;">Total:</span>  {{ $payment->total_amount }}</h2>
             {{-- <h2><span style="color: green;">Full Payment PAID</h2> --}}
         </td>
     </tr>
