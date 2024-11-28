@@ -16,7 +16,7 @@ return new class extends Migration
            $table->string('lecture_title')->nullable();
            $table->string('video')->nullable();
            $table->text('url')->nullable();
-           $table->string('content')->nullable();
+           $table->longText('content')->nullable();
 
            $table->unsignedBigInteger('course_id')->nullable();
            $table->unsignedBigInteger('section_id');
