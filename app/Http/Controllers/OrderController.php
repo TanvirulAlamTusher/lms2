@@ -33,7 +33,7 @@ class OrderController extends Controller
  public function PendingToConfirm($payment_id){
      $payment = Payment::find($payment_id)->update(['status' =>'confirm']);
 
-     $notifaction = array('message' => 'Oeder Confirm Successfully',
+     $notifaction = array('message' => 'Order Confirm Successfully',
      'alert_type' => 'success');
 
  return redirect()->route('admin.confirm.order')->with($notifaction);

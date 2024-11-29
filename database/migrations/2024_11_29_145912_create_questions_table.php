@@ -25,7 +25,7 @@ return new class extends Migration
           $table->foreign('instructor_id')->references('id')->on('users')->cascadeOnUpdate();
 
 
-          $table->integer('parant_id')->nullable();
+          $table->integer('parent_id')->nullable();
           $table->text('subject')->nullable();
           $table->text('question');
 
