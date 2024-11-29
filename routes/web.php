@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -53,9 +54,17 @@ Route::middleware('auth')->group(function () {
      Route::controller(OrderController::class)->group(function () {
         Route::get('/my/course', 'MyCourse')->name('my.course');
         Route::get('/course/view/{course_id}', 'CourseView')->name('course.view');
+        Route::post('/user/question', 'CourseView')->name('user.question');
 
 
-    }); // Use My Course all route
+    }); //End Use My Course all route
+
+      //User Question all route
+      Route::controller(QuestionController::class)->group(function () {
+        Route::post('/user/question', 'UserQuestion')->name('user.question');
+
+
+    }); //End User Question all route
 
 
 });

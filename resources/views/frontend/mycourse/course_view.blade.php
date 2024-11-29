@@ -452,14 +452,18 @@
                                                 <h3 class="fs-20 font-weight-semi-bold">My question relates to</h3>
 
 
-                                                <form action="#" class="pt-4">
+                                                <form method="POST" action="{{ route('user.question') }}" class="pt-4">
+                                                    @csrf
+
+                                                    <input type="hidden" name="course_id" value="{{ $course->course_id }}">
+                                                    <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
 
                                                     <div class="custom-control-wrap">
                                                         <div class="custom-control custom-radio mb-3 pl-0">
-                                                         <input type="text" name="" class="form-control form--control pl-3" placeholder="Subject">
+                                                         <input type="text" name="subject" class="form-control form--control pl-3" placeholder="Subject">
                                                         </div>
                                                         <div class="custom-control custom-radio mb-3 pl-0">
-                                                            <textarea class="form-control form--control pl-3" name="message" rows="4" placeholder="Ask your Question..."></textarea>
+                                                            <textarea class="form-control form--control pl-3" name="question" rows="4" placeholder="Ask your Question..."></textarea>
 
                                                         </div>
 
@@ -469,7 +473,7 @@
 
 
                                                     <div class="btn-box text-center">
-                                                        <button type="submit" class="btn theme-btn w-100">Sunmit Question <i
+                                                        <button type="submit" class="btn theme-btn w-100">Submit Question <i
                                                                 class="la la-arrow-right icon ml-1"></i></button>
                                                     </div>
 
@@ -480,7 +484,7 @@
                                         </div><!-- end new-question-wrap -->
 
 
-                                        
+
                                         <div class="question-overview-result-wrap">
 
 
