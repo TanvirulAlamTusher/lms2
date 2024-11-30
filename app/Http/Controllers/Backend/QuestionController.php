@@ -28,4 +28,12 @@ class QuestionController extends Controller
    return redirect()->back()->with($notifaction);
 
     }//End method
+
+    public function InstructorAllQuestion(){
+       $id = Auth::user()->id;
+       $questions = Question::where('instructor_id', $id)->where('parent_id', null)
+       ->orderBy('id', 'desc')->get();
+
+       return view('instructor.question.all_question', compact('questions'));
+    }//End method
 }

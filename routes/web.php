@@ -220,6 +220,15 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
 
     });
     //End
+     // Instructor Order All route
+     Route::controller(QuestionController::class)->group(function () {
+        Route::get('/instructor/all/question', 'InstructorAllQuestion')->name('instructor.all.question');
+
+
+
+    });
+    //End
+
 
 
 });
