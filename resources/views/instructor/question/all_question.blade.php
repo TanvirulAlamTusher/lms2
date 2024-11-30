@@ -25,6 +25,7 @@
                         <thead>
                             <tr>
                                 <th>Sl no.</th>
+                                <th>Date</th>
                                 <th>User Name</th>
                                 <th>Course Name</th>
                                 <th>Subject</th>
@@ -37,13 +38,14 @@
                                 <tr>
 
                                     <td>{{ $key + 1 }}</td>
+                                    <td>{{Carbon\Carbon::parse($item->created_at)->diffForHumans()}}</td>
                                     <td>{{ $item['user']['name'] }}</td>
                                     <td>{{ $item['course']['course_name'] }}</td>
                                     <td>{{ $item->subject }}</td>
 
                                     <td>
-                                        <a href="{{ route('instructor.order.details', $item->id) }}"
-                                            class="btn btn-info" title="edit"><i class="lni lni-eye"></i></a>
+                                        <a href="{{ route('question.details', $item->id) }}"
+                                            class="btn btn-info" title="details"><i class="lni lni-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
