@@ -40,5 +40,9 @@ class QuestionController extends Controller
     public function QuestionDetails($id){
        $question = Question::find($id);
        return view('instructor.question.question_details', compact('question'));
-    }
+    }//End method
+
+    public function InstructorReply(Request $request){
+
+    }//End method
 }
