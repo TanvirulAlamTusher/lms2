@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CourseSection;
 use DB;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Question;
 use Illuminate\Http\Request;
+use App\Models\CourseSection;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 
@@ -98,8 +99,9 @@ class OrderController extends Controller
 
   $course = Order::where('course_id', $course_id)->where('user_id', $id)->first();
    $section = CourseSection::where('course_id', $course_id)->orderBy('id', 'asc')->get();
-
-  return view('frontend.mycourse.course_view', compact('course','section'));
+//  $allquestion = Question::where('course_id', $course_id)->latest()->get();
+ $allquestion = Question::latest()->get();
+  return view('frontend.mycourse.course_view', compact('course','section','allquestion'));
 
  }// End method
 

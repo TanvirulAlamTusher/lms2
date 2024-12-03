@@ -452,15 +452,20 @@
                                                 <h3 class="fs-20 font-weight-semi-bold">My question relates to</h3>
 
 
-                                                <form method="POST" action="{{ route('user.question') }}" class="pt-4">
+                                                <form method="POST" action="{{ route('user.question') }}"
+                                                    class="pt-4">
                                                     @csrf
 
-                                                    <input type="hidden" name="course_id" value="{{ $course->course_id }}">
-                                                    <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
+                                                    <input type="hidden" name="course_id"
+                                                        value="{{ $course->course_id }}">
+                                                    <input type="hidden" name="instructor_id"
+                                                        value="{{ $course->instructor_id }}">
 
                                                     <div class="custom-control-wrap">
                                                         <div class="custom-control custom-radio mb-3 pl-0">
-                                                         <input type="text" name="subject" class="form-control form--control pl-3" placeholder="Subject">
+                                                            <input type="text" name="subject"
+                                                                class="form-control form--control pl-3"
+                                                                placeholder="Subject">
                                                         </div>
                                                         <div class="custom-control custom-radio mb-3 pl-0">
                                                             <textarea class="form-control form--control pl-3" name="question" rows="4" placeholder="Ask your Question..."></textarea>
@@ -473,7 +478,8 @@
 
 
                                                     <div class="btn-box text-center">
-                                                        <button type="submit" class="btn theme-btn w-100">Submit Question <i
+                                                        <button type="submit" class="btn theme-btn w-100">Submit
+                                                            Question <i
                                                                 class="la la-arrow-right icon ml-1"></i></button>
                                                     </div>
 
@@ -491,7 +497,8 @@
                                             <div class="lecture-overview-item">
                                                 <div
                                                     class="question-overview-result-header d-flex align-items-center justify-content-between">
-                                                    <h3 class="fs-17 font-weight-semi-bold">30 questions in this course
+                                                    <h3 class="fs-17 font-weight-semi-bold">{{ count($allquestion) }}
+                                                        questions in this course
                                                     </h3>
                                                     <button
                                                         class="btn theme-btn theme-btn-sm theme-btn-transparent ask-new-question-btn">Ask
@@ -503,57 +510,40 @@
                                                 <div class="question-list-item">
 
 
+                                                    @php
+                                                        $id = Auth::user()->id;
+                                                        $question = App\Models\Question::where('user_id', $id)
+                                                            ->where('course_id', $course->course->id)
+                                                            ->where('parent_id', null)
+                                                            ->orderBy('id', 'asc')
+                                                            ->get();
+                                                    @endphp
 
-
-
-
-                                                    <div
-                                                        class="media media-card border-bottom border-bottom-gray py-4 px-3">
-                                                        <div class="media-img rounded-full flex-shrink-0 avatar-sm">
-                                                            <img class="rounded-full" src="images/small-avatar-5.jpg"
-                                                                alt="User image">
-                                                        </div>
-                                                        <div class="media-body">
+                                                    @foreach ($question as $que)
+                                                        <div
+                                                            class="media media-card border-bottom border-bottom-gray py-4 px-3">
                                                             <div
-                                                                class="d-flex align-items-center justify-content-between">
-                                                                <div class="question-meta-content">
-                                                                    <a href="javascript:void(0)" class="d-block">
-                                                                        <h5 class="fs-16 pb-1">Record options</h5>
-                                                                        <p class="text-truncate fs-15 text-gray">
-                                                                            Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit,
-                                                                            sed do eiusmod tempor incididunt ut labore
-                                                                            et dolore magna aliqua.
-                                                                            Ut enim ad minim veniam, quis nostrud
-                                                                            exercitation.
-                                                                        </p>
-                                                                    </a>
-                                                                </div><!-- end question-meta-content -->
-                                                                <div class="question-upvote-action">
-                                                                    <div
-                                                                        class="number-upvotes pb-2 d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"><i
-                                                                                class="la la-arrow-up"></i></button>
-                                                                    </div>
-                                                                    <div
-                                                                        class="number-upvotes question-response d-flex align-items-center">
-                                                                        <span>0</span>
-                                                                        <button type="button"
-                                                                            class="question-replay-btn"><i
-                                                                                class="la la-comments"></i></button>
-                                                                    </div>
-                                                                </div><!-- end question-upvote-action -->
+                                                                class="media-img rounded-full flex-shrink-0 avatar-sm">
+                                                           <img src="{{ !empty($que->user->photo) ? url('upload/user_images/' . $que->user->photo) : url('upload/no_image.jpg') }}"class="user-img">
                                                             </div>
-                                                            <p class="meta-tags pt-1 fs-13">
-                                                                <a href="#">Alex Smith</a>
-                                                                <a href="#">Lecture 20</a>
-                                                                <span>3 hours ago</span>
-                                                            </p>
-                                                        </div><!-- end media-body -->
-                                                    </div><!-- end media -->
+                                                            <div class="media-body">
+                                                                <div
+                                                                    class="d-flex align-items-center justify-content-between">
+                                                                    <div class="question-meta-content">
+                                                                        <a href="javascript:void(0)" class="d-block">
+                                                                            <h5 class="fs-16 pb-1">{{ $que->subject }}</h5>
+                                                                            <p class="text-truncate fs-15 text-gray">{{ $que->question }}
+                                                                            </p>
+                                                                        </a>
+                                                                    </div><!-- end question-meta-content -->
 
-
+                                                                </div>
+                                                                <p class="meta-tags pt-1 fs-13">
+                                                                    <span>{{ Carbon\Carbon::parse($que->created_at)->diffForHumans() }}</span>
+                                                                </p>
+                                                            </div><!-- end media-body -->
+                                                        </div><!-- end media -->
+                                                    @endforeach
 
 
 
