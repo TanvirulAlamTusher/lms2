@@ -19,6 +19,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" >
 
     <!-- inject:css -->
+
     <link rel="stylesheet" href=" {{ asset('frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href=" {{ asset('frontend/css/line-awesome.css') }}">
     <link rel="stylesheet" href=" {{ asset('frontend/css/owl.carousel.min.css') }}">
@@ -29,7 +30,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/plyr.css') }}">
     <link rel="stylesheet" href=" {{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+  
     <!-- end inject -->
+
 </head>
 <body>
 

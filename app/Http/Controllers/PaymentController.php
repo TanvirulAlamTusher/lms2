@@ -32,12 +32,12 @@ class PaymentController extends Controller
 
 
 
-        $cartsTotal = Cart::total();
+        $cartTotal = Cart::total();
         $carts = Cart::content();
 
 
         if ($request->cash_delivery == 'stripe') {
-            return view('frontend.payment.stripe',compact('data','cartsTotal','carts'));
+            return view('frontend.payment.stripe',compact('data','cartTotal','carts'));
 
         } else if ($request->cash_delivery == 'handcash') {
 
