@@ -274,6 +274,7 @@ Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 //checkout page route
 Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
 Route::post('/payment', [PaymentController::class, 'Payment'])->name('payment');
+Route::post('/stripe_order', [PaymentController::class, 'StripeOrder'])->name('stripe_order');
 
 
 //// End Route Accessable for All

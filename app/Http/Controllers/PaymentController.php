@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Stripe;
 
 class PaymentController extends Controller
 {
@@ -105,5 +106,43 @@ class PaymentController extends Controller
 
         } // end else if
 
-    }
+    }//End method
+    public function StripeOrder(Request $request){
+
+        if (Session::has('coupon')) {
+            $total_amount = Session::get('coupon')['total_amount'];
+
+        } else {
+            $total_amount = round(Cart::total());
+        }
+
+        \Stripe\Stripe::setApiKey('sk_test_51QStwYJufiqonGzKbn5qHfXEDmuCl6HWsZCUr6lAKFni12xytfXUoAFeQ2JNAlJ67mVIxbdxk2rIidmqae6QPJPB007cEvdjcE');
+        $token = $_POST['stripeToken'];
+
+        $charge =  \Stripe\Charge::create([
+            'amount' =>  $total_amount*100,
+            'currency' => 'usd',
+            'description' =>'Lms',
+            'source' => $token,
+            'metadata' => ['order_id' => '3434'],
+        ]);
+        $order_id = Payment::insertGetId([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'cash_delivery' => $request->cash_delivery,
+            'total_amount' => $total_amount,
+            'payment_type' =>'Stripe Payment',
+            'invoice_no' =>'EOS' . mt_rand(10000000, 99999999),
+            'order_date' => Carbon::now()->format('d F Y'),
+            'order_month' => Carbon::now()->format('F'),
+            'order_year' => Carbon::now()->format('Y'),
+            'status' => 'pending',
+        ]);
+
+    }//End method
 }
+
+
+
