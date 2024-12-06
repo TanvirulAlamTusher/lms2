@@ -122,9 +122,7 @@
                         <div class="card-body">
                             <h3 class="card-title fs-22 pb-3">Billing Details</h3>
                             <div class="divider"><span></span></div>
-                            <form method="post" class="row" action="{{ route('payment') }}"
-                                enctype="multipart/form-data">
-                                @csrf
+
 
                                 <div class="input-box col-lg-6">
                                     <label class="label-text">First Name</label>
@@ -172,16 +170,28 @@
                                 <div class="border cart-totals p-40">
                                     <div class="divider-2 mb-30">
                                         <div class="table-responsive order_table checkout">
-                                            <form action="{{ route('stripe_order') }}" method="post" id="payment-form">
+                                            <form action="{{ route('stripe_order') }}" method="post"
+                                                id="payment-form">
                                                 @csrf
                                                 <div class="form-row">
-                                                    <label for="card-element"> Credit or Debit Cart</label>
+                                                    <label for="card-element"> Credit or Debit Card</label>
+
+                                                    <input type="hidden" name="name"
+                                                        value="{{ $data['name'] }}">
+                                                    <input type="hidden" name="email"
+                                                        value="{{ $data['email'] }}">
+                                                    <input type="hidden" name="phone"
+                                                        value="{{ $data['phone'] }}">
+                                                    <input type="hidden" name="address"
+                                                        value="{{ $data['address'] }}">
+
 
                                                     <div id="card-element">
                                                         {{-- // stripe element will be inserted here --}}
                                                     </div>
                                                     <div id="card-errors" role="alert"></div>
                                                 </div>
+                                                <br>
                                                 <button class="btn btn-primary">Submit Payment</button>
                                             </form>
 
@@ -297,9 +307,9 @@
                     </div><!-- end card -->
                 </div><!-- end col-lg-5 -->
             </div><!-- end row -->
-        </div><!-- end container -->
+          </div><!-- end container -->
 
-        </form>
+
     </section>
     <!-- ================================
        END CONTACT AREA
@@ -377,7 +387,7 @@
     // Create a Stripe client.
     var stripe = Stripe(
         'pk_test_51QStwYJufiqonGzKhTGmVkaNuGK15fohbK3SgpsHvBC3OhFbmdvPoMqnvwTniPIAR9FEwfYLn6wRQaiZBwJCMztl00z9Qs106T'
-        );
+    );
     // Create an instance of Elements.
     var elements = stripe.elements();
     // Custom styling can be passed to options when creating an Element.
