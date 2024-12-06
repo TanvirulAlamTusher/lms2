@@ -13,6 +13,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -156,7 +157,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
 });//End Admin group middleware
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 //End
 
 Route::get('/become/instructor', [AdminController::class, 'BecomeInstructor'])->name('become.instructor');
@@ -234,7 +235,8 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
 });
 //End Instructor group middleware
 
-Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
+Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login')->middleware(RedirectIfAuthenticated::class);
+//End
 //End
 
 
