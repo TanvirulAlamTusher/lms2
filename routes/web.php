@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\QuestionController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -154,6 +155,13 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/pending/confirm/{id}', 'PendingToConfirm')->name('pending-confirm');
 
       });//End
+
+       //Admin Report Routes
+       Route::controller(ReportController::class)->group(function () {
+        Route::get('/admin/report/view', 'ReportView')->name('report.view');
+
+
+      });//End Admin Report Routes
 
 });//End Admin group middleware
 
