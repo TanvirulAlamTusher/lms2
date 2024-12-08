@@ -159,7 +159,9 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
        //Admin Report Routes
        Route::controller(ReportController::class)->group(function () {
         Route::get('/admin/report/view', 'ReportView')->name('report.view');
-        Route::post('/search/by/date', 'SearchByDate')->name('search.by.date');
+        Route::post('/admin/search/by/date', 'SearchByDate')->name('search.by.date');
+        Route::post('/admin/search/by/month', 'SearchByMonth')->name('search.by.month');
+        Route::post('/admin/search/by/year', 'SearchByYear')->name('search.by.year');
 
 
       });//End Admin Report Routes

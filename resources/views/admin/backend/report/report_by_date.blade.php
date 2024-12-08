@@ -9,7 +9,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Report by Date</li>
+                        <li class="breadcrumb-item active" aria-current="page">Report</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,7 @@
         </div>
         <!--end breadcrumb-->
 
-        <h5>Search By Date : {{ $formatDate }}</h5>
+        <h5>Search By : {{ $formatDate }}</h5>
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">

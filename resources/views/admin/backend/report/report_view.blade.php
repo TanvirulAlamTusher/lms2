@@ -38,7 +38,7 @@
 
                     </div>
                     <div class="col-md-4">
-                        <form action="{{ route('admin.store.coupon') }}" method="post" id="myForm" class="row g-3"
+                        <form action="{{ route('search.by.month') }}" method="post" id="myForm" class="row g-3"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group col-md-12">
@@ -62,7 +62,7 @@
 
                             <div class="form-group col-md-12">
                                 <label for="input1" class="form-label">Search by Year</label>
-                                <select class="form-select " aria-label="Default select example">
+                                <select name="year_name" class="form-select " aria-label="Default select example">
                                     <option selected="">Select Year</option>
                                     <option value="2020">2020</option>
                                     <option value="2021">2021</option>
@@ -86,27 +86,37 @@
 
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group col-md-12">
-                            <label for="input1" class="form-label">Search by Year</label>
-                            <select class="form-select mb-3 " aria-label="Default select example">
-                                <option selected="">Select Year</option>
-                                <option value="2020">2020</option>
-                                <option value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
+                        <form action="{{ route('search.by.year') }}" method="post" id="myForm" class="row g-3"
+                            enctype="multipart/form-data">
+                            @csrf
 
-                            </select>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="d-md-flex d-grid align-items-center gap-3">
-                                <button type="submit" class="btn btn-primary px-4">Save Changes</button>
 
+                            <div class="form-group col-md-12">
+                                <label for="input1" class="form-label">Search by Year</label>
+                                <select name="year_name" class="form-select " aria-label="Default select example">
+                                    <option selected="">Select Year</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+
+                                </select>
                             </div>
-                        </div>
+
+                            <div class="col-md-12">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+
+                                </div>
+                            </div>
+                        </form>
+
+
+
 
                     </div>
 
