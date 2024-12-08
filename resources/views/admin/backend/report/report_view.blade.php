@@ -20,7 +20,7 @@
             <div class="card-body p-4">
                 <div class="row">
                     <div class="col-md-4">
-                        <form action="{{ route('admin.store.coupon') }}" method="post" id="myForm" class="row g-3"
+                        <form action="{{ route('search.by.date') }}" method="post" id="myForm" class="row g-3"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group col-md-12">
