@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Coupon;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,11 @@ class CouponController extends Controller
         $coupon = Coupon::where('instructor_id', $id)->latest()->get();
         return view('instructor.coupon.coupon_all',compact('coupon'));
       }//End method
+
+      public function InstructorAddCoupon(){
+        $id = Auth::user()->id;
+        $courses = Course::where('instructor_id', $id)->get();
+        return view('instructor.coupon.coupon_add',compact('courses'));
+    }//end mathod
 
 }

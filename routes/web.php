@@ -242,7 +242,7 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
      //Instructor Coupon Routes
      Route::controller(CouponController::class)->group(function () {
         Route::get('/instructor/all/coupon', 'InstructorAllCoupon')->name('instructor.all.coupon');
-        Route::get('/admin/add/coupon', 'AdminAddCoupon')->name('admin.add.coupon');
+        Route::get('/instructor/add/coupon', 'InstructorAddCoupon')->name('instructor.add.coupon');
         Route::post('/admin/store/coupon', 'AdminStoreCoupon')->name('admin.store.coupon');
         Route::get('/admin/edit/coupon/{id}', 'AdminEditCoupon')->name('admin.edit.coupon');
         Route::post('/admin/update/coupon', 'AdminUpdateCoupon')->name('admin.update.coupon');
