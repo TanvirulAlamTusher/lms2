@@ -72,7 +72,7 @@ class CouponController extends Controller
 
       public function InstructorAddCoupon(){
         $id = Auth::user()->id;
-        $courses = Course::where('instructor_id', $id)->get();
+        $courses = Course::where('instructor_id', $id)->latest()->get();
         return view('instructor.coupon.coupon_add',compact('courses'));
     }//end mathod
 
@@ -90,6 +90,41 @@ class CouponController extends Controller
 
     return redirect()->route('instructor.all.coupon')->with($notifaction);
       }//end mathod
+
+      public function InstructorEditCoupon($id){
+        $instructor_id = Auth::user()->id;
+        $coupon =  Coupon::find($id);
+        $courses = Course::where('instructor_id', $instructor_id)->latest()->get();
+        return view('instructor.coupon.coupon_edit',compact('coupon','courses'));
+    }//end mathod
+
+    public function InstructorUpdateCoupon(Request $request){
+        $coupon_id = $request->coupon_id;
+
+        Coupon::find($coupon_id)->update([
+          'coupon_name' => strtoupper($request->coupon_name),
+          'coupon_discount' => $request->coupon_discount,
+          'coupon_validity' => $request->coupon_validity,
+          'course_id' => $request->course_id,
+        ]);
+
+        $notifaction = array('message' => 'Coupon Updated successfully',
+        'alert_type' => 'success');
+
+    return redirect()->route('instructor.all.coupon')->with($notifaction);
+      }//end mathod
+
+
+      public function InstructorDeleteCoupon($id){
+        Coupon::find($id)->delete();
+
+        $notifaction = array('message' => 'Coupon Delete successfully',
+        'alert_type' => 'success');
+
+    return redirect()->route('instructor.all.coupon')->with($notifaction);
+      }//end
+
+
 
 
 }
