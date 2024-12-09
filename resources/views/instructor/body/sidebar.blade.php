@@ -58,7 +58,7 @@
             </a>
             <ul>
                 <li> <a href="{{ route('instructor.all.order') }}"><i class='bx bx-radio-circle'></i>All Order</a> </li>
-             
+
 
 
             </ul>
@@ -79,6 +79,20 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart'></i>
+                </div>
+                <div class="menu-title">Manage Coupon</div>
+            </a>
+            <ul>
+
+                <li> <a href="{{ route('instructor.all.coupon') }}"><i class='bx bx-radio-circle'></i>All Coupon</a> </li>
+
+
+            </ul>
+        </li>
+
 
 
         <li class="menu-label">Charts & Maps</li>

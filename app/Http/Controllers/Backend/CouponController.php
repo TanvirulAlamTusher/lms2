@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
@@ -58,6 +59,14 @@ class CouponController extends Controller
         'alert_type' => 'success');
 
     return redirect()->route('admin.all.coupon')->with($notifaction);
-      }
+      }//end
+
+      //////////////////////// Instructor All Coupon Methods //////////////////////////
+
+      public function InstructorAllCoupon(){
+        $id = Auth::user()->id;
+        $coupon = Coupon::where('instructor_id', $id)->latest()->get();
+        return view('instructor.coupon.coupon_all',compact('coupon'));
+      }//End method
 
 }
