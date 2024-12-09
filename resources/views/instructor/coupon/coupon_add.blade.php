@@ -19,7 +19,7 @@
         <div class="card">
             <div class="card-body p-4">
 
-                <form action="{{ route('admin.store.coupon') }}" method="post" id="myForm" class="row g-3"
+                <form action="{{ route('instructor.store.coupon') }}" method="post" id="myForm" class="row g-3"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="form-group col-md-6">
@@ -35,7 +35,7 @@
                     <div class="form-group col-md-6">
                         <label for="input1" class="form-label">Select Course</label>
                        <select class="form-select mb-3" aria-label="Select Your Course" name="course_id" id="">
-                        <option selected="">--- Select Course ---</option>
+                        <option  value="" selected="">--- Select Course ---</option>
                         @foreach ($courses as $item)
                         <option value="{{ $item->id }}">{{ $item->course_name }}</option>
                         @endforeach
