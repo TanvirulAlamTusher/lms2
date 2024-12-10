@@ -160,7 +160,7 @@ class CartController extends Controller
                 'success' => 'Coupon Applied Successfully',
             ));
         } else {
-            return response()->json(['error' => 'Invaild Coupon']);
+            return response()->json(['error' => 'Invaild Coupon for this course/instructor']);
         }
     } //End Method
 
