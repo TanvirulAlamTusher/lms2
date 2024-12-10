@@ -142,6 +142,28 @@ class CartController extends Controller
         }
     } //End Method
 
+    public function InstructorCouponApply(Request $request)
+    {
+        $coupon = Coupon::where('coupon_name', $request->coupon_name)
+        ->where('instructor_id', $request->instructor_id)->where('course_id', $request->course_id)
+            ->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
+
+        if ($coupon) {
+            Session::put('coupon', [
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round(Cart::total() * $coupon->coupon_discount / 100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
+            ]);
+            return response()->json(array(
+                'validity' => true,
+                'success' => 'Coupon Applied Successfully',
+            ));
+        } else {
+            return response()->json(['error' => 'Invaild Coupon']);
+        }
+    } //End Method
+
     public function CouponCalculation()
     {
         if (Session::has('coupon')) {
@@ -199,7 +221,7 @@ class CartController extends Controller
     {
 
         $course = Course::find($id);
-       
+
         // Check if the course is already in the cart
         $cartItem = Cart::search(function ($cartItem, $rowId) use ($id) {
             return $cartItem->id === $id;

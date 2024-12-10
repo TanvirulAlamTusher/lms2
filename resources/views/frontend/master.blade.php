@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/plyr.css') }}">
     <link rel="stylesheet" href=" {{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
-  
+
     <!-- end inject -->
 
 </head>
@@ -93,7 +93,7 @@
 
 <script>
  @if(Session::has('message'))
- var type = "{{ Session::get('alert-type','info') }}"
+ var type = "{{ Session::get('alert_type','info') }}"
  switch(type){
     case 'info':
     toastr.info(" {{ Session::get('message') }} ");

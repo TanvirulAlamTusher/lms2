@@ -1,8 +1,8 @@
 @extends('frontend.master')
 @section('home')
     <!-- ================================
-                            START BREADCRUMB AREA
-                        ================================= -->
+                                START BREADCRUMB AREA
+                            ================================= -->
     <section class="breadcrumb-area pt-50px pb-50px bg-white pattern-bg">
         <div class="container">
             <div class="col-lg-8 mr-auto">
@@ -43,7 +43,7 @@
                             <span class="student-total pl-2">540,815 students</span>
                         </div>
                     </div><!-- end d-flex -->
-                    <p class="pt-2 pb-1">Created by <a href="{{ route('instructor.details', $course->instructor_id )}}"
+                    <p class="pt-2 pb-1">Created by <a href="{{ route('instructor.details', $course->instructor_id) }}"
                             class="text-color hover-underline">{{ $course['user']['name'] }}</a></p>
                     <div class="d-flex flex-wrap align-items-center">
                         <p class="pr-3 d-flex align-items-center">
@@ -83,12 +83,12 @@
         </div><!-- end container -->
     </section><!-- end breadcrumb-area -->
     <!-- ================================
-                            END BREADCRUMB AREA
-                        ================================= -->
+                                END BREADCRUMB AREA
+                            ================================= -->
 
     <!--======================================
-                                START COURSE DETAILS AREA
-                        ======================================-->
+                                    START COURSE DETAILS AREA
+                            ======================================-->
     <section class="course-details-area pb-20px">
         <div class="container">
             <div class="row">
@@ -238,7 +238,9 @@
                                         </ul>
                                     </div><!-- end instructor-img -->
                                     <div class="media-body">
-                                        <h5><a href="{{ route('instructor.details', $course->instructor_id )}}">{{ $course->user->name }}</a></h5>
+                                        <h5><a
+                                                href="{{ route('instructor.details', $course->instructor_id) }}">{{ $course->user->name }}</a>
+                                        </h5>
                                         <span class="d-block lh-18 pt-2 pb-3">Joined
                                             {{ Carbon\Carbon::parse($course->user->created_at)->diffForHumans() }}</span>
                                         <p class="text-black lh-18 pb-3">Email : {{ $course->user->email }}</p>
@@ -565,16 +567,29 @@
                                     </p>
 
                                     <p class="preview-price-discount-text pb-35px">
-                                        <span class="text-color-3">4 days</span> left at this price!
+
                                     </p>
                                     <div class="buy-course-btn-box">
-                                        <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart({{ $course->id }},'{{ $course->course_name }}','{{ $course->instructor_id }}','{{ $course->course_name_slug }}')" ><i
+                                        <button type="submit" class="btn theme-btn w-100 mb-2"
+                                            onclick="addToCart({{ $course->id }},'{{ $course->course_name }}','{{ $course->instructor_id }}','{{ $course->course_name_slug }}')"><i
                                                 class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
                                         <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"
-                                         onclick="buyCourse({{ $course->id }},'{{ $course->course_name }}','{{ $course->instructor_id }}','{{ $course->course_name_slug }}')" ><i
+                                            onclick="buyCourse({{ $course->id }},'{{ $course->course_name }}','{{ $course->instructor_id }}','{{ $course->course_name_slug }}')"><i
                                                 class="la la-shopping-bag mr-1"></i> Buy this course</button>
                                     </div>
-                                    <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
+                                    <form action="#">
+                                        <div class="input-group mb-2" id="couponField">
+                                            <input class="form-control form--control pl-3" type="text" id="coupon_code"
+                                                placeholder="Coupon code">
+                                            <div class="input-group-append">
+                                                <input type="hidden" id="course_id" name="course_id" value="{{ $course->id }}">
+                                                <input type="hidden" id="instructor_id" name="instructor_id" value="{{ $course->instructor_id }}">
+
+                                                <a type="submit" onclick="applyInstructorCoupon()" class="btn theme-btn">Apply Code</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                     <div class="preview-course-incentives">
                                         <h3 class="card-title fs-18 pb-2">This course includes</h3>
                                         <ul class="generic-list-item pb-3">
@@ -642,7 +657,9 @@
                                 <div class="divider"><span></span></div>
                                 <ul class="generic-list-item">
                                     @foreach ($categoris as $category)
-                                        <li><a href="{{ url('category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }}</a></li>
+                                        <li><a
+                                                href="{{ url('category/' . $category->id . '/' . $category->category_slug) }}">{{ $category->category_name }}</a>
+                                        </li>
                                     @endforeach
 
                                 </ul>
@@ -652,40 +669,44 @@
                             <div class="card-body">
                                 <h3 class="card-title fs-18 pb-2">Related Courses</h3>
                                 <div class="divider"><span></span></div>
-                                @if($relatedCourses->isEmpty())
-                                <p>No related courses available.</p>
-                            @else
-                                @foreach ($relatedCourses as $relatedCourse)
-                                    <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                        <a href="{{ url('course/details/'.$relatedCourse->id.'/'.$relatedCourse->course_name_slug) }}" class="media-img">
-                                            <img class="mr-3 lazy" src="{{ asset($relatedCourse->course_image) }}"
-                                                 data-src="images/small-img-2.jpg" alt="Related course image">
-                                        </a>
-                                        <div class="media-body">
-                                            <h5 class="fs-15">
-                                                <a href="{{ url('course/details/'.$relatedCourse->id.'/'.$relatedCourse->course_name_slug) }}">{{ $relatedCourse->course_name }}</a>
-                                            </h5>
-                                            <span class="d-block lh-18 py-1 fs-14">{{ $relatedCourse->user->name }}</span>
-                                            @php
-                                                $amount = $relatedCourse->selling_price - $relatedCourse->discount_price;
-                                                $discount = ($amount / $relatedCourse->selling_price) * 100;
-                                            @endphp
-                                            @if ($relatedCourse->discount_price == null)
-                                                <p class="card-price text-black font-weight-bold">
-                                                    ${{ $relatedCourse->selling_price }}
-                                                </p>
-                                            @else
-                                                <p class="text-black font-weight-semi-bold lh-18 fs-15">
-                                                    ${{ $relatedCourse->discount_price }}
-                                                    <span class="before-price fs-14">
+                                @if ($relatedCourses->isEmpty())
+                                    <p>No related courses available.</p>
+                                @else
+                                    @foreach ($relatedCourses as $relatedCourse)
+                                        <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
+                                            <a href="{{ url('course/details/' . $relatedCourse->id . '/' . $relatedCourse->course_name_slug) }}"
+                                                class="media-img">
+                                                <img class="mr-3 lazy" src="{{ asset($relatedCourse->course_image) }}"
+                                                    data-src="images/small-img-2.jpg" alt="Related course image">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="fs-15">
+                                                    <a
+                                                        href="{{ url('course/details/' . $relatedCourse->id . '/' . $relatedCourse->course_name_slug) }}">{{ $relatedCourse->course_name }}</a>
+                                                </h5>
+                                                <span
+                                                    class="d-block lh-18 py-1 fs-14">{{ $relatedCourse->user->name }}</span>
+                                                @php
+                                                    $amount =
+                                                        $relatedCourse->selling_price - $relatedCourse->discount_price;
+                                                    $discount = ($amount / $relatedCourse->selling_price) * 100;
+                                                @endphp
+                                                @if ($relatedCourse->discount_price == null)
+                                                    <p class="card-price text-black font-weight-bold">
                                                         ${{ $relatedCourse->selling_price }}
-                                                    </span>
-                                                </p>
-                                            @endif
-                                        </div>
-                                    </div><!-- end media -->
-                                @endforeach
-                            @endif
+                                                    </p>
+                                                @else
+                                                    <p class="text-black font-weight-semi-bold lh-18 fs-15">
+                                                        ${{ $relatedCourse->discount_price }}
+                                                        <span class="before-price fs-14">
+                                                            ${{ $relatedCourse->selling_price }}
+                                                        </span>
+                                                    </p>
+                                                @endif
+                                            </div>
+                                        </div><!-- end media -->
+                                    @endforeach
+                                @endif
 
                                 <div class="view-all-course-btn-box">
                                     <a href="course-grid.html" class="btn theme-btn w-100">View All Courses <i
@@ -700,12 +721,12 @@
         </div><!-- end container -->
     </section><!-- end course-details-area -->
     <!--======================================
-                                END COURSE DETAILS AREA
-                        ======================================-->
+                                    END COURSE DETAILS AREA
+                            ======================================-->
 
     <!--======================================
-                                START RELATED COURSE AREA
-                        ======================================-->
+                                    START RELATED COURSE AREA
+                            ======================================-->
     <section class="related-course-area bg-gray pt-60px pb-60px">
         <div class="container">
             <div class="related-course-wrap">
@@ -790,12 +811,12 @@
         </div><!-- end container -->
     </section><!-- end related-course-area -->
     <!--======================================
-                                END RELATED COURSE AREA
-                        ======================================-->
+                                    END RELATED COURSE AREA
+                            ======================================-->
 
     <!--======================================
-                                START CTA AREA
-                        ======================================-->
+                                    START CTA AREA
+                            ======================================-->
     <section class="cta-area pt-60px pb-60px position-relative overflow-hidden">
         <span class="stroke-shape stroke-shape-1"></span>
         <span class="stroke-shape stroke-shape-2"></span>
@@ -840,8 +861,8 @@
         </div><!-- end container -->
     </section><!-- end cta-area -->
     <!--======================================
-                                END CTA AREA
-                        ======================================-->
+                                    END CTA AREA
+                            ======================================-->
     <!-- Modal -->
     <div class="modal fade modal-container" id="shareModal" tabindex="-1" role="dialog"
         aria-labelledby="shareModalTitle" aria-hidden="true">
