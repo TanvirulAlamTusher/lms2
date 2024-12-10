@@ -78,9 +78,6 @@ require __DIR__ . '/auth.php';
 
 
 
-
-
-
 // Admin group middleware
 Route::middleware(['auth', 'roles:admin'])->group(function () {
 
@@ -176,12 +173,6 @@ Route::post('/instructor/register', [AdminController::class, 'InstructorRegister
 //End
 
 
-
-
-
-
-
-
 //Instructor group middleware
 Route::middleware(['auth', 'roles:instructor'])->group(function () {
 
@@ -252,22 +243,11 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
     });//End Instructor Coupon Routes
 
 
-
-
 });
 //End Instructor group middleware
 
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login')->middleware(RedirectIfAuthenticated::class);
 //End
-//End
-
-
-
-
-
-
-
-
 
 //// Route Accessable for All
 
