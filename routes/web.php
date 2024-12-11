@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
@@ -280,6 +281,9 @@ Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
 Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
 Route::post('/payment', [PaymentController::class, 'Payment'])->name('payment');
 Route::post('/stripe_order', [PaymentController::class, 'StripeOrder'])->name('stripe_order');
+//Review route
+
+Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
 
 
 //// End Route Accessable for All
