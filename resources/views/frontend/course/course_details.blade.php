@@ -457,6 +457,7 @@
 
 
                             <form method="post" action="{{ route('store.review') }}" class="row">
+                                @csrf
 
 
                             <div class="leave-rating-wrap pb-4">
@@ -485,7 +486,7 @@
                                 <div class="btn-box col-lg-12">
                                     <input type="hidden" name="course_id" value="{{ $course->id }}">
                                     <input type="hidden" name="instructor_id" value="{{ $course->instructor_id }}">
-                                   
+
 
                                     <button class="btn theme-btn" type="submit">Submit Review</button>
                                 </div><!-- end btn-box -->
