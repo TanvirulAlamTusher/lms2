@@ -30,15 +30,15 @@
                         @else
                         @endif
 
-                        @php
-                            $reviewcount = App\Models\Review::where('course_id', $course->id)
-                                ->where('status', '1')
-                                ->latest()
-                                ->get();
-                            $avgRating = App\Models\Review::where('course_id', $course->id)
-                                ->where('status', '1')
-                                ->avg('rating');
-                        @endphp
+    @php
+        $reviewcount = App\Models\Review::where('course_id', $course->id)
+            ->where('status', '1')
+            ->latest()
+            ->get();
+        $avgRating = App\Models\Review::where('course_id', $course->id)
+            ->where('status', '1')
+            ->avg('rating');
+    @endphp
 
                         <div class="rating-wrap d-flex flex-wrap align-items-center">
                             <div class="review-stars">

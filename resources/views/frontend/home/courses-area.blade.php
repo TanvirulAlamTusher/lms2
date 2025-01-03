@@ -71,6 +71,21 @@
 
                                         </div>
                                     </div><!-- end card-image -->
+
+                    @php
+                    $reviewcount = App\Models\Review::where('course_id', $course_item->id)
+                        ->where('status', '1')
+                        ->latest()
+                        ->get();
+                    $avgRating = App\Models\Review::where('course_id', $course_item->id)
+                        ->where('status', '1')
+                        ->avg('rating');
+                @endphp
+
+
+
+
+
                                     <div class="card-body">
                                         <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->label }}</h6>
                                         <h5 class="card-title"><a
@@ -81,14 +96,49 @@
                                         </p>
                                         <div class="rating-wrap d-flex align-items-center py-2">
                                             <div class="review-stars">
-                                                <span class="rating-number">4.4</span>
-                                                <span class="la la-star"></span>
-                                                <span class="la la-star"></span>
-                                                <span class="la la-star"></span>
-                                                <span class="la la-star"></span>
-                                                <span class="la la-star-o"></span>
+                                                <span class="rating-number">{{ round($avgRating, 1) }}</span>
+
+                                @if ($avgRating == 0)
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                            @elseif ($avgRating == 1 || $avgRating < 2)
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                            @elseif ($avgRating == 2 || $avgRating < 3)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                            @elseif ($avgRating == 3 || $avgRating < 4)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                                <span class="la la-star-o"></span>
+                            @elseif ($avgRating == 4 || $avgRating < 5)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star-o"></span>
+                            @elseif ($avgRating == 5)
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                                <span class="la la-star"></span>
+                            @endif
+
+
                                             </div>
-                                            <span class="rating-total pl-1">(20,230)</span>
+                                            <span class="rating-total pl-1">({{ count($reviewcount) }})</span>
                                         </div><!-- end rating-wrap -->
                                         <div class="d-flex justify-content-between align-items-center">
                                             @if ($course_item->discount_price == null)
