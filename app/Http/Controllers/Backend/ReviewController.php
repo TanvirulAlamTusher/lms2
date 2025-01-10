@@ -59,4 +59,14 @@ class ReviewController extends Controller
 
     } //end method
 
+
+    public function InstructorAllReview(){
+        $id = Auth::user()->id;
+        $review = Review::where('instructor_id',$id)
+        ->where('status',1)
+        ->orderBy('id','DESC')
+        ->get();
+        return view('instructor.review.active_review',compact('review'));
+    }//End method
+
 }

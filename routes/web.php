@@ -252,6 +252,14 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
 
     });//End Instructor Coupon Routes
 
+     //Instructor Review All Routes
+     Route::controller(ReviewController::class)->group(function () {
+        Route::get('/instructor/all/review', 'InstructorAllReview')->name('instructor.all.review');
+
+
+      });
+      //End Instructor Review All Routes
+
 
 });
 //End Instructor group middleware

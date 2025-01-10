@@ -92,6 +92,19 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart'></i>
+                </div>
+                <div class="menu-title">Manage Review</div>
+            </a>
+            <ul>
+
+                <li> <a href="{{ route('instructor.all.review') }}"><i class='bx bx-radio-circle'></i>All Review</a> </li>
+
+
+            </ul>
+        </li>
 
 
 
