@@ -167,6 +167,8 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
       //Admin Review All Routes
       Route::controller(ReviewController::class)->group(function () {
         Route::get('/admin/pending/review', 'AdminPendingReview')->name('admin.pending.review');
+        Route::get('/admin/active/review', 'AdminActiveReview')->name('admin.active.review');
+        Route::post('/update/review/status', 'UpdateReviewStatus')->name('update.review.status');
 
       });
       //End Admin Review All Routes
