@@ -164,6 +164,13 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
       });//End Admin Report Routes
 
+      //Admin Review All Routes
+      Route::controller(ReviewController::class)->group(function () {
+        Route::get('/admin/pending/review', 'AdminPendingReview')->name('admin.pending.review');
+
+      });
+      //End Admin Review All Routes
+
 });//End Admin group middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
