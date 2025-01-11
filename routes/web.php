@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
@@ -172,6 +173,14 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
       });
       //End Admin Review All Routes
+
+        //Admin  All User and Instructor Routes
+        Route::controller(ActiveUserController::class)->group(function () {
+            Route::get('/all/user', 'AllUser')->name('all.user');
+
+
+          }); //End Admin  All User and Instructor Routes
+
 
 });//End Admin group middleware
 

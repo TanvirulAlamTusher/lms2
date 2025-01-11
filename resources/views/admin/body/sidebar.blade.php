@@ -25,7 +25,7 @@
 
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-cart'></i>
+                <div class="parent-icon"><i class='bx bx-category'></i>
                 </div>
                 <div class="menu-title">Manage Category</div>
             </a>
@@ -94,7 +94,7 @@
         </li>
         <li>
             <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"><i class='bx bx-cog'></i></div>
+                <div class="parent-icon"><i class='bx bx-cart'></i></div>
 
                 <div class="menu-title">Manage Orders</div>
             </a>
@@ -107,7 +107,7 @@
 
         <li>
             <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"><i class='bx bx-cog'></i></div>
+                <div class="parent-icon"><i class='bx bx-chart'></i></div>
 
                 <div class="menu-title">Manage Report</div>
             </a>
@@ -116,15 +116,29 @@
             </ul>
         </li>
 
+
+
         <li>
             <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"><i class='bx bx-cog'></i></div>
+                <div class="parent-icon"><i class='bx bx-message-dots'></i></div>
 
                 <div class="menu-title">Manage Review</div>
             </a>
             <ul>
                 <li> <a href="{{ route('admin.pending.review') }}"><i class='bx bx-radio-circle'></i>Pending Review</a></li>
                 <li> <a href="{{ route('admin.active.review') }}"><i class='bx bx-radio-circle'></i>Active Review</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class='bx bx-user'></i></div>
+
+                <div class="menu-title">Manage All User</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.user') }}"><i class='bx bx-radio-circle'></i>All User</a></li>
+                <li> <a href="{{ route('admin.active.review') }}"><i class='bx bx-radio-circle'></i>All Instructor</a></li>
             </ul>
         </li>
 
