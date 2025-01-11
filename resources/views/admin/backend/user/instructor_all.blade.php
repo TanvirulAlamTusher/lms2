@@ -10,7 +10,7 @@
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
 
-                    <li class="breadcrumb-item active" aria-current="page">All User</li>
+                    <li class="breadcrumb-item active" aria-current="page">All Instructor</li>
 
 
                 </ol>
@@ -29,11 +29,11 @@
                         <tr>
                             <th>Sl no.</th>
 
-                            <th>User Image</th>
-                            <th>User Name</th>
-                            <th>User Email</th>
-                            <th>User Phone</th>
-                            <th>User Status</th>
+                            <th>Instructor Image</th>
+                            <th>Instructor Name</th>
+                            <th>Instructor Email</th>
+                            <th>Instructor Phone</th>
+                            <th>Instructor Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +45,7 @@
 
                            <td> <img src="{{
                             !empty($item->photo)
-                                ?  url('upload/user_images/' . $item->photo)
+                                ?  url('upload/instructor_images/' . $item->photo)
                             : url('upload/no_image.jpg')
                         }}" alt="Img" style="width: 70px; height:40px;"></td>
 
