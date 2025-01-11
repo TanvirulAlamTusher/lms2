@@ -31,8 +31,6 @@
                             <th>User Email</th>
                             <th>User Phone</th>
                             <th>User Status</th>
-
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,18 +40,18 @@
 
                             <td>{{ $key+1}}</td>
 
-                           <td> <img src="{{ !empty($item->photo) ? url('upload/user_images/' . $item->photo) : url('upload/no_image.jpg') }}"
-                            alt="user_image" style="width: 70px; height:40px;"></td>
+                           <td> <img src="{{
+                            !empty($item->photo)
+                            ? ($item->role == 'instructor'
+                                ? url('upload/instructor_images/' . $item->photo)
+                                : url('upload/user_images/' . $item->photo))
+                            : url('upload/no_image.jpg')
+                        }}" alt="Img" style="width: 70px; height:40px;"></td>
 
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
                             <td>{{ $item->name }}</td>
-
-                           <td>
-                            <a href="{{ route('edit.category', $item->id) }}" class="btn btn-info px-5">Edit</a>
-                            <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
-                           </td>
                         </tr>
                         @endforeach
 

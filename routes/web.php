@@ -177,6 +177,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         //Admin  All User and Instructor Routes
         Route::controller(ActiveUserController::class)->group(function () {
             Route::get('/all/user', 'AllUser')->name('all.user');
+            Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
 
 
           }); //End Admin  All User and Instructor Routes
