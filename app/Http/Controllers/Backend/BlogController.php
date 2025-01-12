@@ -23,4 +23,9 @@ class BlogController extends Controller
 
   return redirect()->back()->with($notifaction);
     }//End method
+
+    public function EditBlogCategory($id){
+        $categories = BlogCategory::find($id);
+        return response()->json($categories);
+    }
 }

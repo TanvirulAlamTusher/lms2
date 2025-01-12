@@ -176,6 +176,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
     Route::controller(BlogController::class)->group(function () {
         Route::get('/blog/category', 'AllBlogCategory')->name('blog.category');
         Route::post('/blog/category/store', 'StoreBlogCategory')->name('blog.category.store');
+        Route::get('/edit/blog/category/{id}', 'EditBlogCategory');
 
     }); //End Admin Blog Routes
 
