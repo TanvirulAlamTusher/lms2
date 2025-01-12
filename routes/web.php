@@ -1,23 +1,24 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Backend\ActiveUserController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\CouponController;
-use App\Http\Controllers\Backend\CourseController;
-use App\Http\Controllers\Backend\QuestionController;
-use App\Http\Controllers\Backend\ReportController;
-use App\Http\Controllers\Backend\ReviewController;
-use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\IndexController;
-use App\Http\Controllers\Frontend\WishListController;
-use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Middleware\RedirectIfAuthenticated;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\QuestionController;
+use App\Http\Controllers\Frontend\WishListController;
+use App\Http\Controllers\Backend\ActiveUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Route::get('/', [UserController::class, 'Index'])->name('index');
 
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.index');
-})->middleware(['auth' ,'roles:user', 'verified'])->name('dashboard');
+})->middleware(['auth', 'roles:user', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/user/profile', [UserController::class, 'UserProfile'])->name('user.profile');
@@ -54,31 +55,24 @@ Route::middleware('auth')->group(function () {
 
     }); // end user wishlist
 
-     //Use My Course all route
-     Route::controller(OrderController::class)->group(function () {
+    //Use My Course all route
+    Route::controller(OrderController::class)->group(function () {
         Route::get('/my/course', 'MyCourse')->name('my.course');
         Route::get('/course/view/{course_id}', 'CourseView')->name('course.view');
         Route::post('/user/question', 'CourseView')->name('user.question');
 
-
     }); //End Use My Course all route
 
-      //User Question all route
-      Route::controller(QuestionController::class)->group(function () {
+    //User Question all route
+    Route::controller(QuestionController::class)->group(function () {
         Route::post('/user/question', 'UserQuestion')->name('user.question');
 
-
     }); //End User Question all route
-
 
 });
 // END AUTH MEDDLEWARE
 
-
-
 require __DIR__ . '/auth.php';
-
-
 
 // Admin group middleware
 Route::middleware(['auth', 'roles:admin'])->group(function () {
@@ -117,19 +111,18 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
         Route::post('/update/user/status', 'UpdateUserStatus')->name('update.user.status');
 
-    });//End
+    }); //End
 
-     //Admin Course All Routes
-     Route::controller(AdminController::class)->group(function () {
+    //Admin Course All Routes
+    Route::controller(AdminController::class)->group(function () {
         Route::get('/admin/all/course', 'AdminAllCourse')->name('admin.all.course');
         Route::post('/update/course/status', 'UpdateCourseStatus')->name('update.course.status');
         Route::get('/admin/course/details/{id}', 'AdminCourseDetails')->name('admin.course.details');
         Route::get('/admin/all/coupon', 'AdminCourseDetails')->name('admin.all.coupon');
 
-
-    });//End
-      //Admin Coupon Routes
-      Route::controller(CouponController::class)->group(function () {
+    }); //End
+    //Admin Coupon Routes
+    Route::controller(CouponController::class)->group(function () {
         Route::get('/admin/all/coupon', 'AdminAllCoupon')->name('admin.all.coupon');
         Route::get('/admin/add/coupon', 'AdminAddCoupon')->name('admin.add.coupon');
         Route::post('/admin/store/coupon', 'AdminStoreCoupon')->name('admin.store.coupon');
@@ -137,53 +130,55 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::post('/admin/update/coupon', 'AdminUpdateCoupon')->name('admin.update.coupon');
         Route::get('/admin/delete/coupon/{id}', 'AdminDeleteCoupon')->name('admin.delete.coupon');
 
+    }); //End
 
-    });//End
-
-       //Admin Setting Routes
-       Route::controller(SettingController::class)->group(function () {
+    //Admin Setting Routes
+    Route::controller(SettingController::class)->group(function () {
         Route::get('/smtp/setting', 'SmtpSetting')->name('smtp.setting');
         Route::post('/update/smtp', 'UpdateSmtp')->name('update.smtp');
-      });//End
+    }); //End
 
-       //Admin All Order Routes
-       Route::controller(OrderController::class)->group(function () {
+    //Admin All Order Routes
+    Route::controller(OrderController::class)->group(function () {
         Route::get('/admin/pending/order', 'PendingOrder')->name('admin.pending.order');
         Route::get('/admin/confirm/order', 'ConfirmOrder')->name('admin.confirm.order');
         Route::get('/admin/order/details/{id}', 'OrderDetails')->name('admin.order.details');
         Route::get('/pending/confirm/{id}', 'PendingToConfirm')->name('pending-confirm');
 
-      });//End
+    }); //End
 
-       //Admin Report Routes
-       Route::controller(ReportController::class)->group(function () {
+    //Admin Report Routes
+    Route::controller(ReportController::class)->group(function () {
         Route::get('/admin/report/view', 'ReportView')->name('report.view');
         Route::post('/admin/search/by/date', 'SearchByDate')->name('search.by.date');
         Route::post('/admin/search/by/month', 'SearchByMonth')->name('search.by.month');
         Route::post('/admin/search/by/year', 'SearchByYear')->name('search.by.year');
 
+    }); //End Admin Report Routes
 
-      });//End Admin Report Routes
-
-      //Admin Review All Routes
-      Route::controller(ReviewController::class)->group(function () {
+    //Admin Review All Routes
+    Route::controller(ReviewController::class)->group(function () {
         Route::get('/admin/pending/review', 'AdminPendingReview')->name('admin.pending.review');
         Route::get('/admin/active/review', 'AdminActiveReview')->name('admin.active.review');
         Route::post('/update/review/status', 'UpdateReviewStatus')->name('update.review.status');
 
-      });
-      //End Admin Review All Routes
+    });
+    //End Admin Review All Routes
 
-        //Admin  All User and Instructor Routes
-        Route::controller(ActiveUserController::class)->group(function () {
-            Route::get('/all/user', 'AllUser')->name('all.user');
-            Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
+    //Admin  All User and Instructor Routes
+    Route::controller(ActiveUserController::class)->group(function () {
+        Route::get('/all/user', 'AllUser')->name('all.user');
+        Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
 
+    }); //End Admin  All User and Instructor Routes
 
-          }); //End Admin  All User and Instructor Routes
+    //Admin Blog Routes
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/blog/category', 'AllBlogCategory')->name('blog.category');
 
+    }); //End Admin Blog Routes
 
-});//End Admin group middleware
+}); //End Admin group middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 //End
@@ -191,7 +186,6 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 Route::get('/become/instructor', [AdminController::class, 'BecomeInstructor'])->name('become.instructor');
 Route::post('/instructor/register', [AdminController::class, 'InstructorRegister'])->name('instructor.register');
 //End
-
 
 //Instructor group middleware
 Route::middleware(['auth', 'roles:instructor'])->group(function () {
@@ -240,18 +234,17 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
         Route::get('/instructor/order/details/{payment_id}', 'InstructorOrderDetails')->name('instructor.order.details');
         Route::get('/instructor/order/invoice/{payment_id}', 'InstructorOrderInvoice')->name('instructor.order.invoice');
 
-
     });
     //End
-     // Instructor Order All route
-     Route::controller(QuestionController::class)->group(function () {
+    // Instructor Order All route
+    Route::controller(QuestionController::class)->group(function () {
         Route::get('/instructor/all/question', 'InstructorAllQuestion')->name('instructor.all.question');
         Route::get('/question/details/{id}', 'QuestionDetails')->name('question.details');
         Route::post('/instructor/reply', 'InstructorReply')->name('instructor.reply');
     });
     //End
-     //Instructor Coupon Routes
-     Route::controller(CouponController::class)->group(function () {
+    //Instructor Coupon Routes
+    Route::controller(CouponController::class)->group(function () {
         Route::get('/instructor/all/coupon', 'InstructorAllCoupon')->name('instructor.all.coupon');
         Route::get('/instructor/add/coupon', 'InstructorAddCoupon')->name('instructor.add.coupon');
         Route::post('/instructor/store/coupon', 'InstructorStoreCoupon')->name('instructor.store.coupon');
@@ -259,17 +252,14 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
         Route::post('/instructor/update/coupon', 'InstructorUpdateCoupon')->name('instructor.update.coupon');
         Route::get('/instructor/delete/coupon/{id}', 'InstructorDeleteCoupon')->name('instructor.delete.coupon');
 
+    }); //End Instructor Coupon Routes
 
-    });//End Instructor Coupon Routes
-
-     //Instructor Review All Routes
-     Route::controller(ReviewController::class)->group(function () {
+    //Instructor Review All Routes
+    Route::controller(ReviewController::class)->group(function () {
         Route::get('/instructor/all/review', 'InstructorAllReview')->name('instructor.all.review');
 
-
-      });
-      //End Instructor Review All Routes
-
+    });
+    //End Instructor Review All Routes
 
 });
 //End Instructor group middleware
@@ -311,6 +301,5 @@ Route::post('/stripe_order', [PaymentController::class, 'StripeOrder'])->name('s
 //Review route
 
 Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
-
 
 //// End Route Accessable for All
