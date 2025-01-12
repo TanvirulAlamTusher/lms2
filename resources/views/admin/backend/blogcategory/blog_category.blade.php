@@ -57,7 +57,7 @@
                                         <button type="button" class="btn btn-info px-5" data-bs-toggle="modal" data-bs-target="#categoryEdit" id="{{ $item->id }}" onclick="categoryEdit(this.id)">
                                             Edit</button>
 
-                                        <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger px-5"
+                                        <a href="{{ route('delete.blog.category', $item->id) }}" class="btn btn-danger px-5"
                                             id="delete">Delete</a>
                                     </td>
                                 </tr>
@@ -108,7 +108,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form name="" action="{{ route('blog.category.store') }}" method="POST" id="Form">
+                    <form name="" action="{{ route('blog.category.update') }}" method="POST" id="Form">
                         @csrf
                         <input type="hidden" name="category_id" id="category_id">
                         <div class="form-group">
