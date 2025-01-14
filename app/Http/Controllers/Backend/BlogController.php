@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 
 class BlogController extends Controller
 {
@@ -43,11 +44,20 @@ class BlogController extends Controller
 
       public function DeleteBlogCategory($id){
         BlogCategory::find($id)->delete();
-        
+
         $notifaction = array('message' => 'Blog Category Delete successfully',
         'alert_type' => 'success');
 
     return redirect()->back()->with($notifaction);
 
-      }
+      }//end method
+
+      //************************************************************************************************
+    //   BlogPostMethod
+
+    public function BlogPost(){
+       $post = BlogPost::latest()->get();
+       return view('admin.backend.post.all_post',compact('post'));
+
+    }//end method
 }

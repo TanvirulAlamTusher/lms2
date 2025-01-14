@@ -172,7 +172,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
     }); //End Admin  All User and Instructor Routes
 
-    //Admin Blog Routes
+    //Admin Blog category Routes
     Route::controller(BlogController::class)->group(function () {
         Route::get('/blog/category', 'AllBlogCategory')->name('blog.category');
         Route::post('/blog/category/store', 'StoreBlogCategory')->name('blog.category.store');
@@ -180,7 +180,14 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/edit/blog/category/{id}', 'EditBlogCategory');
         Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
 
-    }); //End Admin Blog Routes
+    }); //End Admin Blog category Routes
+
+    //Admin Blog Post Routes
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('/blog/post', 'BlogPost')->name('blog.post');
+
+
+    }); //End Admin Blog Post Routes
 
 }); //End Admin group middleware
 
