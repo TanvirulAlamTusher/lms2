@@ -16,6 +16,8 @@
 	<link href=" {{ asset('backend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
 	<link href=" {{ asset('backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
 	<link href=" {{ asset('backend/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet"/>
+     {{-- tag input --}}
+    <link href="{{ asset('backend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
 	<!-- loader-->
 	<link href="{{ asset('backend/assets/css/pace.min.css') }}" rel="stylesheet"/>
 	<script src="{{ asset('backend/assets/js/pace.min.js') }}"></script>
@@ -57,7 +59,7 @@
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('backend/assets/js/bootstrap.bundle.min.js')}}"></script>
 	<!--plugins-->
-    
+
 	<script src=" {{ asset('backend/assets/js/jquery.min.js') }}"></script>
 	<script src=" {{ asset('backend/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
 	<script src=" {{ asset('backend/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
@@ -66,11 +68,14 @@
     <script src=" {{ asset('backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
 	<script src=" {{ asset('backend/assets/plugins/chartjs/js/chart.js') }}"></script>
 	<script src=" {{ asset('backend/assets/js/index.js') }}"></script>
+     {{-- tag input --}}
+     <script src="{{ asset('backend/assets/plugins/input-tags/js/tagsinput.js')}}"></script>
 	<!--app JS-->
 	<script src=" {{ asset('backend/assets/js/app.js')}}"></script>
 	<script src=" {{ asset('backend/assets/js/validate.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
+
 	<script>
 		new PerfectScrollbar(".app-container")
 	</script>
@@ -107,6 +112,15 @@
          break;
       }
       @endif
+     </script>
+     {{-- tiny editor --}}
+     <script src="https://cdn.tiny.cloud/1/1hx40q73a7swqpm469e9c404qj4obopbtvpzbb1etemfnxsi/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+     <script>
+       tinymce.init({
+         selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+         plugins: 'code table lists',
+         toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+       });
      </script>
 </body>
 
