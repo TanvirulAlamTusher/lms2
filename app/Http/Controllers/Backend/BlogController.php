@@ -149,4 +149,18 @@ class BlogController extends Controller
         } //end else
 
     } //End function
+
+    public function DeleteBlogPost($id){
+        $post = BlogPost::find($id);
+        $img = $post->post_image;
+
+        unlink($img);
+
+        BlogPost::find($id)->delete();
+
+        $notifaction = array('message' => 'Post Delete successfully',
+            'alert_type' => 'success');
+
+        return redirect()->back()->with($notifaction);
+    }//End function
 }

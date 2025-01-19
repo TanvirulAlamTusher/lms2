@@ -188,6 +188,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
         Route::get('/add/blog/post', 'AddBlogPost')->name('add.blog.post');
         Route::post('/store/blog/post', 'StoreBlogPost')->name('store.blog.post');
         Route::get('/edit/post/{id}', 'EditBlogPost')->name('edit.post');
+        Route::get('/delete/post/{id}', 'DeleteBlogPost')->name('delete.post');
         Route::post('/update/blog/post', 'UpdateBlogPost')->name('update.blog.post');
 
 
