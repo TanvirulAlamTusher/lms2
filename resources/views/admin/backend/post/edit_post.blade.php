@@ -10,7 +10,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Post a Blog</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Blog Post</li>
                 </ol>
             </nav>
         </div>
@@ -19,42 +19,43 @@
     <div class="card">
         <div class="card-body p-4">
 
-            <form action="{{ route('store.blog.post')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
+            <form action="{{ route('update.blog.post')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
                 @csrf
+                <input type="hidden" name="id" value="{{ $post->id }}">
                 <div class="form-group col-md-6">
 
-                    <label for="input1" class="form-label">Blog Category</label>
+                    <label for="input1" class="form-label">Edit Blog Category</label>
 
                   <select name="blogcat_id" class="form-select mb-3" aria-label="Default select example">
                     <option selected="" value="">Open this select menu</option>
 
                     @foreach ($blogcat as $cat)
-                    <option value="{{ $cat->id }}">{{ $cat->category_name }}</option>
+                    <option value="{{ $cat->id }}" {{ $cat->id == $post->blogcat_id ? 'selected' : '' }} > {{ $cat->category_name }}</option>
                     @endforeach
 
                   </select>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="input1" class="form-label">Post Title</label>
-                    <input type="text" name="post_title" class="form-control" id="input1" placeholder="Post Title ">
+                    <label for="input1" class="form-label">Edit Post Title</label>
+                    <input type="text" name="post_title" class="form-control" id="input1" value="{{ $post->post_title }}">
                 </div>
 
                 <div class="form-group col-md-12">
-                    <label for="input1" class="form-label">Post</label>
-                    <textarea class="form-control" id="myeditorinstance" name="long_descp" placeholder="Write Blog Post Here....."
-                        rows="5"></textarea>
+                    <label for="input1" class="form-label">Edit Post</label>
+                    <textarea class="form-control" id="myeditorinstance" name="long_descp" value=" "
+                        rows="5">{!! $post->long_descp !!}</textarea>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="input1" class="form-label">Post Tag</label>
-                    <input type="text" name="post_tags" class="form-control" data-role="tagsinput" value="">
+                    <label for="input1" class="form-label">Edit Post Tag</label>
+                    <input type="text" name="post_tags" class="form-control" data-role="tagsinput" value="{{ $post->post_tags }}">
 
                 </div>
 
 
 
                         <div class="form-group col-md-6 text-secondary">
-                            <label for="formFile" class="form-label">Post Image</label>
+                            <label for="formFile" class="form-label">Change Post Image</label>
                             {{-- <input id="image" type="file" name="photo" class="form-control"/> --}}
                             <input oninput="showImage.src=window.URL.createObjectURL(this.files[0])"
                             name="post_image" type="file" class="form-control" id="image">
@@ -63,7 +64,7 @@
                  <div class="col-md-6">
 
                         <img id="showImage"
-                            src="{{ url('upload/no_image.jpg') }}"
+                            src="{{ asset($post->post_image) }}"
                             alt="post_image" class=" p-1 bg-primary" width="100">
 
 
@@ -93,9 +94,7 @@
                 long_descp: {
                     required : true,
                 },
-                post_image: {
-                    required : true,
-                },
+
 
             },
             messages :{
@@ -108,9 +107,7 @@
                 long_descp: {
                     required : 'Post Required!!',
                 },
-                post_image: {
-                    required : 'Image Required!!',
-                },
+               
 
 
             },

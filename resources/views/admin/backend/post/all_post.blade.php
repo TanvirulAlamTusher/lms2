@@ -44,11 +44,11 @@
 
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->post_title }}</td>
-                                    <td>{{ $item->blogcat_id }}</td>
+                                    <td>{{ $item->blog->category_name }}</td>
                                     <td><img src="{{ asset($item->post_image) }}" alt="Post Image"
                                             style="width: 70px; hight: 40px;"></td>
                                     <td>
-                                        <a href="{{ route('edit.category', $item->id) }}" class="btn btn-info px-5">Edit</a>
+                                        <a href="{{ route('edit.post', $item->id) }}" class="btn btn-info px-5">Edit</a>
                                         <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger px-5"
                                             id="delete">Delete</a>
                                     </td>
