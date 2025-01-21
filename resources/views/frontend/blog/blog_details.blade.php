@@ -193,7 +193,7 @@
                             <div class="divider"><span></span></div>
                             <ul class="generic-list-item">
                                 @foreach ($bcategory as $cat)
-                                <li><a href="#">{{ $cat->category_name }}</a></li>
+                                <li><a href="{{ url('blog/cat/list/'.$cat->id) }}">{{ $cat->category_name }}</a></li>
 
                                 @endforeach
                             </ul>
@@ -210,7 +210,7 @@
                                 </a>
                                 <div class="media-body">
                                     <h5 class="fs-15"><a href="{{ url('blog/details/'.$dpost->post_slug) }}">{{ $dpost->post_title }}</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">Admin </span> 
+                                    <span class="d-block lh-18 py-1 fs-14">Admin </span>
 
                                 </div>
                             </div><!-- end media -->

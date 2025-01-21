@@ -318,6 +318,7 @@ Route::post('/stripe_order', [PaymentController::class, 'StripeOrder'])->name('s
 Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
 //Blog Details route
 Route::get('blog/details/{slug}', [BlogController::class, 'BlogDetails']);
+Route::get('blog/cat/list/{id}', [BlogController::class, 'BlogCatList']);
 
 
 
