@@ -315,7 +315,10 @@ Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checko
 Route::post('/payment', [PaymentController::class, 'Payment'])->name('payment');
 Route::post('/stripe_order', [PaymentController::class, 'StripeOrder'])->name('stripe_order');
 //Review route
-
 Route::post('/store/review', [ReviewController::class, 'StoreReview'])->name('store.review');
+//Blog Details route
+Route::get('blog/details/{slug}', [BlogController::class, 'BlogDetails']);
+
+
 
 //// End Route Accessable for All
