@@ -322,7 +322,7 @@ Route::get('blog/cat/list/{id}', [BlogController::class, 'BlogCatList']);
 Route::get('blog', [BlogController::class, 'BlogList'])->name('blog');
 
 
-
+// make notifications read complete
 Route::post('/mark-notification-as-read/{notification}', [PaymentController::class, 'MarkAsRead']);
 
 
