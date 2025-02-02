@@ -323,4 +323,8 @@ Route::get('blog', [BlogController::class, 'BlogList'])->name('blog');
 
 
 
+Route::post('/mark-notification-as-read/{notification}', [PaymentController::class, 'MarkAsRead']);
+
+
+
 //// End Route Accessable for All

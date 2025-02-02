@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Notification;
 
+
 class PaymentController extends Controller
 {
     public function Payment(Request $request)
@@ -173,6 +174,24 @@ class PaymentController extends Controller
        return redirect()->route('index')->with($notification);
 
    }// End Method
-}
+
+   public function MarkAsRead(Request $request, $notificationId){
+
+    $user = Auth::user();
+    $notification = $user->notifications()->where('id',$notificationId)->first();
+
+    if ($notification) {
+        $notification->markAsRead();
+
+    }
+    return response()->json(['count' => $user->unreadNotifications()->count()]);
+
+}// End Method 
+
+
+
+   }// End Method
+
+
 
 
