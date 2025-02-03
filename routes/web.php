@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\RollController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\CouponController;
@@ -200,6 +201,15 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
 
     }); //End Admin Blog Post Routes
+
+     //Admin Roll Permission Routes
+     Route::controller(RollController::class)->group(function () {
+        Route::get('/all/permission', 'AllPermission')->name('all.permission');
+
+
+
+    }); //End Admin  Roll Permission Routes
+
 
 }); //End Admin group middleware
 
