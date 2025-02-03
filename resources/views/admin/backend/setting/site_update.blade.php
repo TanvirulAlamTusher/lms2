@@ -10,7 +10,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Smtp Setting</li>
+                        <li class="breadcrumb-item active" aria-current="page">Site Setting</li>
                     </ol>
                 </nav>
             </div>
@@ -20,46 +20,56 @@
             <div class="card-body p-4">
                 <h5 class="mb-4">Smtp Setting</h5>
 
-                <form action="{{ route('update.smtp') }}" method="post" id="myForm" class="row g-3"
+                <form action="{{ route('update.site') }}" method="post" id="myForm" class="row g-3"
                     enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" value="{{ $smtp->id }}" name="id">
+                    <input type="hidden" value="{{ $site->id }}" name="id">
 
                     <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">Mailer</label>
-                        <input type="text" value="{{ $smtp->mailer }}" name="mailer"
+                        <label for="input1" class="form-label">Phone</label>
+                        <input type="number" value="{{ $site->phone }}" name="phone"
                             class="form-control" id="input1" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">Host</label>
-                        <input type="text" value="{{ $smtp->host }}" name="host"
+                        <label for="input1" class="form-label">Email</label>
+                        <input type="email" value="{{ $site->email }}" name="email"
                             class="form-control" id="input1" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">Port</label>
-                        <input type="text" value="{{ $smtp->port }}" name="port"
+                        <label for="input1" class="form-label">Address</label>
+                        <input type="text" value="{{ $site->address }}" name="address"
                             class="form-control" id="input1" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">Username</label>
-                        <input type="text" value="{{ $smtp->username }}" name="username"
+                        <label for="input1" class="form-label">Facebook Id</label>
+                        <input type="text" value="{{ $site->facebook }}" name="facebook"
                             class="form-control" id="input1" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">Password</label>
-                        <input type="text" value="{{ $smtp->password }}" name="password"
+                        <label for="input1" class="form-label">Twitter Id</label>
+                        <input type="text" value="{{ $site->twitter }}" name="twitter"
                             class="form-control" id="input1" >
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">Encryption</label>
-                        <input type="text" value="{{ $smtp->encryption }}" name="encryption"
+                        <label for="input1" class="form-label">Copyright</label>
+                        <input type="text" value="{{ $site->copyright }}" name="copyright"
                             class="form-control" id="input1" >
                     </div>
-                    <div class="form-group col-md-4">
-                        <label for="input1" class="form-label">From address</label>
-                        <input type="text" value="{{ $smtp->from_address }}" name="from_address"
-                            class="form-control" id="input1" >
+                    <div class="form-group col-md-6 text-secondary">
+                        <label for="formFile" class="form-label">Logo</label>
+                        {{-- <input id="image" type="file" name="photo" class="form-control"/> --}}
+                        <input oninput="showImage.src=window.URL.createObjectURL(this.files[0])"
+                      value="{{ $site->logo }}"  name="logo" type="file" class="form-control" id="logo">
                     </div>
+
+             <div class="col-md-6">
+
+                    <img id="showImage"
+                        src="{{ asset($site->logo) }}"
+                        alt="logo" class=" p-1 bg-primary" width="140">
+
+
+            </div>
 
 
 
@@ -82,58 +92,44 @@
         $(document).ready(function() {
             $('#myForm').validate({
                 rules: {
-                    mailer: {
+                    phone: {
                         required: true,
                     },
-                    host: {
+                    email: {
                         required: true,
                     },
-                    port: {
+                    address: {
                         required: true,
                     },
-                    username: {
+                    facebook: {
                         required: true,
                     },
-                    password: {
+                    twitter: {
                         required: true,
                     },
-                    encryption: {
-                        required: true,
-                    },
-                    from_address: {
-                        required: true,
-                    },
+
 
 
                 },
                 messages: {
-                    mailer: {
-                        required: 'mailer required',
+                    phone: {
+                        required: 'phone required',
                     },
-                    host: {
-                        required: 'host required',
-                    },
-
-                    port: {
-                        required: 'port required',
+                    email: {
+                        required: 'email required',
                     },
 
-                    username: {
-                        required: 'username required',
+                    address: {
+                        required: 'address required',
                     },
 
-                    password: {
-                        required: 'password required',
+                    facebook: {
+                        required: 'facebook ID required',
                     },
 
-                    encryption: {
-                        required: 'encryption required',
+                    twitter: {
+                        required: 'twitter ID required',
                     },
-
-                    from_address: {
-                        required: 'From Address required',
-                    },
-
 
 
 
