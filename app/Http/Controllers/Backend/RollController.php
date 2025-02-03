@@ -23,12 +23,41 @@ class RollController extends Controller
             'name' => $request->name,
             'group_name' => $request->group_name,
         ]);
-        
+
         $notifaction = array('message' => 'Permission Add Succefully',
         'alert_type' => 'success');
 
 
         return redirect()->route('all.permission')->with($notifaction );
+
+    }// End function
+
+    public function EditPermission($id){
+       $permission = Permission::find($id);
+       return view('admin.backend.pages.permission.edit_permission',compact('permission'));
+    }// End function
+
+    public function UpdatePermission(Request $request){
+        $per_id = $request->id;
+        Permission::find($per_id)->update([
+            'name' => $request->name,
+            'group_name' => $request->group_name,
+        ]);
+
+        $notifaction = array('message' => 'Permission Update Succefully',
+        'alert_type' => 'success');
+
+
+        return redirect()->route('all.permission')->with($notifaction );
+
+    }// End function
+
+    public function DeletePermission($id){
+        Permission::find($id)->delete();
+
+        $notifaction = array('message' => 'Permission Delete Succefully',
+        'alert_type' => 'success');
+        return redirect()->back()->with($notifaction );
 
     }// End function
 }
