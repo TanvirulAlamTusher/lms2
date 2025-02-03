@@ -18,7 +18,7 @@
         <!--end breadcrumb-->
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="mb-4">Smtp Setting</h5>
+                <h5 class="mb-4">Site Setting</h5>
 
                 <form action="{{ route('update.site') }}" method="post" id="myForm" class="row g-3"
                     enctype="multipart/form-data">
