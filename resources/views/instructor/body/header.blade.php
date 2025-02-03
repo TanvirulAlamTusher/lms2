@@ -48,7 +48,7 @@
                             <div class="header-notifications-list">
 
 
-                              @forelse ( $user->notifications as $notification )
+                              @forelse ( $user->unreadNotifications as $notification )
 
 
 
