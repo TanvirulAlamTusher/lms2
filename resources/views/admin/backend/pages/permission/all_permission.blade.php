@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-            <a href="{{ route('add.category') }}" class="btn btn-primary "> Add Permission </a>
+            <a href="{{ route('add.permission') }}" class="btn btn-primary "> Add Permission </a>
 
 
             </div>
@@ -32,6 +32,7 @@
                         <tr>
                             <th>Sl no.</th>
                             <th>Permission Name</th>
+                            <th>Guard Name</th>
                             <th>Group Name</th>
                             <th>Action</th>
                         </tr>
@@ -43,6 +44,7 @@
 
                             <td>{{ $key+1}}</td>
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->guard_name  }}</td>
                             <td>{{ $item->group_name }}</td>
 
                            <td>
