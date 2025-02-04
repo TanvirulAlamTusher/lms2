@@ -60,4 +60,8 @@ class RollController extends Controller
         return redirect()->back()->with($notifaction );
 
     }// End function
+
+    public function ImportPermission(){
+        return view('admin.backend.pages.permission.import_permission',);
+    }
 }
