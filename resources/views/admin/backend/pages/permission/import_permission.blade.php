@@ -8,7 +8,9 @@
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                    <a href="{{ route('export') }}" class="btn btn-warning "> Download Xlsx </a>
+                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Import Permission</li>
                 </ol>
             </nav>
         </div>
@@ -16,7 +18,7 @@
     <!--end breadcrumb-->
     <div class="card">
         <div class="card-body p-4">
-            <form action="{{ route('store.permission')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
+            <form action="{{ route('import')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
                 @csrf
                 <div class="row">
 

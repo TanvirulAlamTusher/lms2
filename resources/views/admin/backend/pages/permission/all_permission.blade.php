@@ -19,6 +19,10 @@
             &nbsp; &nbsp;
 
             <a href="{{ route('import.permission') }}" class="btn btn-warning "> Import </a>
+            &nbsp;
+
+            <a href="{{ route('export') }}" class="btn btn-danger "> Export </a>
+
 
 
             </div>

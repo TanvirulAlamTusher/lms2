@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Exports\PermissionExport;
+use App\Imports\PermissionImport;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -68,9 +70,30 @@ class RollController extends Controller
     }//End function
     public function Export(){
         return Excel::download(new PermissionExport, 'permission.xlsx');
-      
+
         // you can download as csv file also
         // return Excel::download(new PermissionExport, 'permission.csv');
+
+    }// End function
+    public function Import(Request $request){
+        try{
+            Excel::import(new PermissionImport, $request->file('import_file'));
+
+
+            $notifaction = array('message' => 'Permission Imported Succefully',
+            'alert_type' => 'success');
+
+            return redirect()->route('all.permission')->with($notifaction );
+
+
+        }catch(Exception $e){
+            $notifaction = array('message' => 'Permission Exctis',
+            'alert_type' => 'error');
+
+            return redirect()->back()->with($notifaction );
+
+        }
+
 
     }// End function
 }
