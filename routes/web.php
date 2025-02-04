@@ -202,7 +202,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
     }); //End Admin Blog Post Routes
 
-     //Admin Roll Permission Routes
+     //Admin Permission Routes
      Route::controller(RollController::class)->group(function () {
         Route::get('/all/permission', 'AllPermission')->name('all.permission');
         Route::get('/add/permission', 'AddPermission')->name('add.permission');
@@ -218,6 +218,14 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
 
     }); //End Admin  Roll Permission Routes
+     //Roles Routes
+     Route::controller(RollController::class)->group(function () {
+        Route::get('/all/roles', 'AllRoles')->name('all.roles');
+        Route::get('/add/roles', 'AddRoles')->name('add.roles');
+        Route::post('/store/roles', 'StoreRoles')->name('store.roles');
+
+
+    }); //End Roles  Routes
 
 
 }); //End Admin group middleware
