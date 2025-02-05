@@ -195,22 +195,22 @@ class RollController extends Controller
         compact('role','permission_groups','permissions'));
 
     }//end function
-    public function AdminUpdateRoles(Request $request, $id){
 
-        $role = Role::find($id);
-        $permissions = $request->permission;
+    public function AdminUpdateRoles(Request $request, $id)
+{
+    $role = Role::findById($id, 'web'); // Ensure correct guard
+    $permissions = $request->permission ?? [];
 
-        if (!empty($permissions)) {
-            $role->syncPermissions($permissions);
-        }
+    // Convert IDs to names
+    $permissionNames = \Spatie\Permission\Models\Permission::whereIn('id', $permissions)->pluck('name')->toArray();
 
-        $notification = array(
-            'message' => 'Role Permission Updated Successfully',
-            'alert-type' => 'success'
-        );
-        return redirect()->route('all.roles.permission')->with($notification);
+    $role->syncPermissions($permissionNames); // Use names instead of IDs
 
-    }// End Method
+    return redirect()->route('all.roles.permission')->with([
+        'message' => 'Role Permission Updated Successfully',
+        'alert-type' => 'success'
+    ]);
+}
 
     public function AdminDeleteRoles($id){
       $role = Role::find($id);
