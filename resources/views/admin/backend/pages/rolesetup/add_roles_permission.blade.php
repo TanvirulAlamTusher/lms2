@@ -10,7 +10,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Permission</li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Role In Permission</li>
                 </ol>
             </nav>
         </div>
@@ -18,34 +18,50 @@
     <!--end breadcrumb-->
     <div class="card">
         <div class="card-body p-4">
-            <form action="{{ route('update.permission')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
+            <form action="{{ route('store.permission')}}" method="post" id="myForm" class="row g-3" enctype="multipart/form-data" >
                 @csrf
-                <input type="hidden" value="{{ $permission->id }}" name="id">
                 <div class="row">
 
-                        <div class="form-group col-md-6">
-                            <label for="input2" class="form-label">Edit Permission Name</label>
-                            <input type="text" name="name" class="form-control" id="input2" value="{{ $permission->name }}">
-                        </div>
 
                     <div class="form-group col-md-6">
-                        <label for="input1" class="form-label">Edit Group Name</label>
+                        <label for="input1" class="form-label">Roles Name</label>
                         <select name="group_name" class="form-select mb-3" aria-label="Default select example">
-                            <option selected="" disabled>select menu</option>
+                            <option selected="" disabled>select Roles</option>
 
-                            <option value="Category" {{ $permission->group_name == 'Category' ? 'selected' : ''}} >Category</option>
-                            <option value="Instructor"{{ $permission->group_name == 'Instructor' ? 'selected' : ''}} >Instructor</option>
-                            <option value="Coupon"{{ $permission->group_name == 'Coupon' ? 'selected' : ''}}>Coupon</option>
-                            <option value="Setting"{{ $permission->group_name == 'Setting' ? 'selected' : ''}}>Setting</option>
-                            <option value="Orders"{{ $permission->group_name == 'Orders' ? 'selected' : ''}}>Orders</option>
-                            <option value="Report"{{ $permission->group_name == 'Report' ? 'selected' : ''}}>Report</option>
-                            <option value="Review"{{ $permission->group_name == 'Review' ? 'selected' : ''}}>Review</option>
-                            <option value="All User"{{ $permission->group_name == 'All User' ? 'selected' : ''}}>All User</option>
-                            <option value="Blog"{{ $permission->group_name == 'Blog' ? 'selected' : ''}}>Blog</option>
-                            <option value="Role and Permission"{{ $permission->group_name == 'Role and Permission' ? 'selected' : ''}}>Role and Permission</option>
+                            @foreach ($roles as $item)
+
+
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+
+                            @endforeach
+
+
 
                         </select>
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">Permission All</label>
+                    </div>
+                    <hr>
+
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Permission All</label>
+                        </div>
+
+                    </div>
+                    <div class="col-9">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Permission All</label>
+                        </div>
+
+                    </div>
+
                 </div>
 
 
@@ -86,7 +102,6 @@
                 group_name: {
                     required : 'Group name Required!!',
                 },
-
 
 
 
