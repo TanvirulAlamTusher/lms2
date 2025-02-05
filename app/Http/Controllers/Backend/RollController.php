@@ -187,6 +187,15 @@ class RollController extends Controller
         compact('roles'));
     }//end function
 
+    public function AdminEditRoles($id){
+        $role =  Role::find($id);
+        $permissions = Permission::all();
+        $permission_groups = User::getpermissionGroups();
+        return view('admin.backend.pages.rolesetup.edit_roles_permission',
+        compact('role','permission_groups','permissions'));
+
+    }//end function
+
      ////////////////////////////////End Add Roles Permission all route////////////////////////////////////////
 
 
