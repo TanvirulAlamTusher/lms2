@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-9">
                                 @php
-                                    $permissions = App\Models\User::getpermissionByGroupsName($group->group_name);
+                                    $permissions = App\Models\User::getpermissionByGroupName($group->group_name);
                                 @endphp
                                 @foreach ($permissions as $permission)
 
