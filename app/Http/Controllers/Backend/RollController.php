@@ -179,7 +179,13 @@ class RollController extends Controller
 
      return redirect()->route('all.roles')->with($notifaction );
 
-    }
+    }//end function
+
+    public function AllRolesPermission(){
+        $roles = Role::all();
+        return view('admin.backend.pages.rolesetup.all_roles_permission',
+        compact('roles'));
+    }//end function
 
      ////////////////////////////////End Add Roles Permission all route////////////////////////////////////////
 
