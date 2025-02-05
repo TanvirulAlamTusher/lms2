@@ -156,8 +156,10 @@ class RollController extends Controller
 
     public function AddRolesPermission(){
         $roles =  Role::all();
+        $permissions = Permission::all();
         $permission_groups = User::getpermissionGroups();
-        return view('admin.backend.pages.rolesetup.add_roles_permission',compact('roles','permission_groups'));
+        return view('admin.backend.pages.rolesetup.add_roles_permission',
+        compact('roles','permission_groups','permissions'));
 
     }// End function
 

@@ -50,11 +50,20 @@ class User extends Authenticatable
 
     public function UserOnline(){
         return Cache::has('user-is-online' . $this->id);
-    }
+    }//end
 
     public static function getpermissionGroups(){
-        $permission_group = DB::table('permissions')->select('group_name')
-        ->groupBy('group_name')->get();
+        $permission_group = DB::table('permissions')
+        ->select('group_name')
+        ->groupBy('group_name')
+        ->get();
         return $permission_group;
-    }
+    }//end
+    public static function getpermissionByGroupsName($group_name){
+        $permissions = DB::table('permissions')
+        ->select('name','id')
+        ->where('group_name',$group_name)
+        ->get();
+        return $permissions;
+    }//end
 }
