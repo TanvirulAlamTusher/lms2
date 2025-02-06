@@ -13,6 +13,7 @@
                 </ol>
             </nav>
         </div>
+        @if (Auth::user()->can('category.add'))
         <div class="ms-auto">
             <div class="btn-group">
             <a href="{{ route('add.category') }}" class="btn btn-primary "> Add Category </a>
@@ -20,6 +21,7 @@
 
             </div>
         </div>
+        @endif
     </div>
     <!--end breadcrumb-->
 
@@ -46,8 +48,13 @@
                             <td>{{ $item->category_name }}</td>
                            <td><img src="{{ asset($item->image)}}" alt="Category Image" style="width: 70px; hight: 40px;"></td>
                            <td>
+                            @if (Auth::user()->can('category.edit'))
                             <a href="{{ route('edit.category', $item->id) }}" class="btn btn-info px-5">Edit</a>
+                            @endif
+
+                            @if (Auth::user()->can('category.delete'))
                             <a href="{{ route('delete.category', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
+                            @endif
                            </td>
                         </tr>
                         @endforeach

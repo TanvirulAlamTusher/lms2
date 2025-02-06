@@ -13,6 +13,7 @@
                 </ol>
             </nav>
         </div>
+        @if (Auth::user()->can('coupon.add'))
         <div class="ms-auto">
             <div class="btn-group">
             <a href="{{ route('admin.add.coupon') }}" class="btn btn-primary "> Add Coupon </a>
@@ -20,6 +21,7 @@
 
             </div>
         </div>
+        @endif
     </div>
     <!--end breadcrumb-->
 
@@ -56,9 +58,13 @@
                                 @endif
                               </td>
                            <td>
+                            @if (Auth::user()->can('coupon.edit'))
                             <a href="{{ route('admin.edit.coupon', $item->id) }}" class="btn btn-info px-5">Edit</a>
-                            <a href="{{ route('admin.delete.coupon', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
-                           </td>
+                           @endif
+                            @if (Auth::user()->can('coupon.delete'))
+                              <a href="{{ route('admin.delete.coupon', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
+                            @endif
+                        </td>
                         </tr>
                         @endforeach
 

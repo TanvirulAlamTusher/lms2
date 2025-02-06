@@ -22,6 +22,10 @@
 
 
         <li class="menu-label">UI Elements</li>
+        <!-- #region -->
+
+        @if (Auth::user()->can('category.menu'))
+
 
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -30,13 +34,22 @@
                 <div class="menu-title">Manage Category</div>
             </a>
             <ul>
+                @if (Auth::user()->can('category.all'))
                 <li> <a href="{{ route('all.category')}}"><i class='bx bx-radio-circle'></i>All Category</a>
                 </li>
+                @endif
+                @if (Auth::user()->can('subcategory.all'))
                 <li> <a href="{{ route('all.subcategory')}}"><i class='bx bx-radio-circle'></i>All Sub Category</a>
                 </li>
+                @endif
 
             </ul>
         </li>
+
+        @endif
+
+
+        @if (Auth::user()->can('instructor.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-group'></i></div>
@@ -52,6 +65,9 @@
 
             </ul>
         </li>
+        @endif
+
+        @if (Auth::user()->can('course.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-book'></i></div>
@@ -59,12 +75,16 @@
                 <div class="menu-title">Manage Courses</div>
             </a>
             <ul>
+                @if (Auth::user()->can('course.all'))
                 <li> <a href="{{ route('admin.all.course') }}"><i class='bx bx-radio-circle'></i>All Courses</a>
                 </li>
+                @endif
 
 
             </ul>
         </li>
+        @endif
+        @if (Auth::user()->can('coupon.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-purchase-tag'></i></div>
@@ -78,7 +98,9 @@
 
             </ul>
         </li>
+        @endif
 
+        @if (Auth::user()->can('setting.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-cog'></i></div>
@@ -86,12 +108,17 @@
                 <div class="menu-title">Setting</div>
             </a>
             <ul>
+
                 <li> <a href="{{ route('smtp.setting') }}"><i class='bx bx-radio-circle'></i>SMTP Setting</a>   </li>
                 <li> <a href="{{ route('site.setting') }}"><i class='bx bx-radio-circle'></i>Site Setting</a> </li>
 
 
             </ul>
         </li>
+        @endif
+
+        @if (Auth::user()->can('order.menu'))
+
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-cart'></i></div>
@@ -104,7 +131,9 @@
 
             </ul>
         </li>
+        @endif
 
+        @if (Auth::user()->can('report.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-chart'></i></div>
@@ -115,9 +144,10 @@
                 <li> <a href="{{ route('report.view') }}"><i class='bx bx-radio-circle'></i>Report View</a></li>
             </ul>
         </li>
+        @endif
 
 
-
+        @if (Auth::user()->can('review.menu'))
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-message-dots'></i></div>
@@ -129,6 +159,9 @@
                 <li> <a href="{{ route('admin.active.review') }}"><i class='bx bx-radio-circle'></i>Active Review</a></li>
             </ul>
         </li>
+        @endif
+
+        @if (Auth::user()->can('all.user.menu'))
 
         <li>
             <a class="has-arrow" href="javascript:;">
@@ -141,6 +174,11 @@
                 <li> <a href="{{ route('all.instructor') }}"><i class='bx bx-radio-circle'></i>All Instructor</a></li>
             </ul>
         </li>
+
+        @endif
+
+        @if (Auth::user()->can('blog.menu'))
+
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-news'></i></div>
@@ -153,6 +191,9 @@
 
             </ul>
         </li>
+        @endif
+
+        @if (Auth::user()->can('rolepermission.menu'))
 
         <li class="menu-label">Roll & Permission</li>
         <li>
@@ -169,6 +210,9 @@
 
             </ul>
         </li>
+        @endif
+
+        @if (Auth::user()->can('admin.menu'))
         <li class="menu-label">Admin</li>
         <li>
             <a class="has-arrow" href="javascript:;">
@@ -177,11 +221,13 @@
                 <div class="menu-title">Manage Admin</div>
             </a>
             <ul>
+                @if (Auth::user()->can('admin.all'))
                 <li> <a href="{{ route('all.admin') }}"><i class='bx bx-radio-circle'></i>All Admin</a> </li>
-
+                @endif
 
             </ul>
         </li>
+        @endif
 
 
 
