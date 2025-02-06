@@ -180,6 +180,14 @@ class AdminController extends Controller
         $course = Course::find($id);
         return view('admin.backend.courses.course_details', compact('course'));
 
-    }
+    }//end method
+    ///////////////////////////////////Admin User All Route/////////////////////////////////////
+    public function AllAdmin(){
+        $alladmin = User::where('role', 'admin')->get();
+        return view('admin.backend.pages.admin.all_admin', compact('alladmin'));
+
+    }//end function
+
+     ///////////////////////////////////End Admin User All Route/////////////////////////////////////
 
 }
