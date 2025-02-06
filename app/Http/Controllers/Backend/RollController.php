@@ -202,7 +202,7 @@ class RollController extends Controller
     $permissions = $request->permission ?? [];
 
     // Convert IDs to names
-    $permissionNames = \Spatie\Permission\Models\Permission::whereIn('id', $permissions)->pluck('name')->toArray();
+    $permissionNames = Permission::whereIn('id', $permissions)->pluck('name')->toArray();
 
     $role->syncPermissions($permissionNames); // Use names instead of IDs
 

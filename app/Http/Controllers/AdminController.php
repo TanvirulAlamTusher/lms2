@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\User;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -186,6 +187,38 @@ class AdminController extends Controller
         $alladmin = User::where('role', 'admin')->get();
         return view('admin.backend.pages.admin.all_admin', compact('alladmin'));
 
+    }//end function
+    public function AddAdmin(){
+        $roles = Role::all();
+        return view('admin.backend.pages.admin.add_admin', compact('roles'));
+    }//end function
+
+    public function StoreAdmin(Request $request){
+       $user = new User();
+       $user->username = $request->username;
+       $user->name = $request->name;
+       $user->email = $request->email;
+       $user->phone = $request->phone;
+       $user->address = $request->address;
+       $user->password =Hash::make($request->password);
+       $user->role = 'admin';
+       $user->status = '1';
+       $user->save();
+
+       if ($request->roles) {
+        $role = Role::find($request->roles); // Fetch role by ID
+
+        if ($role) {
+            $user->assignRole($role->name); // Assign by role name
+        }
+    }
+
+
+       $notifaction = array('message' => 'New Admin inserted successfully',
+       'alert_type' => 'success');
+
+
+       return redirect()->route('all.admin')->with($notifaction );
     }//end function
 
      ///////////////////////////////////End Admin User All Route/////////////////////////////////////

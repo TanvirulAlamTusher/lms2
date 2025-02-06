@@ -15,7 +15,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-            <a href="{{ route('add.permission') }}" class="btn btn-primary "> Add Admin </a>
+            <a href="{{ route('add.admin') }}" class="btn btn-primary "> Add Admin </a>
             </div>
         </div>
     </div>
@@ -41,20 +41,25 @@
                     </thead>
                     <tbody>
 
-                        @foreach ($alladmin as $key=> $item)
+                        @foreach ($alladmin as $key => $item)
                         <tr>
-
-                            <td>{{ $key+1}}</td>
-                            <td><img src="{{ !empty($item->photo) ? url('upload/admin_images/' . $item->photo) : url('upload/no_image.jpg') }}"
-                                alt="admin_img" class="  bg-primary" width="70"></td>
+                            <td>{{ $key + 1 }}</td>
+                            <td>
+                                <img src="{{ !empty($item->photo) ? url('upload/admin_images/' . $item->photo) : url('upload/no_image.jpg') }}"
+                                     alt="admin_img" class="bg-primary" width="70">
+                            </td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
-                            <td>{{ $item->role }}</td>
-                           <td>
-                            <a href="{{ route('edit.permission', $item->id) }}" class="btn btn-info px-5">Edit</a>
-                            <a href="{{ route('delete.permission', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
-                           </td>
+                            <td>
+                                @foreach ($item->roles as $role)
+                                    <span class="badge badge-pill bg-primary">{{ $role->name }}</span>
+                                @endforeach
+                            </td>
+                            <td>
+                                <a href="{{ route('edit.permission', $item->id) }}" class="btn btn-info px-5">Edit</a>
+                                <a href="{{ route('delete.permission', $item->id) }}" class="btn btn-danger px-5" id="delete">Delete</a>
+                            </td>
                         </tr>
                         @endforeach
 
