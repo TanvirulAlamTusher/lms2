@@ -220,6 +220,42 @@ class AdminController extends Controller
 
        return redirect()->route('all.admin')->with($notifaction );
     }//end function
+    public function EditAdmin($id){
+        $user = User::find($id);
+        $roles = Role::all();
+        return view('admin.backend.pages.admin.edit_admin', compact('user','roles'));
+
+    }//end function
+
+    public function UpdateAdmin(Request $request, $id){
+        $user = User::find($id);
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->role = 'admin';
+        $user->status = '1';
+        $user->save();
+
+        //detach exiting roles. its spite package function
+        $user->roles()->detach();
+
+        if ($request->roles) {
+         $role = Role::find($request->roles); // Fetch role by ID
+
+         if ($role) {
+             $user->assignRole($role->name); // Assign by role name
+         }
+     }
+
+
+        $notifaction = array('message' => 'Admin updated successfully',
+        'alert_type' => 'success');
+
+
+        return redirect()->route('all.admin')->with($notifaction );
+     }//end function
 
      ///////////////////////////////////End Admin User All Route/////////////////////////////////////
 
