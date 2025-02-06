@@ -257,6 +257,39 @@ class AdminController extends Controller
         return redirect()->route('all.admin')->with($notifaction );
      }//end function
 
+     public function DeleteAdmin($id)
+     {
+         $user = User::find($id);
+
+         if (!is_null($user)) {
+             // Check if the user has the 'Super Admin' role
+             if ($user->hasRole('Super Admin')) {
+                 $notification = array(
+                     'message' => 'Super Admin cannot be deleted',
+                     'alert_type' => 'error'
+                 );
+                 return redirect()->back()->with($notification);
+             }
+
+             $user->delete();
+
+             $notification = array(
+                 'message' => 'Admin deleted successfully',
+                 'alert_type' => 'success'
+             );
+
+             return redirect()->back()->with($notification);
+         }
+
+         $notification = array(
+             'message' => 'Admin cannot be deleted',
+             'alert_type' => 'error'
+         );
+
+         return redirect()->back()->with($notification);
+     }
+
+
      ///////////////////////////////////End Admin User All Route/////////////////////////////////////
 
 }
