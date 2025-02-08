@@ -87,18 +87,18 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 
     //Category all routes
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('/all/category', 'AllCategory')->name('all.category');
-        Route::get('/add/category', 'AddCategory')->name('add.category');
-        Route::post('/store/category', 'StoreCategory')->name('store.category');
-        Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
-        Route::post('/update/category', 'UpdateCategory')->name('update.category');
-        Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
+        Route::get('/all/category', 'AllCategory')->name('all.category')->middleware('permission:category.all');
+        Route::get('/add/category', 'AddCategory')->name('add.category')->middleware('permission:category.add');
+        Route::post('/store/category', 'StoreCategory')->name('store.category')->middleware('permission:category.all');
+        Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category')->middleware('permission:category.edit');
+        Route::post('/update/category', 'UpdateCategory')->name('update.category')->middleware('permission:category.all');
+        Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category')->middleware('permission:category.delete');
 
     });
     //End
     //Sub Category all routes
     Route::controller(CategoryController::class)->group(function () {
-        Route::get('/all/subcategory', 'AllSubCategory')->name('all.subcategory');
+        Route::get('/all/subcategory', 'AllSubCategory')->name('all.subcategory')->middleware('permission:subcategory.all');
         Route::get('/add/subcategory', 'AddSubCategory')->name('add.subcategory');
         Route::post('/store/subcategory', 'StoreSubCategory')->name('store.subcategory');
         Route::get('/edit/subcategory/{id}', 'EditSubCategory')->name('edit.subcategory');
