@@ -72,15 +72,15 @@
                                         </div>
                                     </div><!-- end card-image -->
 
-                    @php
-                    $reviewcount = App\Models\Review::where('course_id', $course_item->id)
-                        ->where('status', '1')
-                        ->latest()
-                        ->get();
-                    $avgRating = App\Models\Review::where('course_id', $course_item->id)
-                        ->where('status', '1')
-                        ->avg('rating');
-                @endphp
+                                    @php
+                                        $reviewcount = App\Models\Review::where('course_id', $course_item->id)
+                                            ->where('status', '1')
+                                            ->latest()
+                                            ->get();
+                                        $avgRating = App\Models\Review::where('course_id', $course_item->id)
+                                            ->where('status', '1')
+                                            ->avg('rating');
+                                    @endphp
 
 
 
@@ -98,43 +98,43 @@
                                             <div class="review-stars">
                                                 <span class="rating-number">{{ round($avgRating, 1) }}</span>
 
-                                @if ($avgRating == 0)
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                            @elseif ($avgRating == 1 || $avgRating < 2)
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                            @elseif ($avgRating == 2 || $avgRating < 3)
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                            @elseif ($avgRating == 3 || $avgRating < 4)
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                                <span class="la la-star-o"></span>
-                            @elseif ($avgRating == 4 || $avgRating < 5)
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star-o"></span>
-                            @elseif ($avgRating == 5)
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                                <span class="la la-star"></span>
-                            @endif
+                                                @if ($avgRating == 0)
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                @elseif ($avgRating == 1 || $avgRating < 2)
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                @elseif ($avgRating == 2 || $avgRating < 3)
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                @elseif ($avgRating == 3 || $avgRating < 4)
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star-o"></span>
+                                                    <span class="la la-star-o"></span>
+                                                @elseif ($avgRating == 4 || $avgRating < 5)
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star-o"></span>
+                                                @elseif ($avgRating == 5)
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                    <span class="la la-star"></span>
+                                                @endif
 
 
                                             </div>
@@ -218,7 +218,8 @@
                                             </div>
                                         </div><!-- end card-image -->
                                         <div class="card-body">
-                                            <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->level }}</h6>
+                                            <h6 class="ribbon ribbon-blue-bg fs-14 mb-3">{{ $course_item->level }}
+                                            </h6>
                                             <h5 class="card-title"><a
                                                     href="{{ url('course/details/' . $course_item->id . '/' . $course_item->course_name_slug) }}">{{ $course_item->course_title }}</a>
                                             </h5>
@@ -943,9 +944,7 @@
                     <p class="card-text pt-1 fs-14 lh-22">{{ $item->prerequisites }}</p>
 
                     @php
-                        $goals = App\Models\Course_goal::where('course_id', $item->id)
-                            ->orderBy('id', 'DESC')
-                            ->get();
+                        $goals = App\Models\Course_goal::where('course_id', $item->id)->orderBy('id', 'DESC')->get();
                     @endphp
 
                     <ul class="generic-list-item fs-14 py-3">
@@ -959,8 +958,10 @@
 
                     <div class="d-flex justify-content-between align-items-center">
 
-                                <button onclick="addToCart({{ $item->id }}, '{{ $item->course_name }}', '{{ $item->instructor_id }}' , '{{ $item->course_name_slug }}' )" type="submit" class="btn theme-btn flex-grow-1 mr-3"><i
-                                    class="la la-shopping-cart mr-1 fs-18"></i>Add to Cart</button>
+                        <button
+                            onclick="addToCart({{ $item->id }}, '{{ $item->course_name }}', '{{ $item->instructor_id }}' , '{{ $item->course_name_slug }}' )"
+                            type="submit" class="btn theme-btn flex-grow-1 mr-3"><i
+                                class="la la-shopping-cart mr-1 fs-18"></i>Add to Cart</button>
 
                         <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i
                                 class="la la-heart-o"></i></div>
