@@ -212,7 +212,7 @@
                 <li class="nav-item">
                     <div id="app">
 
-                        <send-message >
+                        <send-message :receiverid="{{ $instructor->id }}" receivername="{{ $instructor->name }}">
 
                         </send-message>
 
