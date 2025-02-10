@@ -18,10 +18,11 @@
       <form @submit.prevent="sendMessage()">
       <div class="modal-body">
         <textarea class="form-control" rows="5" placeholder="Type your Message" v-model="form.msg"></textarea>
-        ...
+        <span class="text-success" v-if="successMessage.message">{{ successMessage.message }}</span>
+        <span class="text-danger" v-if="errors.msg">{{ errors.msg[0] }}</span>
       </div>
       <div class="modal-footer">
-      
+
         <button type="submit" class="btn btn-primary">Sent Message</button>
       </div>
     </form>
@@ -38,14 +39,28 @@ export default {
     data(){
         return{
             form:{
-                msg:""
-            }
+                msg:"",
+                receiver_id : this.receiverid,
+            },
+            errors:{
+
+            },
+            successMessage:{
+
+            },
         }
     },
 
     methods: {
         sendMessage(){
-             alert(this.form.msg);
+            axios.post('/send-message',this.form)
+            .then((res) => {
+                this.form.msg = "";
+                this.successMessage = res.data;
+                console.log(res.data);
+            }).catch((err) => {
+                this.errors = err.response.data.errors;
+            })
         }
     }
 }

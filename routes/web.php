@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Backend\ActiveUserController;
+use App\Http\Controllers\Backend\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -380,6 +381,9 @@ Route::get('blog', [BlogController::class, 'BlogList'])->name('blog');
 // make notifications read complete
 Route::post('/mark-notification-as-read/{notification}', [PaymentController::class, 'MarkAsRead']);
 
+// Chat Post Request Route
+
+Route::post('/send-message', [ChatController::class, 'SentMessage']);
 
 
 //// End Route Accessable for All
