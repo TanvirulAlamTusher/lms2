@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\ChatMessage;
@@ -31,5 +32,12 @@ class ChatController extends Controller
         $profileData = User::find($id);
         return view('frontend.dashboard.livechat', compact('profileData'));
 
+    }//end function
+    public function GetAllUser(){
+    $chats = ChatMessage::orderBy('id','DESC')
+    ->where('sender_id', Auth::user()->id)
+    ->orWhere('receiver_id', Auth::user()->id)
+    ->get();
+    return $chats;
     }//end function
 }

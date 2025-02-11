@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
      Route::controller(ChatController::class)->group(function () {
         Route::get('/live/chat', 'LiveChat')->name('live.chat');
 
+
     }); //User Live Chat all route
 
 });
@@ -388,8 +389,11 @@ Route::get('blog', [BlogController::class, 'BlogList'])->name('blog');
 Route::post('/mark-notification-as-read/{notification}', [PaymentController::class, 'MarkAsRead']);
 
 // Chat Post Request Route
+Route::controller(ChatController::class)->group(function () {
+    Route::post('/send-message', 'SentMessage');
+    Route::get('/user-all', 'GetAllUser')->name('user.all');
 
-Route::post('/send-message', [ChatController::class, 'SentMessage']);
+});
 
 
 //// End Route Accessable for All

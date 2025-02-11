@@ -1,5 +1,5 @@
 <template>
-    <div class="row"  style=" width: 873px; ">
+    <div class="row"  style=" width: 100%; ">
       <div class="col-md-2 myUser">
           <ul class="user">
              <strong>Chat List</strong>
@@ -102,6 +102,24 @@
 
   <script>
   export default {
+    data(){
+        return {
+            users: {},
+        }
+    },
+    created(){
+
+    },
+    methods:{
+        getAllUser(){
+            axios.get('/user-all')
+            .then((res) => {
+                this.users = res.data;
+            }).catch((err) =>{
+
+            })
+        }
+    },
 
   };
   </script>
