@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\ChatMessage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,6 +23,13 @@ class ChatController extends Controller
             'created_at' => Carbon::now(),
         ]);
         return response()->json(['message' => 'Message Send Successfully']);
+
+    }//end function
+
+    public function LiveChat(){
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        return view('frontend.dashboard.livechat', compact('profileData'));
 
     }//end function
 }

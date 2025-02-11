@@ -71,6 +71,12 @@ Route::middleware('auth')->group(function () {
 
     }); //End User Question all route
 
+     //User Live Chat all route
+     Route::controller(ChatController::class)->group(function () {
+        Route::get('/live/chat', 'LiveChat')->name('live.chat');
+
+    }); //User Live Chat all route
+
 });
 // END AUTH MEDDLEWARE
 
