@@ -392,6 +392,7 @@ Route::post('/mark-notification-as-read/{notification}', [PaymentController::cla
 Route::controller(ChatController::class)->group(function () {
     Route::post('/send-message', 'SentMessage');
     Route::get('/user-all', 'GetAllUser')->name('user.all');
+    Route::get('/user-message/{id}', 'UserMessageById')->name('user.message');
 
 });
 

@@ -6,7 +6,7 @@
              <hr>
 
           <li v-for="(user, index) in users" :key="index" >
-            <a href="">
+            <a href="" @click.prevent="userMessage(user.id)">
                 <img v-if="user.role === 'user' " :src="'/upload/user_images/'+user.photo"
                 alt="UserImage"
                 class="userImg"
@@ -106,10 +106,14 @@
   </template>
 
   <script>
+import axios from 'axios';
+
   export default {
     data(){
         return {
             users: {},
+            allmessages: {},
+            selectedUser: '',
         }
     },
     created(){
@@ -123,7 +127,18 @@
             }).catch((err) =>{
 
             })
+        },
+
+        userMessage(user_id){
+            axios.get('/user-message/'+user_id)
+            .then((res) => {
+                this.allmessages = res.data;
+                this.selectedUser = user_id;
+            }).catch((err) =>{
+
+            })
         }
+
     },
 
   };

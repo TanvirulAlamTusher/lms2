@@ -48,4 +48,24 @@ class ChatController extends Controller
     })->unique();
     return $users;
     }//end function
+
+    public function UserMessageById($id){
+      $user = User::find($id);
+      if($user){
+        $messages = ChatMessage::where(function($q) use ($id)  {
+             $q->where('sender_id', auth()->id());
+             $q->where('receiver_id', $id);
+        })->orWhere(function($q) use ($id){
+            $q->where('sender_id',$id);
+            $q->where('receiver_id', auth()->id());
+        })->with('user')->get();
+
+        return response()->json([
+            'user' => $user,'messages' => $messages
+        ]);
+      } else {
+         abort(404);
+      }
+    }//end function
 }
+
