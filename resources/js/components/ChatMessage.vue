@@ -79,11 +79,12 @@
               <input
                 id="btn-input"
                 type="text"
+                v-model="msg"
                 class="form-control input-sm"
                 placeholder="Type your message here..."
               />
               <span class="input-group-btn">
-                <button class="btn btn-primary">Send</button>
+                <button class="btn btn-primary" @click.prevent="sendMessage()">Send</button>
               </span>
             </div>
           </div>
@@ -101,6 +102,8 @@ import axios from 'axios';
             users: {},
             allmessages: {},
             selectedUser: '',
+            msg: '',
+
         }
     },
     created(){
@@ -124,9 +127,20 @@ import axios from 'axios';
             }).catch((err) =>{
 
             })
-        }
+        },
+        sendMessage(){
+            axios.post('/send-message',{receiver_id:this.selectedUser, msg:this.msg})
+            .then((res) => {
+                this.msg = "";
+                this.userMessage(this.selectedUser);
+                console.log(res.data);
+            }).catch((err) => {
+                this.errors = err.response.data.errors;
+            })
+        },
 
     },
+
 
   };
   </script>
