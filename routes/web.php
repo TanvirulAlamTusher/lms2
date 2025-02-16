@@ -340,6 +340,14 @@ Route::middleware(['auth', 'roles:instructor'])->group(function () {
     });
     //End Instructor Review All Routes
 
+      //Instructor LiveChat All Routes
+      Route::controller(ChatController::class)->group(function () {
+        Route::get('/instructor/live/chat', 'InstructorLiveChat')->name('instructor.live.chat');
+
+    });
+    //End Instructor LiveChat All Routes
+
+
 });
 //End Instructor group middleware
 

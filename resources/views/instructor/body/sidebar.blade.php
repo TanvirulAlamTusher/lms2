@@ -105,6 +105,19 @@
 
             </ul>
         </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart'></i>
+                </div>
+                <div class="menu-title">Chat</div>
+            </a>
+            <ul>
+
+                <li> <a href="{{ route('instructor.live.chat') }}"><i class='bx bx-radio-circle'></i>Live Chat</a> </li>
+
+
+            </ul>
+        </li>
 
 
 

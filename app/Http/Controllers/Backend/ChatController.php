@@ -67,5 +67,9 @@ class ChatController extends Controller
          abort(404);
       }
     }//end function
+
+    public function InstructorLiveChat(){
+        return view('instructor.chat.live_chat');
+    }
 }
 
